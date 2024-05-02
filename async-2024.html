@@ -12,11 +12,49 @@
   .button { background: linear-gradient(to right, #0d47a1, #1976d2); border: none; padding: 10px 20px; color: white; border-radius: 5px; cursor: pointer; }
   .register { background: #202124; padding: 20px; }
   input, textarea { width: 100%; padding: 10px; margin-top: 5px; background: #333; border: 1px solid #555; color: white; border-radius: 5px; }
-  form { max-width: 400px; margin: auto; }
+  form { max-width: 400px; }
   .case-study { background: #333; padding: 20px; margin: 15px 0; }
   .testimonial { font-style: italic; background: #252526; padding: 10px; margin-bottom: 10px; }
   .accordion { font-size: x-large; background: #252526; padding: 10px; margin-top: 10px; cursor: pointer; }
   .panel { padding: 0 18px; background: #333; max-height: 0; overflow: hidden; transition: max-height 0.2s ease-out; }
+
+  .carousel {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin: 40px 0;
+  }
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+  .carousel-item {
+    width: 100%;
+    flex-shrink: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-right: 20px;
+    background-color: #333;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+  }
+  .carousel-control {
+    background: none;
+    border: none;
+    color: #9acd32;
+    font-size: 30px;
+    padding: 10px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .prev {
+    left: 10px;
+  }
+  .next {
+    right: 10px;
+  }
 </style>
 </head>
 <body>
@@ -127,29 +165,41 @@
   <p>От автора первого курса по асинхронному программированию, созданного 15 лет назад. За эти 15 лет собрано множество опыта, отзывов, практики и курс выпускался и перерабатывался практически каждый год.</p>
 </section>
 
-<section class="case-study">
+<!--section class="case-study">
   <h2>Case Study</h2>
   <p>Explore how top tech companies optimize their back-end operations using Node.js async patterns.</p>
+</section-->
+
+<section>
+  <h2>Почему этот курс?</h2>
+  <p>Лучшие практики и уникальный опыт...</p>
 </section>
 
 <section>
-  <h2>Why Choose This Course?</h2>
-  <p>Unique insights into modern backend technologies and best practices in a hands-on, project-based learning environment.</p>
-</section>
-
-<section>
-  <h2>Отзывы</h2>
-  <div class="testimonial">
-    <p>"Цитата", Software Engineer</p>
+<div class="container">
+  <h1>Отзывы</h1>
+  <div class="carousel" id="carouselExample">
+    <div class="carousel-track" id="track">
+      <div class="carousel-item">
+        <p>"Цитата", Software Engineer</p>
+      </div>
+      <div class="carousel-item">
+        <p>"Цитата", Architect</p>
+      </div>
+      <div class="carousel-item">
+        <p>"Цитата", Junior</p>
+      </div>
+    </div>
   </div>
+</div>
 </section>
 
 <section class="register">
-  <h2>Sign Up</h2>
+  <h2>Регистрация на курс</h2>
   <form action="https://metarhia.com/register" method="POST">
     <input type="text" placeholder="Name" required>
     <input type="email" placeholder="Email" required>
-    <textarea placeholder="Why do you want to join this course?" required></textarea>
+    <textarea placeholder="Почему Вы хотите записаться?"></textarea>
     <button type="submit" class="button">Register Now</button>
   </form>
 </section>
@@ -160,7 +210,7 @@
 </section>
 
 <footer>
-  <p>For more information, please visit our <a href="https://github.com/metatech-university" style="color: #8ab4f8;">GitHub page</a> or contact us directly.</p>
+  <p>Больше информации на <a href="https://github.com/metatech-university" style="color: #8ab4f8;">GitHub странице</a></p>
 </footer>
 
 <script>
@@ -180,6 +230,29 @@ for (const item of acc) {
     panel.style.maxHeight = panel.scrollHeight + 'px';
   });
 }
+
+  let currentSlide = 0;
+  const track = document.getElementById('track');
+  const slides = Array.from(track.children);
+  const slideWidth = slides[0].offsetWidth + 20;
+
+  let slideInterval = setInterval(() => moveSlide(1), 3000);
+
+  function moveSlide(direction) {
+    currentSlide += direction;
+    if (currentSlide < 0) {
+      currentSlide = slides.length - 1;
+    } else if (currentSlide >= slides.length) {
+      currentSlide = 0; // Wrap to first slide
+    }
+    track.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+    resetTimer();
+  }
+
+  function resetTimer() {
+    clearInterval(slideInterval);
+    slideInterval = setInterval(() => moveSlide(1), 3000);
+  }
 </script>
 
 </body>
