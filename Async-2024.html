@@ -128,22 +128,22 @@
 </footer>
 
 <script>
-const acc = document.getElementsByClassName('accordion');
-const closeAll = () => {
+  const acc = document.getElementsByClassName('accordion');
+  const closeAll = () => {
+    for (const item of acc) {
+      item.classList.remove('active');
+      const panel = item.nextElementSibling;
+      panel.style.maxHeight = null;
+    }
+  };
   for (const item of acc) {
-    item.classList.remove('active');
-    const panel = item.nextElementSibling;
-    panel.style.maxHeight = null;
+    item.addEventListener('click', ({ target }) => {
+      closeAll();
+      target.classList.add('active');
+      const panel = target.nextElementSibling;
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+    });
   }
-};
-for (const item of acc) {
-  item.addEventListener('click', ({ target }) => {
-    closeAll();
-    target.classList.add('active');
-    const panel = target.nextElementSibling;
-    panel.style.maxHeight = panel.scrollHeight + 'px';
-  });
-}
 
   let currentSlide = 0;
   const track = document.getElementById('track');
