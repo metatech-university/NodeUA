@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patterns for Async & Node.js Training</title>
+<style>
+  body { font-family: 'Courier New', Courier, monospace; background: #121212; color: #ccc; }
+  header, section { padding: 20px; border-bottom: 1px solid #333; }
+  h1, h2, h3 { color: #8ab4f8; }
+  p, li { line-height: 1.6; }
+  .button { background: linear-gradient(to right, #0d47a1, #1976d2); border: none; padding: 10px 20px; color: white; border-radius: 5px; cursor: pointer; }
+  .register { background: #202124; padding: 20px; }
+  input, textarea { width: 100%; padding: 10px; margin-top: 5px; background: #333; border: 1px solid #555; color: white; border-radius: 5px; }
+  form { max-width: 400px; }
+  .case-study { background: #333; padding: 20px; margin: 15px 0; }
+  .testimonial { font-style: italic; background: #252526; padding: 10px; margin-bottom: 10px; }
+  .accordion { font-size: x-large; background: #252526; padding: 10px; margin-top: 10px; cursor: pointer; }
+  .panel { padding: 0 18px; background: #333; max-height: 0; overflow: hidden; transition: max-height 0.2s ease-out; }
+
+  .carousel {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin: 40px 0;
+  }
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+  .carousel-item {
+    width: 100%;
+    flex-shrink: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-right: 20px;
+    background-color: #333;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+  }
+  .carousel-control {
+    background: none;
+    border: none;
+    color: #9acd32;
+    font-size: 30px;
+    padding: 10px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .prev {
+    left: 10px;
+  }
+  .next {
+    right: 10px;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>🚀 Rethinking GRASP, SOLID, and GoF patterns for Frontend & Backend modern development</h1>
+  <p>Практический тренинг по применению паттернов GRASP, SOLID, GoF в асинхронном программировании на JavaScript для прикладных и системных разработчиков, для бекенда и фронтенда, Node.js и браузерных приложений.</p>
+</header>
+
+<section>
+  <h2>Уникальность курса</h2>
+  <p>От автора первого курса по асинхронному программированию на JavaScript, прочитанному в Киевском политехническом институте еще 17 лет назад, множества докладов и лекций по Node.js. За эти годы собрано множество опыта, отзывов, практики и курс перерабатывался практически каждый год, вбирая самые новые пактики. Тимур Шемсединов так же является контрибьютором мноджества платформ и библиотек в открытом коде, среди которых Node.js, Metarhia, geoip-lite, MDN, HowProgrammingWorks, metasync... Тимур один из первых, кто начал портировать в JavaScript абстракции параллельного программирования из C++, C#, Java, Go и других языков.</p>
+</section>
+
+<section>
+  <h2>Структура курса</h2>
+  <div>🚀 Введение в паттерны GRASP, SOLID, GoF и переосмысление их для JavaScript</div>
+  <div>🚀 Введение в асинхронное программирование для Node.js и браузера</div>
+  <div>🧩 Понимание рантайма: асинхронность и фазы event loop, I/O</div>
+  <div>⭐ SILID: Принцип единственной ответственности - SRP (Single Responsibility Principle)</div>
+  <div>⭐ SILID: Принцип открытости/закрытости - OCP (Open-closed Principle)</div>
+  <div>⭐ SILID: Принцип подстановки Лисков - LSP (Liskov Substitution Principle)</div>
+  <div>⭐ SILID: Принцип разделения интерфейса - ISP (Interface Segregation Principle)</div>
+  <div>⭐ SILID: Принцип инверсии зависимостей - DIP (Dependency Inversion Principle)</div>
+  <div>⭐ GRASP: Информационный эксперт (Information Expert)</div>
+  <div>⭐ GRASP: Создатель (Creator)</div>
+  <div>⭐ GRASP: Контроллер (Controller)</div>
+  <div>⭐ GRASP: Низкое зацепление (Low Coupling) и высокая связность (High Cohesion)</div>
+  <div>⭐ GRASP: Полиморфизм (Polymorphism)</div>
+  <div>⭐ GRASP: Чистая выдумка (Pure Fabrication)</div>
+  <div>⭐ GRASP: Перенаправление (Indirection)</div>
+  <div>⭐ GRASP: Устойчивость к изменениям (Protected Variations)</div>
+  <div>⭐ Инверсия управления (Inversion of Control)</div>
+  <div>⭐ Внедрение зависимостей (Dependency Injection)</div>
+  <div>🤝 Контракт callbacks: асинхронность на безе колбеков</div>
+  <div>🤝 Контракты событий: EventTarget и EventEmitter</div>
+  <div>🤝 Контракт streams (потоки): Readable, Writable, Transform</div>
+  <div>🧑‍🎓 Streams: паттерн открытый конструктор (Revealing Constructor)</div>
+  <div>🧑‍🎓 Streams: буфферизация, backpressure для потоков</div>
+  <div>🤝 Контракт Thenabe</div>
+  <div>🤝 Контракт Promise: then/catch/finally, all, allSettled, race, any</div>
+  <div>🤝 Контракт асинхронных функций: async/await</div>
+  <div>🤝 Контракт Signal: signal, computed, effect, dispose</div>
+  <div>⭐ Обработка ошибок, решение проблем и обработка stack traces</div>
+  <div>⭐ Абстракции отмены асинхронных операций: AbortController, AbortSignal</div>
+  <div>🧩 Абстракция AsyncQueue: асинхронная очередь</div>
+  <div>🧩 Абстракция AsyncPool: асинхронный пул</div>
+  <div>🧩 Абстракции асинхронных коллекций</div>
+  <div>🧑‍🎓 Паттерн: Chain of responsibility</div>
+  <div>⭐ Конвертеры контрактов асинхроности: callbackify</div>
+  <div>🧑‍🎓 Предотвращение data race и control race conditions (состояний гонки)</div>
+  <div>🧑‍🎓 Отмена асинхронных операций: AbortController, AbortSignal</div>
+  <div>🧑‍🎓 Async Generator и Async Iterator</div>
+  <div>⚙️ Абстракции параллельного программирования: Semaphore, Mutex, Locks</div>
+  <div>🧩 Системные абстракции: threads, processes</div>
+  <div>🧩 Межпроцессовое и межпотоковое взаимодействие, MessageChannel, BroadcastChannel</div>
+  <div>🧩 Coroutines: корутины</div>
+  <div>🧑‍🎓 Композиция колбеков и асинхронных функций</div>
+  <div>🧑‍🎓 Асинхронность на базе потоков событий RxJS</div>
+  <div>🧑‍🎓 Модель акторов</div>
+  <div>🧑‍🎓 Контракт Future: функциоанльное асинхронное программирование</div>
+  <div>⚙️ Асинхронность на синхроных генераторах function*/yield</div>
+  <div>⚙️ Отслеживание асинхронных контектов, AsyncLocalStorage, AsyncResource</div>
+  <div>🧩 Web Locks API для Node.js и браузеров</div>
+</section>
+
+<section class="accordion">👉 Минимальный $450</section>
+<div class="panel">
+  <ul>
+    <li>10 часов лекций (запись)</li>
+    <li>20 часов дополнительных видео материалов</li>
+    <li>24 часа Q&A созвонов с ответами на вопросы</li>
+    <li>Примеры кода приближенные к реальным проектам</li>
+    <li>Задания с вариантами решений и автопроверкой</li>
+    <li>Оценка знаний Self assessment</li>
+    <li>Персонализация роадмапа обучения</li>
+  </ul>
+</div>
+
+<section class="accordion">👉 Базовый $1250</section>
+<div class="panel">
+  <ul>
+    <li>20 часов лекций (запись)</li>
+    <li>30 часов дополнительных видео материалов</li>
+    <li>24 часа Q&A созвонов с ответами на вопросы</li>
+    <li>Примеры кода приближенные к реальным проектам</li>
+    <li>Задания с проверкой решания наставником</li>
+    <li>Оценка знаний Self assessment с проверкой наставником</li>
+    <li>Персонализация роадмапа с консультацией наставника</li>
+    <li>2 часа еженедельных групповых консультаций до конца года</li>
+  </ul>
+</div>
+
+<section class="accordion">👉 Профессионый $2850</section>
+<div class="panel">
+  <ul>
+    <li>3 часа консультаций автора курса</li>
+    <li>10 часов консультаций наставника</li>
+    <li>20 часов лекций (запись)</li>
+    <li>30 часов дополнительных видео материалов</li>
+    <li>24 часа Q&A созвонов с ответами на вопросы</li>
+    <li>Примеры кода приближенные к реальным проектам</li>
+    <li>Задания, работа с наставником, ревью кода, оптимизация</li>
+    <li>Оценка знаний Self assessment с проверкой автором курса</li>
+    <li>Персонализация роадмапа с консультацией автора курса</li>
+    <li>4 часа еженедельных групповых консультаций до конца года</li>
+  </ul>
+</div>
+
+<section class="accordion">👉 Эксклюзивный $10000</section>
+<div class="panel">
+  <ul>
+    <li>10 часов консультаций автора курса</li>
+    <li>10 часов групповых консультаций автора курса</li>
+    <li>20 часов лекций (запись)</li>
+    <li>30 часов дополнительных видео материалов</li>
+    <li>24 часа Q&A созвонов с ответами на вопросы</li>
+    <li>Примеры кода приближенные к реальным проектам</li>
+    <li>Задания, ревью кода от автор курса, разбор решений</li>
+    <li>Оценка знаний Self assessment с проверкой автором курса</li>
+    <li>Персонализация роадмапа с консультацией автора курса</li>
+    <li>4 часа еженедельных групповых консультаций до конца года</li>
+  </ul>
+</div>
+
+<section>
+  <h2>Уникальность курса</h2>
+  <p>От автора первого курса по асинхронному программированию, созданного 15 лет назад. За эти 15 лет собрано множество опыта, отзывов, практики и курс выпускался и перерабатывался практически каждый год.</p>
+</section>
+
+<section>
+<div class="container">
+  <h1>Отзывы</h1>
+  <div class="carousel" id="carouselExample">
+    <div class="carousel-track" id="track">
+      <div class="carousel-item">
+        <p>"Цитата", Software Engineer</p>
+      </div>
+      <div class="carousel-item">
+        <p>"Цитата", Architect</p>
+      </div>
+      <div class="carousel-item">
+        <p>"Цитата", Junior</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="register">
+  <h2>Регистрация на курс</h2>
+  <form action="https://metarhia.com/register" method="POST">
+    <input type="text" placeholder="Name" required>
+    <input type="email" placeholder="Email" required>
+    <textarea placeholder="Почему Вы хотите записаться?"></textarea>
+    <button type="submit" class="button">Register Now</button>
+  </form>
+</section>
+
+<section>
+  <h2>Про автора курса</h2>
+  <p>Тимур Шемсединов - 28 лет в IT, эксперт в node.js & javascript, инженерии программного обеспечения, кибернетике, архитектуре распределенных систем, базах данных, метапрограммировании и построении облачных сервисов.</p>
+</section>
+
+<footer>
+  <p>Больше информации на <a href="https://github.com/metatech-university" style="color: #8ab4f8;">GitHub странице</a></p>
+</footer>
+
+<script>
+  const acc = document.getElementsByClassName('accordion');
+  const closeAll = () => {
+    for (const item of acc) {
+      item.classList.remove('active');
+      const panel = item.nextElementSibling;
+      panel.style.maxHeight = null;
+    }
+  };
+  for (const item of acc) {
+    item.addEventListener('click', ({ target }) => {
+      closeAll();
+      target.classList.add('active');
+      const panel = target.nextElementSibling;
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+    });
+  }
+
+  let currentSlide = 0;
+  const track = document.getElementById('track');
+  const slides = Array.from(track.children);
+  const slideWidth = slides[0].offsetWidth + 20;
+
+  let slideInterval = setInterval(() => moveSlide(1), 3000);
+
+  function moveSlide(direction) {
+    currentSlide += direction;
+    if (currentSlide < 0) {
+      currentSlide = slides.length - 1;
+    } else if (currentSlide >= slides.length) {
+      currentSlide = 0; // Wrap to first slide
+    }
+    track.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+    resetTimer();
+  }
+
+  function resetTimer() {
+    clearInterval(slideInterval);
+    slideInterval = setInterval(() => moveSlide(1), 3000);
+  }
+</script>
+
+</body>
+</html>
