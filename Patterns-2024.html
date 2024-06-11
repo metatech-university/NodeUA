@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patterns for Async & Node.js Master Class</title>
+<style>
+  body { font-family: 'Courier New', Courier, monospace; background: #121212; color: #ccc; }
+  header, section { padding: 20px; border-bottom: 1px solid #333; }
+  h1, h2, h3 { color: #8ab4f8; }
+  p, li { line-height: 1.6; }
+  .button { background: linear-gradient(to right, #0d47a1, #1976d2); border: none; padding: 10px 20px; color: white; border-radius: 5px; cursor: pointer; }
+  .register { background: #202124; padding: 20px; }
+  input, textarea { width: 100%; padding: 10px; margin-top: 5px; background: #333; border: 1px solid #555; color: white; border-radius: 5px; }
+  form { max-width: 400px; }
+  .case-study { background: #333; padding: 20px; margin: 15px 0; }
+  .testimonial { font-style: italic; background: #252526; padding: 10px; margin-bottom: 10px; }
+  .accordion { font-size: x-large; background: #252526; padding: 10px; margin-top: 10px; cursor: pointer; }
+  .panel { padding: 0 18px; background: #333; max-height: 0; overflow: hidden; transition: max-height 0.2s ease-out; }
+  .carousel { width: 100%; overflow: hidden; position: relative; margin: 40px 0; }
+  .carousel-track { display: flex; transition: transform 0.5s ease; }
+  .carousel-item { width: 100%; flex-shrink: 0; padding: 20px; box-sizing: border-box; margin-right: 20px; background-color: #333; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); }
+  .carousel-control { background: none; border: none; color: #9acd32; font-size: 30px; padding: 10px; cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%); }
+  .prev { left: 10px; }
+  .next { right: 10px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🚀 Patterns for Async & Node.js Master Class</h1>
+  <p>Мастер-класс по паттернам GRASP, SOLID и GoF для аринхронного программирования бекенда и фронтенда на JavaScript, TypeScript и Node.js</p>
+</header>
+
+<section>
+  <h2>Уникальность мастер-класса</h2>
+  <p>От автора первого курса по асинхронному программированию на JavaScript, прочитанному в Киевском политехническом институте еще 17 лет назад, множества докладов и лекций по Node.js. За эти годы собрано множество опыта, отзывов, практики и курс перерабатывался практически каждый год, вбирая самые новые пактики. Тимур Шемсединов так же является контрибьютором мноджества платформ и библиотек в открытом коде, среди которых Node.js, Metarhia, geoip-lite, MDN, HowProgrammingWorks, metasync... Тимур один из первых, кто начал портировать в JavaScript абстракции параллельного программирования из C++, C#, Java, Go и других языков.</p>
+</section>
+  
+<section>
+  <h2>⚠️ Проблемы структуры и архитектура кода в асинхронном программирования на JavaScript:</h2>
+  <div>🔹 Плохо читается смысл кода</div>
+  <div>🔹 Непредсказуемая очередность</div>
+  <div>🔹 Нестабильность результата</div>
+  <div>🔹 Сложность отладки</div>
+  <div>🔹 Сложность тестирования</div>
+  <div>🔹 Сложность обработки ошибок</div>
+  <div>🔹 Callback hell</div>
+  <div>🔹 Блокирование event loop</div>
+  <div>🔹 Утечки памяти и ресурсов</div>
+  <div>🔹 Состояние гонки и блокировки</div>
+  <div>👉 На мастер-классе мы рассмотрим все эти проблемы на примерах</div>
+</section>
+
+<section class="register">
+  <h2>Регистрация на открытый семинар</h2>
+  <form action="https://metarhia.com/register" method="POST">
+    <input type="text" placeholder="Name" required>
+    <input type="email" placeholder="Email" required>
+    <textarea placeholder="Почему Вы хотите записаться?"></textarea>
+    <button type="submit" class="button">Отправить</button>
+  </form>
+</section>
+
+<section>
+<div class="container">
+  <h1>Отзывы</h1>
+  <div class="carousel" id="carouselExample">
+    <div class="carousel-track" id="track">
+      <div class="carousel-item">
+        <p>"Цитата", Software Engineer</p>
+      </div>
+      <div class="carousel-item">
+        <p>"Цитата", Architect</p>
+      </div>
+      <div class="carousel-item">
+        <p>"Цитата", Junior</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+Принцип единственной ответственности - SRP (Single Responsibility Principle)
+Принцип открытости/закрытости - OCP (Open-closed Principle)
+Принцип подстановки Лисков - LSP (Liskov Substitution Principle)
+Принцип разделения интерфейса - ISP (Interface Segregation Principle)
+Принцип инверсии зависимостей - DIP (Dependency Inversion Principle)
+
+
+  
+<section>
+  <h2>Вы получите ответы по таким темам:</h2>
+  <div>🔸 Принципы SOLID: SRP, OCP, LSP, ISP, DIP.</div>
+  <div>🔸 Паттерны GRASP: Information Expert, Creator, Controller, Low Coupling, High Cohesion, Polymorphism, Pure Fabrication, Indirection, Protected Variations.</div>
+  <div>🔸 Контракты асинхронности: callbacks, events, streams, Thenabe, Promise, async/await, signals.</div>
+  <div>🔸 Фазы event loop, I/O (операции ввода-вывода). Обработка ошибок и конвертеры контрактов асинхроности.</div>
+  <div>🔸 Паттерны GoF (Банды Четырех) и другие: Adaper, Strategy, Revealing Constructor, Chain of responsibility и т.д.</div>
+  <div>🔸 Контрактное программирование и архитектура программных систем: слоеная, чистая, трехзвенная, гексагональная, событийная и др.</div>
+  <div>🔸 Встроенные возможности JavaScript: Async Generator, Async Iterator, function*/yield.</div>
+  <div>🔸 Асинхронные коллекции: AbortController, AbortSignal, AsyncQueue, AsyncPool.</div>
+  <div>🔸 Другие асинхронные и параллельные абстракции: future, threads, processes, actors, semaphore, mutex, locks, coroutines, модель акторов.</div>
+  <div>🔸 Принцип инферсии управления - Inversion of Control и внедрение зависимостей (DI)</div>
+  <div>🔸 Предотвращение data race и control race conditions (состояний гонки).</div>
+  <div>🔸 Межпроцессовое и межпотоковое взаимодействие, MessageChannel, BroadcastChannel.</div>
+  <div>🔸 Отслеживание асинхронных контектов, AsyncLocalStorage, AsyncResource</div>
+  <div>🔸 Web Locks API для Node.js и браузеров.</div>
+</section>
+
+<section>
+  <h2>Автора курса</h2>
+  <p>Тимур Шемсединов - 28 лет в IT, эксперт в Node.js & JavaScript, инженерии программного обеспечения, кибернетике, архитектуре распределенных систем, базах данных, метапрограммировании и построении облачных сервисов.</p>
+</section>
+
+<section class="register">
+  <h2>Регистрация на открытый семинар</h2>
+  <form action="https://metarhia.com/register" method="POST">
+    <input type="text" placeholder="Name" required>
+    <input type="email" placeholder="Email" required>
+    <textarea placeholder="Почему Вы хотите записаться?"></textarea>
+    <button type="submit" class="button">Отправить</button>
+  </form>
+</section>
+
+<footer>
+  <p>Больше информации на <a href="https://github.com/metatech-university" style="color: #8ab4f8;">GitHub странице</a></p>
+</footer>
+
+<script>
+  const acc = document.getElementsByClassName('accordion');
+  const closeAll = () => {
+    for (const item of acc) {
+      item.classList.remove('active');
+      const panel = item.nextElementSibling;
+      panel.style.maxHeight = null;
+    }
+  };
+  for (const item of acc) {
+    item.addEventListener('click', ({ target }) => {
+      closeAll();
+      target.classList.add('active');
+      const panel = target.nextElementSibling;
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+    });
+  }
+
+  let currentSlide = 0;
+  const track = document.getElementById('track');
+  const slides = Array.from(track.children);
+  const slideWidth = slides[0].offsetWidth + 20;
+
+  let slideInterval = setInterval(() => moveSlide(1), 3000);
+
+  function moveSlide(direction) {
+    currentSlide += direction;
+    if (currentSlide < 0) {
+      currentSlide = slides.length - 1;
+    } else if (currentSlide >= slides.length) {
+      currentSlide = 0; // Wrap to first slide
+    }
+    track.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+    resetTimer();
+  }
+
+  function resetTimer() {
+    clearInterval(slideInterval);
+    slideInterval = setInterval(() => moveSlide(1), 3000);
+  }
+</script>
+
+</body>
+</html>
