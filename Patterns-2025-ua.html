@@ -1,0 +1,2360 @@
+<!DOCTYPE html>
+<html lang="ua">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Node.js and Async 2025 Training Course</title>
+    <style>
+      html,
+      body,
+      div,
+      span,
+      applet,
+      object,
+      iframe,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      blockquote,
+      pre,
+      a,
+      abbr,
+      acronym,
+      address,
+      big,
+      cite,
+      code,
+      del,
+      dfn,
+      em,
+      img,
+      ins,
+      kbd,
+      q,
+      s,
+      samp,
+      small,
+      strike,
+      strong,
+      sub,
+      sup,
+      tt,
+      var,
+      b,
+      u,
+      i,
+      center,
+      dl,
+      dt,
+      dd,
+      ol,
+      ul,
+      li,
+      fieldset,
+      form,
+      label,
+      legend,
+      table,
+      caption,
+      tbody,
+      tfoot,
+      thead,
+      tr,
+      th,
+      td,
+      article,
+      aside,
+      canvas,
+      details,
+      embed,
+      figure,
+      figcaption,
+      footer,
+      header,
+      hgroup,
+      menu,
+      nav,
+      output,
+      ruby,
+      section,
+      summary,
+      time,
+      mark,
+      audio,
+      video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+      }
+      /* HTML5 display-role reset for older browsers */
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      body {
+        line-height: 1;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      blockquote,
+      q {
+        quotes: none;
+      }
+      blockquote:before,
+      blockquote:after,
+      q:before,
+      q:after {
+        content: '';
+        content: none;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Courier New', Courier, monospace;
+        background: #121212;
+        color: #ccc;
+      }
+
+      h1,
+      h2,
+      h3 {
+        color: #8ab4f8;
+      }
+
+      a {
+        color: #8ab4f8;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2px;
+        transition: 0.1s ease-in-out;
+      }
+
+      button,
+      select,
+      textarea {
+        font-family: 'Courier New', Courier, monospace;
+      }
+
+      .inner {
+        width: 100%;
+        max-width: 1280px;
+        margin-inline: auto;
+        padding-inline: 12px;
+
+        @media (min-width: 1280px) {
+          padding-inline: 24px;
+        }
+      }
+
+      /* Accordion */
+      .accordion {
+        &:open {
+          & .accordion-heading {
+            color: #dedede;
+
+            &::after {
+              transform: translateY(-50%) rotate(225deg);
+            }
+          }
+        }
+      }
+
+      .accordion-heading {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding-block: 24px;
+        padding-inline-end: 40px;
+        font-size: 18px;
+        font-weight: 600;
+        color: #8ab4f8;
+        cursor: pointer;
+        transition: 0.15s ease-in-out;
+
+        @media (min-width: 768px) {
+          gap: 24px;
+        }
+
+        &::after {
+          position: absolute;
+          inset-block-start: 50%;
+          inset-inline-end: 0;
+          transform: translateY(-50%);
+          font-size: 32px;
+          font-weight: 400;
+          transition: 0.15s linear;
+          content: '+';
+        }
+
+        @media (hover: hover) {
+          &:hover {
+            color: #dedede;
+          }
+        }
+
+        &::marker {
+          content: '';
+        }
+
+        &::-webkit-details-marker {
+          display: none;
+        }
+      }
+
+      .accordion-heading-icon {
+        width: 32px;
+        height: 32px;
+        flex-shrink: 0;
+
+        @media (min-width: 1280px) {
+          width: 40px;
+          height: 40px;
+        }
+      }
+
+      .accordion-body {
+        width: 75%;
+        padding-bottom: 24px;
+
+        & p {
+          line-height: 1.2;
+        }
+
+        & p + p {
+          margin-block-start: 12px;
+        }
+
+        & p + ul,
+        & p + ol {
+          margin-block-start: 12px;
+        }
+
+        & ul li + li {
+          margin-block-start: 8px;
+        }
+      }
+
+      /* Header */
+      .header {
+        border-bottom: 1px solid #333;
+
+        & .header-grid {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          height: 100px;
+        }
+
+        & .logo {
+          font-size: 28px;
+          font-weight: 700;
+          line-height: 1.2;
+
+          @media (min-width: 1280px) {
+            font-size: 32px;
+          }
+        }
+      }
+
+      .navigation {
+        position: fixed;
+        inset: 0;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 24px;
+        background-color: #121212;
+
+        @media (min-width: 1280px) {
+          position: static;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 64px;
+          padding: 0;
+        }
+
+        &.active {
+          display: flex;
+          animation: menuAnimation 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
+        }
+      }
+
+      .navigation-links {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+
+        @media (min-width: 1280px) {
+          flex-direction: row;
+          align-items: center;
+          gap: 12px;
+        }
+
+        & a {
+          font-size: 18px;
+          font-weight: 500;
+
+          @media (min-width: 1280px) {
+            font-size: 16px;
+          }
+
+          @media (hover: hover) {
+            &:hover {
+              text-decoration-color: transparent;
+            }
+          }
+        }
+      }
+
+      .navigation-lang {
+        height: 32px;
+        border: none;
+        background: none;
+        font-size: 16px;
+        color: #8ab4f8;
+        cursor: pointer;
+        outline: none;
+        appearance: none;
+      }
+
+      .menu-trigger {
+        position: relative;
+        z-index: 6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 65px;
+        height: 50px;
+        padding: 0;
+        border: none;
+        background: none;
+
+        @media (min-width: 1280px) {
+          display: none;
+        }
+
+        .icon {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          gap: 4px;
+          width: 24px;
+          height: 20px;
+
+          & > span {
+            width: 100%;
+            height: 2px;
+            background-color: #8ab4f8;
+            transition: 0.2s ease-in-out;
+
+            &:nth-child(2) {
+              position: relative;
+              background-color: transparent;
+
+              &::before,
+              &::after {
+                position: absolute;
+                inset: 0;
+                background-color: #8ab4f8;
+                transition: 0.2s linear;
+                content: '';
+              }
+            }
+          }
+        }
+
+        &.active {
+          .icon {
+            & > span:nth-child(1),
+            & > span:nth-child(3) {
+              opacity: 0;
+            }
+
+            & > span:nth-child(2) {
+              &::before {
+                transform: rotate(-45deg);
+              }
+
+              &::after {
+                transform: rotate(45deg);
+              }
+            }
+          }
+        }
+      }
+
+      @keyframes menuAnimation {
+        from {
+          opacity: 0;
+          transform: translateY(-15%);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Footer */
+      .footer {
+        padding-block: 24px;
+        text-align: center;
+      }
+
+      /* Intro */
+      .intro {
+        border-bottom: 1px solid #333;
+      }
+
+      .intro-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        padding-block: 32px;
+
+        @media (min-width: 768px) {
+          padding-block: 64px;
+        }
+
+        @media (min-width: 840px) {
+          flex-direction: row;
+          justify-content: space-between;
+        }
+      }
+
+      .intro-description {
+        & h2 {
+          margin-bottom: 24px;
+          font-size: 36px;
+          font-weight: 700;
+          line-height: 1.2;
+
+          @media (min-width: 768px) {
+            font-size: 42px;
+          }
+        }
+
+        & ol {
+          font-size: 18px;
+
+          & li {
+            position: relative;
+            padding-inline-start: 24px;
+
+            &::before {
+              position: absolute;
+              inset-inline-start: 0;
+              content: '\2714';
+            }
+          }
+
+          & li + li {
+            margin-block-start: 12px;
+          }
+        }
+
+        & .intro-begining {
+          margin-top: 24px;
+          font-size: 22px;
+        }
+      }
+
+      .intro-photo {
+        width: 75%;
+        margin-inline: auto;
+        aspect-ratio: 1 / 1;
+        border-radius: 50px;
+        overflow: hidden;
+
+        @media (min-width: 840px) {
+          width: 30%;
+          margin-inline: unset;
+        }
+
+        & img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      /* About */
+      .about {
+        border-bottom: 1px solid #333;
+      }
+
+      .about-grid {
+        padding-block: 32px;
+
+        @media (min-width: 768px) {
+          padding-block: 64px;
+        }
+      }
+
+      .about-description {
+        margin-bottom: 24px;
+
+        @media (min-width: 1280px) {
+          width: 75%;
+        }
+
+        & h2 {
+          margin-bottom: 24px;
+          font-size: 32px;
+          font-weight: bold;
+        }
+
+        & p {
+          line-height: 1.2;
+        }
+
+        & p + p {
+          margin-top: 16px;
+        }
+      }
+
+      .about-list {
+        & li + li {
+          border-top: 1px solid #333;
+        }
+      }
+
+      /* Authors */
+
+      .authors {
+        border-bottom: 1px solid #333;
+      }
+
+      .authors-inner {
+        padding-block: 32px;
+
+        @media (min-width: 768px) {
+          padding-block: 64px;
+        }
+      }
+
+      .authors-heading {
+        margin-block-end: 64px;
+        font-size: 32px;
+        font-weight: bold;
+      }
+
+      .authors-grid {
+        display: grid;
+        column-gap: 32px;
+        row-gap: 40px;
+
+        @media (min-width: 768px) {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (min-width: 1024px) {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .author {
+        display: flex;
+        align-items: flex-start;
+        gap: 24px;
+      }
+
+      .author-photo {
+        width: 100px;
+        flex-shrink: 0;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+
+      .author-name {
+        margin-block-end: 4px;
+        font-size: 20px;
+        font-weight: 700;
+      }
+
+      .author-position {
+        margin-bottom: 12px;
+        font-size: 18px;
+        line-height: 1.2;
+      }
+
+      .author-about {
+        font-size: 14px;
+        line-height: 1.2;
+      }
+
+      /* Programm */
+      .programm {
+        border-bottom: 1px solid #333;
+      }
+
+      .programm-inner {
+        padding-block: 32px;
+
+        @media (min-width: 768px) {
+          padding-block: 64px;
+        }
+      }
+
+      .programm-heading {
+        margin-block-end: 64px;
+        font-size: 32px;
+        font-weight: bold;
+
+        @media (min-width: 1280px) {
+          text-align: center;
+        }
+      }
+
+      .programm-list {
+        position: relative;
+        display: grid;
+        gap: 32px;
+        margin-block-end: 40px;
+        counter-reset: counter;
+
+        &::before {
+          position: absolute;
+          inset-inline-start: 5px;
+          height: 80%;
+          border-right: 1px dotted #8ab4f8;
+          content: '';
+
+          @media (min-width: 1280px) {
+            height: 75%;
+            inset-inline-start: 50%;
+          }
+        }
+      }
+
+      .programm-item {
+        position: relative;
+        display: flex;
+        padding-inline-start: 40px;
+        align-items: flex-start;
+        counter-increment: counter;
+
+        @media (min-width: 1280px) {
+          padding: 0;
+        }
+
+        &::before,
+        &::after {
+          position: absolute;
+          inset-inline-start: 0;
+          background-color: #121212;
+          font-size: 18px;
+          font-weight: 700;
+          line-height: 1.4;
+          color: #8ab4f8;
+          transform: translateY(-10%);
+
+          @media (min-width: 1280px) {
+            position: static;
+            width: 75px;
+            text-align: center;
+            font-size: 32px;
+            transform: translateY(-27%);
+          }
+        }
+
+        &:nth-child(even) {
+          @media (min-width: 1280px) {
+            text-align: right;
+          }
+
+          &::after {
+            content: counter(counter);
+          }
+        }
+
+        &:nth-child(odd) {
+          @media (min-width: 1280px) {
+            justify-content: flex-end;
+            text-align: left;
+          }
+
+          &::before {
+            content: counter(counter);
+          }
+        }
+      }
+
+      .programm-item-body {
+        @media (min-width: 1280px) {
+          width: 47%;
+        }
+      }
+
+      .programm-title {
+        margin-block-end: 12px;
+        font-size: 20px;
+      }
+
+      .programm-description {
+        line-height: 1.2;
+      }
+
+      .programm-schedule {
+        width: 100%;
+        max-width: 640px;
+        margin-inline: auto;
+        margin-block-end: 40px;
+
+        & img {
+          width: 100%;
+          margin-block-end: 24px;
+          border-radius: 24px;
+        }
+
+        & figcaption {
+          padding-inline: 12px;
+          text-align: center;
+          line-height: 1.2;
+
+          @media (min-width: 1280px) {
+            padding-inline: 32px;
+          }
+        }
+      }
+
+      .programm-group {
+        margin-block-end: 40px;
+        text-align: center;
+        font-size: 18px;
+        line-height: 1.2;
+        color: #8ab4f8;
+      }
+
+      .plan-heading {
+        margin-block-end: unset;
+      }
+
+      .programm-schedule-list {
+        & .accordion:not(.no-padding) {
+          padding-inline-start: 20px;
+        }
+      }
+
+      /* Tariffs */
+      .tariffs {
+        border-bottom: 1px solid #333;
+      }
+
+      .tariffs-inner {
+        padding-block: 32px;
+
+        @media (min-width: 768px) {
+          padding-block: 64px;
+        }
+      }
+
+      .tariffs-heading {
+        margin-block-end: 64px;
+        font-size: 32px;
+        font-weight: bold;
+      }
+
+      .tariffs-list {
+        display: grid;
+        gap: 24px;
+
+        @media (min-width: 768px) {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (min-width: 1024px) {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+
+      .tariff {
+        display: flex;
+        flex-direction: column;
+        padding-block: 24px;
+        padding-inline: 16px;
+        border: 1px solid #212121;
+        border-radius: 8px;
+        transition: 0.2s ease-in-out;
+
+        @media (hover: hover) {
+          &:nth-child(1):hover {
+            border-color: rgb(5, 98, 5);
+
+            & .tariff-heading-name {
+              color: rgb(5, 98, 5);
+            }
+          }
+
+          &:nth-child(2):hover {
+            border-color: rgb(206, 139, 15);
+
+            & .tariff-heading-name {
+              color: rgb(206, 139, 15);
+            }
+          }
+
+          &:nth-child(3):hover {
+            border-color: plum;
+
+            & .tariff-heading-name {
+              color: plum;
+            }
+          }
+
+          &:nth-child(4):hover {
+            border-color: gold;
+
+            & .tariff-heading-name {
+              color: gold;
+            }
+          }
+
+          &:hover {
+            .tariff-heading-price {
+              color: #fff;
+            }
+
+            .tariff-submit {
+              background-color: #8ab4f8;
+              color: #212121;
+            }
+          }
+        }
+      }
+
+      .tariff-heading {
+        display: grid;
+        gap: 12px;
+        margin-bottom: 24px;
+        text-align: center;
+        font-size: 20px;
+        font-weight: 700;
+      }
+
+      .tariff-heading-name,
+      .tariff-heading-price {
+        transition: 0.2s ease-in-out;
+      }
+
+      .tariff-options {
+        margin-block-end: 24px;
+        & li {
+          position: relative;
+          padding-inline-start: 24px;
+
+          &::before {
+            position: absolute;
+            inset-inline-start: 0;
+            content: '\2714';
+          }
+        }
+        & li + li {
+          margin-top: 12px;
+          line-height: 1.2;
+        }
+      }
+
+      .tariff-submit {
+        display: flex;
+        align-items: center;
+        height: 40px;
+        margin-block-start: auto;
+        margin-inline: auto;
+        padding-inline: 24px;
+        background: transparent;
+        border: 1px solid #8ab4f8;
+        border-radius: 2px;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+          Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
+          sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        text-transform: uppercase;
+        text-decoration: none;
+        letter-spacing: 1px;
+        color: #8ab4f8;
+        cursor: pointer;
+        transition: 0.2s ease-in-out;
+      }
+
+      /* Feedback */
+      .feedback {
+        border-bottom: 1px solid #333;
+      }
+
+      .feedback-inner {
+        padding-block: 32px;
+
+        @media (min-width: 768px) {
+          padding-block: 64px;
+        }
+      }
+
+      .feedback-heading {
+        margin-block-end: 64px;
+        font-size: 32px;
+        font-weight: bold;
+      }
+
+      .feedback-video {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%;
+        height: 0;
+
+        & iframe {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      /* FAQ */
+      .faq {
+        border-bottom: 1px solid #333;
+      }
+
+      .faq-inner {
+        padding-block: 32px;
+
+        @media (min-width: 768px) {
+          padding-block: 64px;
+        }
+      }
+
+      .faq-heading {
+        margin-block-end: 64px;
+        font-size: 32px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="inner header-grid">
+        <h1 class="logo">&#x1F680;&nbsp;Курс Patterns 2025</h1>
+
+        <nav class="navigation" id="navigation">
+          <ol class="navigation-links">
+            <li><a href="#about">Про курс</a></li>
+            <li><a href="#programm">Програма</a></li>
+            <li><a href="#authors">Автори та експерти</a></li>
+            <li><a href="#tariffs">Тарифи</a></li>
+            <li><a href="#feedback">Відгуки</a></li>
+          </ol>
+
+          <select class="navigation-lang">
+            <option value="ua">UA</option>
+            <option value="ru">RU</option>
+          </select>
+        </nav>
+
+        <button
+          class="menu-trigger"
+          id="menuToggle"
+          onclick="toggleMenu()"
+          aria-label="Показати меню"
+        >
+          <span class="icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Intro -->
+    <section class="intro">
+      <div class="inner intro-grid">
+        <div class="intro-description">
+          <h2>
+            <div>Курс Patterns 2025</div>
+            <div>Тимура Шемсединова</div>
+          </h2>
+          <ol>
+            <li>Опрацювання патернів на JavaScript і TypeScript</li>
+            <li>Розбір нативної реалізації патернів</li>
+            <li>Програма менторства</li>
+            <li>Щотижневі семінари</li>
+            <li>Спільнота, що допоможе вам у розвитку</li>
+            <li>Попередня підготовка</li>
+          </ol>
+          <p class="intro-begining">📅 Передстарт навчання 1 квітня</p>
+        </div>
+        <div class="intro-photo">
+          <img src="./files/timur.webp" alt="Фото Тимура Шемсединова" />
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="about" id="about">
+      <div class="inner about-grid">
+        <div class="about-description">
+          <h2>Patterns 2025</h2>
+          <p>
+            Це розбір патернів і принципів програмування в контексті їх нативної
+            реалізації в JavaScript і TypeScript.
+          </p>
+          <p>
+            Ми допоможемо вам опанувати суть та особливості реалізації кожного
+            патерну і принципу, а також закріпимо це на практичних заняттях у
+            малих групах.
+          </p>
+          <p>
+            Ви отримаєте code review, зворотний зв'язок та валідацію ваших знань
+            від Тимура та команди досвідчених інженерів.
+          </p>
+        </div>
+
+        <ol class="about-list">
+          <li>
+            <details class="accordion">
+              <summary class="accordion-heading">
+                <svg
+                  class="accordion-heading-icon"
+                  fill="none"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <clipPath id="a"><path d="m0 0h24v24h-24z" /></clipPath>
+                  <g clip-path="url(#a)" fill="currentColor">
+                    <g clip-rule="evenodd" fill-rule="evenodd">
+                      <path
+                        d="m24 14.28c-.3492-.7087-.7715-1.379-1.26-2-.3706-.4594-.8626-.8058-1.42-1-.2755-.0659-.5644-.0485-.83.05-.39.12-.86.35-1.28.5s-.61-.06-.77-.27c-.32-.44-.57-1-.85-1.37-.4095-.56516-.9569-1.01613-1.59-1.30997-.2058-.07441-.4256-.10224-.6435-.08149s-.4284.08956-.6165.20149c-.3479.18797-.6095.50335-.73.88-.1487.48737-.1204 1.01157.08 1.47997.1653.3728.3734.7252.62 1.05.5277.6128 1.0218 1.2537 1.48 1.92.13.21.27.42.39.64-.3824-.1884-.785-.3327-1.2-.43-.2755-.0498-.5594-.0221-.82.08-.1749.0756-.327.1957-.4411.3483-.114.1527-.1861.3325-.2089.5217-.0192.6044.1446 1.2004.47 1.71.3025.4456.707.8125 1.18 1.07.94.52 2.06.55 3.17 1 .0381.0268.0817.045.1276.0532.0458.0083.093.0064.1381-.0055.045-.0119.087-.0335.1228-.0633.0359-.0297.0648-.067.0848-.1091.0199-.0422.0304-.0882.0308-.1348.0003-.0466-.0096-.0927-.0289-.1351-.0194-.0424-.0478-.0801-.0832-.1104-.0355-.0303-.0771-.0525-.122-.065-.91-.46-1.85-.59-2.67-1-.5045-.2226-.9273-.5965-1.21-1.07-.1094-.193-.1871-.4023-.23-.62-.0091-.1198-.0091-.2401 0-.36 0-.06 0-.13.06-.15.2406-.0355.4859.0178.69.15.34.15.7.34 1 .46.2333.0889.4804.1363.73.14.1514.0002.2971-.0578.4069-.162.1099-.1043.1754-.2468.1831-.398-.0007-.2251-.0241-.4496-.07-.67-.0545-.2188-.1351-.4303-.24-.63-.13-.25-.28-.49-.41-.73-.4779-.6958-.9954-1.3636-1.55-2-.1896-.2477-.3507-.5161-.48-.8-.0744-.1661-.1021-.3493-.08-.53.0053-.059.0244-.116.0556-.1663.0313-.0504.0739-.0927.1244-.1237.18-.10997.37 0 .54.13.2916.2264.5537.4884.78.78.29.36.57.9.9 1.33.1733.229.3827.4283.62.59.1498.0876.3171.1411.4899.1567.1729.0155.3471-.0072.5101-.0667.4502-.1615.8909-.3485 1.32-.56.23-.1.42-.23.56-.19.4122.1192.7828.3513 1.07.67.4725.5499.8879 1.1463 1.24 1.78.056.0678.1343.1135.221.1287.0866.0153.1758-.0007.2516-.0453.0759-.0445.1334-.1146.1622-.1977s.0271-.1737-.0048-.2557z"
+                      />
+                      <path
+                        d="m6.14 8.24003c.03641-.02144.06805-.05011.09299-.08423.02493-.03412.04262-.07298.05198-.11418.00937-.04121.01021-.0839.00248-.12544-.00774-.04155-.02389-.08107-.04745-.11615-.04712-.0721-.12057-.12291-.20465-.1416-.08408-.01868-.17213-.00375-.24535.0416l-1.06.7c-.23.17-.65.37-1 .61-.18337.14818-.3391.3276-.46.53-.04995.10639-.07585.22247-.07585.34s.0259.23357.07585.33997c.15187.2994.35882.5674.61.79.21391.1677.44525.3119.69.43.49.24 1 .39 1.51.61.08194.032.17259.0337.25567.0048.08309-.0288.15319-.0863.19773-.1621.04454-.0759.0606-.1651.04532-.2517s-.06092-.165-.12872-.221c-.37-.27-.78-.5-1.16-.76-.21648-.1495-.41161-.3278-.58-.53-.05997-.0388-.11681-.0823-.17-.13l.84-.89997z"
+                      />
+                      <path
+                        d="m8.88 6.60001c-.33.64-.7 1.25-1 1.9-.13286.27639-.24972.56019-.35.85-.11.28-.2.58-.29.86999-.2.7-.34 1.41-.48 2.11-.0156.0885.00152.1796.04815.2564.04664.0767.1196.1339.20529.1608.0857.027.17826.0218.26042-.0145.08217-.0363.14833-.1012.18614-.1827.28-.67.61-1.31.9-2 .19-.44.38-.88999.53-1.34999.26-.79.41-1.58.61-2.38.02688-.08107.02225-.16929-.01295-.24711-.03521-.07783-.09841-.13954-.17705-.17289-.0413-.01585-.08538-.02323-.12959-.0217-.04422.00153-.08767.01193-.12779.03058-.04011.01866-.07607.0452-.10572.07803-.02966.03283-.05241.07129-.0669.11309z"
+                      />
+                      <path
+                        d="m11.25 10.06-.49.57-.87.87c-.08036.0548-.1359.139-.15462.2345-.01871.0954.00091.1944.05462.2755.02542.0403.05858.0751.09755.1024.03897.0274.08298.0467.12945.057.0465.0102.0946.0111.1415.0026.0468-.0084.0915-.0261.1315-.052l1.13-.75.66-.5c.2226-.1984.4237-.4196.6-.66.1625-.2073.2723-.45096.32-.71001.0031-.09354-.0141-.18665-.0504-.27294-.0362-.0863-.0907-.16375-.1596-.22706-.1618-.15489-.3394-.29232-.53-.41-.3231-.1954-.6569-.37235-1-.53-.3256-.15188-.6595-.28542-1-.4-.0784-.03431-.1671-.0368-.2474-.00695-.08019.02986-.14568.08972-.1826.16695-.03431.07843-.03681.16713-.00695.24736.02985.08023.08971.14572.16695.18264.2793.17525.5466.36901.8.58.2508.20783.488.43163.71.67.13.06.31-.08-.25.56001z"
+                      />
+                      <path
+                        d="m12.93 2.48001c.3.06.75-.81.75-.83.0431-.08012.067-.1691.07-.26.01-.09307.01-.18694 0-.28-.11-1.1000032-.4-1.000003-.5-1.0600032-.1-.05999995-.33 0-.64.9100002-.0401.074893-.0671.156043-.08.240003-.0102.08636-.0102.17363 0 .26 0 0 .11.97.4 1.02z"
+                      />
+                      <path
+                        d="m17.34 3.93002c.0986-.06214.1892-.13601.27-.22.0815-.07944.1551-.1665.22-.26.73-.93.67-1 .54-1.21s-.37-.24-1.32.35c-.1041.06763-.2042.14108-.3.22-.0853.08867-.1654.18216-.24.28-.68 1-.48 1.18-.4 1.26s.23.26 1.23-.42z"
+                      />
+                      <path
+                        d="m17.54 6.47c.06.38 1.44.36 1.47.36.1997-.01816.3972-.05499.59-.11 1.2-.3 1.25-.39 1.25-.62s-.19-.49-1.36-.55c-.1396-.01474-.2804-.01474-.42 0-.1353.02046-.269.05053-.4.09-1.21.48-1.15.7-1.13.83z"
+                      />
+                    </g>
+                    <path
+                      d="m4.75 18.29c-.04203.0013-.08339.0108-.12172.0281s-.07288.042-.10167.0726c-.02879.0307-.05126.0667-.06612.106-.01486.0394-.02182.0813-.02049.1233 0 1.55 0 1.67.43 2 .29087.2365.63351.401 1 .48-.02337.514.11056 1.023.38393 1.4589.27337.436.67317.7782 1.14607.9811.42851.2011.88867.3263 1.36.37.46237.0423.92855.0085 1.38-.1.5628-.0877 1.0868-.3408 1.5053-.7273.4185-.3864.7126-.8886.8447-1.4427.0202-.0491.0297-.1019.0277-.1549s-.0153-.1049-.0392-.1523c-.0238-.0474-.0575-.0891-.0989-.1223-.0413-.0333-.0893-.0572-.1407-.0702-.0514-.0131-.1051-.0149-.1572-.0054-.0522.0095-.1018.0301-.1453.0604-.0435.0304-.08.0697-.107.1153-.027.0457-.0438.0966-.0494.1494-.1625.3559-.4225.6585-.75.8726-.3274.2142-.7088.3311-1.1.3374-.33234.0363-.66766.0363-1 0-.34174-.034-.67777-.1113-1-.23-.2964-.0776-.56872-.2281-.79224-.4376-.22353-.2096-.39119-.4716-.48776-.7624l.28.06c1.04495.1925 2.10914.2596 3.17.2.7318-.054 1.4506-.2227 2.13-.5l.82-.5c.0994-.0763.19-.1636.27-.26.0887-.0999.1689-.2069.24-.32.1977-.2372.3059-.5362.3059-.845s-.1082-.6078-.3059-.845c-.1332-.1453-.2926-.2641-.47-.35-.7634-.2175-1.5572-.3087-2.35-.27l-2.3.19c-.86.1-1.72.26-2.59.37zm.59 1 .22-.42 3-.15h2.26c.521-.0176 1.042.0329 1.55.15.1114.0229.2148.0746.3.15-.0264.078-.0634.152-.11.22l-.22.26-.55.33c-.7135.3196-1.4794.506-2.26.55-.84197.0715-1.68862.0682-2.53-.01-.55294.0148-1.10043-.1126-1.59-.37-.16-.13-.2-.35-.07-.69z"
+                    />
+                    <path
+                      d="m13.32 17.1c.18-1 .06-1-.11-1.1s-.4.09-1 .95c-.0194.0453-.0429.0888-.07.13 0 .32 1 .65 1.15.32z"
+                    />
+                    <path
+                      d="m15.56 6.45999c-.2433-.75583-.6652-1.44187-1.23-2-.5428-.53627-1.163-.98797-1.84-1.34-1.0858-.54967-2.2739-.86814-3.48911-.93527-1.21519-.06713-2.43111.11854-3.57089.54527-1.17179.39448-2.24148 1.04395-3.13202 1.90164s-1.579756 1.90223-2.017981 3.05836c-.35464 1.13972-.35464 2.36031 0 3.50001.337055 1.1011.895091 2.1219 1.640001 3 .45.53 1 1 1.46 1.48.1958.1959.37633.4065.54.63.26695.3526.49181.7352.67 1.14 0 .08.06.17.1.26.08.36.73.23.74-.05s-.11-.33-.18-.49c-.18385-.4595-.4151-.8985-.69-1.31-.16797-.2698-.35512-.5271-.56-.77-.43-.51-.93-1-1.34-1.51-.60977-.7927-1.05206-1.7011-1.3-2.67-.24066-.92437-.19886-1.89963.12-2.80001.3818-.98255.97326-1.87003 1.73318-2.60058.75991-.73056 1.66999-1.28661 2.66682-1.62942.99008-.39206 2.04846-.58251 3.11311-.56019 1.06469.02232 2.11409.25697 3.08689.69019.6099.29658 1.1754.67692 1.68 1.13.4875.42947.8677.96717 1.11 1.57.0319.0905.0977.16508.1835.20799s.185.0508.2765.02201c.0468-.01457.0901-.03854.1272-.07043.0372-.03189.0675-.07103.089-.11502.0216-.044.0339-.09193.0363-.14086.0023-.04892-.0053-.09782-.0225-.14369z"
+                    />
+                  </g>
+                </svg>
+                <div class="accordion-heading-text">
+                  Підвищити гнучкість, підтримуваність та інші важливі якості
+                  вашого коду
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <p>
+                  Ми розберемо якісні характеристики коду — такі як
+                  зрозумілість, семантичність, гнучкість, підтримуваність та
+                  ресурсоємність. Сфокусуємось на багатовимірному аналізі цих
+                  характеристик і пошуку їх оптимального балансу.
+                </p>
+                <p>
+                  Це дозволить не лише отримувати задоволення від написання
+                  коду, а й спростить подальшу роботу з ним.
+                </p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion">
+              <summary class="accordion-heading">
+                <svg
+                  class="accordion-heading-icon"
+                  fill="none"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <clipPath id="a"><path d="m0 0h24v24h-24z" /></clipPath>
+                  <g
+                    clip-path="url(#a)"
+                    clip-rule="evenodd"
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                  >
+                    <path
+                      d="m22.42 13.0001c0-.45 0-.78-.05-.94-.0108-.1692-.0808-.3291-.1979-.4517-.1171-.1225-.2736-.1999-.4421-.2183-.64 0-1.4-.06-2 0-.3845.0197-.757.1404-1.08.3499-.0735.0508-.1343.1177-.1777.1958-.0433.078-.0681.1651-.0723.2542v1.9001c-.8125.1401-1.6408.1637-2.46.0699l-.24-.05c-.0707-1.0921-.0707-2.1878 0-3.2799.0078-.2039-.0227-.4074-.09-.6001-.0474-.0884-.1182-.1622-.2046-.2133-.0863-.05111-.185-.07762-.2854-.07665-.2664-.01577-.5336-.01577-.8 0h-7.74c-.05204-.00269-.1041.00508-.15308.02285-.04899.01777-.09392.0452-.13214.0806s-.06896.0781-.09039.1256-.03312.0989-.03439.1509v1.2201 1.49c-.47 0-1.32.11-2.14.14-.53936.0372-1.08064.0372-1.62 0-.05035-.005-.10117.0005-.14933.0159-.04816.0155-.09263.0407-.13067.0741-.03951.0318-.07224.0711-.09629.1158-.02404.0446-.03891.0937-.04371.1442-.07.85-.11 1.8399-.14 2.7899-.07 2-.06 3.8001-.06 4.1801 0 .14-.07 1.24 0 1.8899-.00424.2119.03313.4226.11.6201.09141.1072.20833.1897.34.24.43784.1251.88648.2088 1.34.25 4.12468.4374 8.2733.6078 12.42.51 1.8524.0232 3.6983-.2227 5.48-.73.1861-.0655.3548-.1725.4934-.3128.1386-.1404.2434-.3104.3066-.4973.36-1.41.24-7.0999.14-9.4599zm-2.23 9.2999c-2.0354.3103-4.0911.4674-6.15.4701-3.5158.1001-7.03447.0066-10.54-.28-.32 0-.62-.17-.79-.1901v-1.8999c0-.37-.06-2.21 0-4.15 0-.81 0-1.64.06-2.38h1.34c3.47-.2 2.87.3099 2.87-3.1401 2.56.05 5.8.1101 7.31.1601h.43v.11c0 .56-.11 1.42-.11 2.28-.0013.4316.0288.8627.09 1.2899.0332.1319.1021.2521.1991.3473.0971.0953.2185.162.3509.1927.7518.1631 1.5216.227 2.29.1901.5876.0214 1.1715-.1023 1.7-.3601.0905-.0693.1638-.1586.2141-.261.0503-.1023.0763-.2149.0759-.3289l.05-1.75c.1763-.0161.3537-.0161.53 0h1.11v.45c.32 10.95-.09 9.04-1.03 9.24z"
+                    />
+                    <path
+                      d="m13.08 7.21002c.0082.06394.0354.12393.0783.17211.0428.04818.0992.0823.1617.09789 0 0-.08.09-.08.16-.0116.08727.0111.17564.0633.24651s.1299.11873.2167.13349c.3477.16437.7091.2982 1.08.4.1602.04016.3248.06032.49.06.1632.01025.3268.01025.49 0 .3411-.05344.6761-.14053 1-.26.0342.0384.0757.06966.122.09197.0464.02231.0966.03524.148.03803.0494.00409.0991-.0018.1462-.01731s.0906-.04033.1279-.07298c.0373-.03264.0677-.07246.0893-.11707.0217-.04462.0341-.09312.0366-.14264l.13-1.6c.0036-.04325.0036-.08674 0-.13.16 0 .34.07.53.11.3899.09246.7893.13944 1.19.14.3152-.01529.6154-.13892.85-.35.1041-.10456.1769-.2362.21-.38.0296-.30595.0296-.61405 0-.92.0138-.4785-.04-.95657-.16-1.42-.0369-.17649-.1138-.34217-.2248-.48432-.1109-.14215-.253-.25698-.4152-.33568-.2184-.09087-.4535-.13515-.69-.13-.3355.01264-.6697.0494-1 .11h-.36c-.12 0-.1-.3-.11-.33-.07-.41 0-1-.05-1.469996-.15-.82000039-.11-1-2.48-.7500004-.4719.0422044-.9208.2231364-1.29.5200004-.1486.127685-.2593.29372-.32.479996-.0788.25705-.1291.52197-.15.79-.0652.43399-.1053.87139-.12 1.31v1.29l.05 1.13zm.76-1.6.16-1.07.22-2.54v-.55c.1782-.19349.4125-.32637.67-.38.5083-.088794 1.0258-.112317 1.54-.07 0 .49-.15 1-.12 1.46v.69c.0099.09627.0446.18832.1007.26719.0561.07886.1316.14185.2193.18281.1961.08973.4055.14714.62.17.3896.02505.7804.02505 1.17 0 .77 0 .41.12.41 1.07 0 .06.09.32.1.5-.1416.03119-.2884.03119-.43 0-.35 0-.74-.08-1.07-.08-.2476-.01678-.496.01725-.73.1-.0921.04204-.1703.10958-.2252.19465-.055.08507-.0844.18409-.0848.28535v.51 1c-.3 0-.6-.09-.91-.13-.2364-.01488-.4736-.01488-.71 0-.4 0-.76.11-1.15.15.0404-.04723.0618-.10784.06-.17z"
+                    />
+                    <path
+                      d="m7 19.3c-.25-.17-.54-.32-.81-.5l-.19-.18c.23-.16.49-.3.68-.42l3-1.73c.04071-.0209.07677-.0499.106-.0852.02924-.0352.05105-.076.06412-.1199.01308-.0439.01715-.09.01197-.1355-.00517-.0455-.01949-.0895-.04209-.1294-.03872-.0779-.10669-.1375-.18911-.1656-.08241-.0281-.1726-.0225-.25089.0156-.77.28-1.55.5-2.31.79-.34233.1292-.67631.2795-1 .45-.27704.1421-.5443.3024-.8.48-.21441.1494-.40063.3356-.55.55-.09886.1393-.14169.3107-.12.48.08863.246.217.4757.38.68.14834.1492.3166.2771.5.38.33.19.71.31 1 .47l1.27.69c.09415.0372.1992.0354.29203-.0049.09283-.0404.16584-.1159.20297-.2101.03713-.0941.03534-.1991-.00498-.292-.04032-.0928-.11587-.1658-.21002-.203z"
+                    />
+                    <path
+                      d="m13.08 14.77c.0432-.0783.0538-.1706.0295-.2567-.0244-.0861-.0817-.1591-.1595-.2033-.038-.0212-.0799-.0346-.1232-.0395-.0432-.0049-.087-.0012-.1289.0108-.0418.0121-.0808.0324-.1148.0596s-.0622.0609-.0831.0991l-1.23 2.21c-.27.59-.6 1.16-.87 1.76-.385.9243-.71883 1.8691-1 2.83-.01904.0466-.02871.0966-.02847.1469.00025.0504.01042.1002.02992.1466s.04795.0886.08373.124c.03579.0354.0782.0635.12482.0825.04662.0191.09653.0287.14689.0285.05036-.0003.10017-.0104.1466-.0299s.08856-.048.12401-.0838c.0354-.0357.0635-.0782.0825-.1248.51-1 1.16-2 1.69-3 .23-.45.41-.92.61-1.39s.29-1.13.47-1.7c.0487-.2283.1156-.4523.2-.67z"
+                    />
+                    <path
+                      d="m16.48 18.05-2.06-1.26c-.0367-.024-.0777-.0405-.1208-.0485-.0431-.0079-.0873-.0073-.1302.0021-.0428.0093-.0833.027-.1192.0522-.0359.0251-.0664.0571-.0898.0942-.0459.0748-.0611.1644-.0425.2501.0187.0857.0697.1609.1425.2099l1.64 1.59-.42.27c-.56.36-1.15.69-1.71 1.07-.2528.1733-.4934.3637-.72.57-.0394.0309-.0723.0692-.0969.1128s-.0404.0916-.0464.1412c-.006.0497-.0022.1001.0112.1483s.0362.0933.0671.1327.0692.0723.1128.0969.0916.0404.1412.0464c.0497.006.1001.0022.1483-.0112s.0933-.0362.1327-.0671c.2265-.1477.4639-.278.71-.39.6-.28 1.25-.5 1.85-.76.3242-.1504.6353-.3277.93-.53.1848-.1412.3352-.3224.44-.53.0614-.138.075-.2926.0388-.4393-.0362-.1466-.1202-.2771-.2388-.3707-.1819-.1383-.3723-.2653-.57-.38z"
+                    />
+                    <path
+                      d="m3.58 8.63004c.30616.02501.61384.02501.92 0 .46 0 .9-.13 1.35-.16.08697.00246.17215-.02499.24131-.07777s.11812-.1277.13869-.21223c0 0 0 .05.09.05.04941.00698.09971.0039.1479-.00906.04818-.01296.09325-.03554.13248-.06636.03924-.03083.07183-.06928.09583-.11303.02399-.04375.03889-.0919.04379-.14155.12719-.71455.21399-1.43569.26-2.16.05019-.50209.05019-1.00792 0-1.51-.03198-.36027-.1162-.71398-.25-1.05-.12176-.27578-.30676-.51901-.54-.71-.14653-.10614-.31332-.18103-.49-.22-.38-.09-1-.11-1.16-.14-.59653-.13621-1.21141-.17337-1.82-.11-.19851.02354-.38993.08816-.5621.18974s-.3213.23789-.4379.40026c-.11077.19949-.18844.41563-.23.64-.02367.37629-.02367.7537 0 1.13l.05 3.64s-.3.33 2.02.63zm-1-4.23c0-.2 0-.47.07-.73.01138-.14939.05947-.29366.14-.42h.11c.12979-.0105.26021-.0105.39 0 .4 0 .81.13 1.06.17.65.09 1.2-.6 1.58 1 .09052.43444.14073.87632.15 1.32 0 .68 0 1.36-.07 2h-.08c-.46-.14-.93-.25-1.36-.32l-.57-.05c-.18637-.015-.37363-.015-.56 0-.41 0-.78.11-1.18.13 0-.44 0-.88.09-1.33s.12-1.17.21-1.77z"
+                    />
+                  </g>
+                </svg>
+                <div class="accordion-heading-text">
+                  Структурувати, поєднувати та об'єднувати знання
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <p>
+                  У процесі прикладної роботи ви накопичуєте досвід, який
+                  поступово перетворюється на внутрішні практики, принципи та
+                  підходи — часто навіть неусвідомлені. Під час навчання ви
+                  будете впізнавати знайомі методи, які вже використовували
+                  раніше, навіть не знаючи їхніх формальних назв чи визначень.
+                </p>
+                <p>
+                  Наше завдання — допомогти вам зрозуміти, як ваш практичний
+                  досвід співвідноситься з фундаментальними підходами. Коли
+                  доречно застосовувати кожен патерн і чому ви інтуїтивно
+                  приходили до подібних рішень.
+                </p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion">
+              <summary class="accordion-heading">
+                <svg
+                  class="accordion-heading-icon"
+                  fill="none"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <clipPath id="a"><path d="m0 0h24v24h-24z" /></clipPath>
+                  <g
+                    clip-path="url(#a)"
+                    clip-rule="evenodd"
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                  >
+                    <path
+                      d="m9.11001 20.53c-.19135-.2649-.4166-.5036-.67-.71-.37009-.2685-.77783-.4808-1.20999-.63.09119-.0569.17809-.1204.26-.19.46544-.3518.7932-.8552.92652-1.4232s.0638-1.1647-.19652-1.6868c-.24125-.5538-.66379-1.009-1.19813-1.2907s-1.14865-.3732-1.74187-.2593c-.52868.1192-1.02406.3549-1.45.69-.46816.3368-.8181.8127-1 1.36-.12355.4094-.14808.8423-.07158 1.263s.25183.8173.51158 1.157c.14849.167.32025.3118.51.43-.22795.0606-.4491.1444-.66.25-.3573.2186-.67233.4997-.93.83-.23681.325-.41919.6864-.54 1.07-.23801.7694-.21339 1.5961.07 2.35.02533.0763.07851.1404.14893.1793.07043.0389.15292.0499.23107.0307.07778-.0233.14336-.0761.18263-.1471.03926-.0711.04909-.1547.02737-.2329-.04805-.4932.024-.9907.21-1.45.13034-.354.30507-.69.52-1 .17356-.3018.4006-.5695.67-.79.17036-.1409.35867-.2586.56-.35.34708-.1468.70477-.2672 1.07-.36.04903-.0117.09497-.0338.13467-.0649.03969-.0311.07221-.0703.09533-.1151.07251-.019.1353-.0644.17602-.1273s.0564-.1388.04398-.2127c-.01688-.0791-.06396-.1484-.13121-.1932s-.14934-.0616-.22879-.0468c-.26218.0499-.53292.0289-.78429-.0607-.25138-.0897-.47428-.2448-.64571-.4493-.14373-.2392-.22784-.5094-.24525-.7878-.0174-.2785.03241-.5571.14525-.8122.13963-.3016.35709-.5604.63-.75.2992-.2187.63925-.3751 1-.46.35155-.0774.71891-.0348 1.04338.1211s.58734.416.74662.7389c.18928.3267.26077.7085.20253 1.0816-.05824.373-.24268.7149-.52253.9684-.08766.0788-.18513.1461-.29.2l-.36.13c-.17 0-.35.39-.36.4-.02471.0888-.01336.1838.03158.2643s.11984.1401.20842.1657c.55335.2236 1.05151.5648 1.46 1 .16996.1723.32392.3598.45999.56.13863.1971.26231.4044.37001.62.2745.5226.3991 1.1109.36 1.7-.00854.0387-.00936.0788-.00242.1178.00693.0391.0215.0764.04286.1098.04313.0675.11132.1151.18955.1324.07824.0172.16013.0027.22764-.0405.06751-.0431.11513-.1113.13237-.1895.26755-.7146.29909-1.4962.09-2.23-.10233-.3092-.25432-.5997-.45001-.86z"
+                    />
+                    <path
+                      d="m19.07 20.53c-.1921-.2675-.4211-.5065-.68-.71-.3665-.2685-.7709-.4808-1.2-.63.08-.05.18-.09.26-.15.4639-.353.7904-.8564.9236-1.4239s.0648-1.1636-.1936-1.6861c-.2427-.5527-.6655-1.0067-1.1994-1.2882-.534-.2815-1.1475-.3738-1.7406-.2618-.5293.1172-1.0252.3531-1.45.69-.4672.3377-.8169.8133-1 1.36-.1222.4101-.1451.8435-.0668 1.2642.0782.4208.2554.8169.5168 1.1558.1449.1668.3134.3116.5.43-.2268.064-.4477.1476-.66.25-.3522.2216-.6635.5024-.92.83-.2444.3203-.4275.6831-.54 1.07-.2435.7686-.2188 1.5972.07 2.35.0232.0778.076.1433.1471.1826s.1547.0491.2329.0274c.0778-.0232.1434-.0761.1826-.1471.0393-.0711.0491-.1547.0274-.2329-.0509-.4933.0212-.9915.21-1.45.1268-.3537.2982-.6897.51-1 .1801-.3001.4101-.5672.68-.79.1672-.1452.3562-.2633.56-.35.3437-.1468.698-.2671 1.06-.36.0496-.0104.0961-.032.136-.0632s.072-.0712.094-.1168c.0738-.0168.1381-.0617.1792-.1253.0411-.0635.0557-.1406.0408-.2147-.0072-.0388-.022-.0757-.0435-.1087-.0215-.0331-.0493-.0615-.0818-.0838s-.0691-.038-.1076-.0461c-.0386-.0082-.0784-.0087-.1171-.0014-.2803.0546-.5703.0281-.836-.0764s-.4961-.2827-.664-.5136c-.1437-.2392-.2278-.5094-.2452-.7878-.0174-.2785.0324-.557.1452-.8122.1417-.3146.3707-.5819.66-.77.2982-.2204.6386-.377 1-.46.3516-.0774.7189-.0348 1.0434.1211s.5873.4161.7466.7389c.2155.3241.3087.7144.2629 1.1009-.0458.3866-.2276.7443-.5129 1.0091-.086.0764-.1798.1434-.28.2-.28.13-.58.1-.72.53-.0247.0888-.0134.1838.0316.2643.0449.0805.1198.1401.2084.1657.552.2261 1.0497.567 1.46 1 .167.175.3207.3622.46.56.1354.1973.2557.4046.36.62.278.5216.406 1.11.37 1.7-.0103.0388-.0124.0793-.0063.119.0062.0397.0206.0777.0422.1115.0216.0339.0501.0628.0835.0851s.071.0374.1106.0444c.0781.0151.1589-.0003.2259-.0431s.115-.1097.1341-.1869c.2643-.7157.2923-1.4972.08-2.23-.1146-.3118-.2802-.6025-.49-.86z"
+                    />
+                    <path
+                      d="m6.62002 4.50997c-.39.18-.76.34-1.12.55-.24829.1472-.48862.30743-.72.48-.13969.10563-.27324.21915-.4.34-.11315.11392-.18676.26113-.21.42-.01895.12824-.00607.25917.03753.38124.0436.12208.11657.23155.21247.31876.28383.20821.58886.38586.91.53l.75.28c.0862.02785.17993.02032.26057-.02094s.14159-.11286.16943-.19906c.02785-.08619.02032-.17992-.02094-.26056s-.11286-.14159-.19906-.16944l-.49-.41s-.22-.15-.38-.27l.14-.07 1.44-1.41c.05134-.05156.0829-.11953.08917-.19202.00626-.07248-.01316-.14487-.05489-.20447-.04172-.05961-.10308-.10264-.17334-.12156-.07025-.01892-.14492-.01253-.21094.01805z"
+                    />
+                    <path
+                      d="m9.64 2.72998c-.34.58-.72 1.12-1 1.71-.14.25-.27.52-.39.79s-.26.68-.36 1c-.22.8-.36 1.61-.6 2.41-.02645.04331-.04316.09185-.04898.14227-.00582.05041-.00061.10149.01527.14968.01589.0482.04206.09237.07672.12945.03465.03707.07695.06617.12397.08527.04701.0191.09762.02775.14831.02534.05069-.0024.10026-.0158.14525-.03927.045-.02346.08436-.05643.11534-.09662.03099-.04019.05287-.08664.06412-.13612.28-.54.53-1.09.76-1.65s.41-1.1.64-1.64l.87-2.61c.0164-.03669.0253-.07629.0261-.11646.0008-.04018-.0065-.0801-.0214-.11741-.015-.03731-.0372-.07124-.0655-.09978s-.062-.0511-.0992-.06635c-.0704-.03511-.15178-.04115-.2266-.01684-.07482.02432-.13709.07705-.1734.14684z"
+                    />
+                    <path
+                      d="m12.28 7.15c.1332-.08688.2543-.19113.36-.31.0995-.10797.1836-.2291.25-.36.0414-.09749.0568-.20407.0445-.30928-.0123-.1052-.0517-.2054-.1145-.29072-.1709-.21916-.3771-.4084-.61-.56-.4905-.23864-.9987-.43923-1.52-.6-.0705-.04032-.1539-.05138-.2325-.03081-.0785.02057-.1458.07113-.1875.14081-.0213.03454-.0354.07305-.0414.11319s-.0038.08109.0065.12035c.0103.03927.0284.07604.0533.10809.0249.03204.0561.05871.0916.07837l.87.7.37.31-.38.4-.71.57c-.0388.02432-.0723.05623-.0984.09381-.0262.03759-.0445.08006-.0538.12489-.0094.04483-.0095.09108-.0006.13598.009.0449.027.08752.0528.12532.0234.03847.0543.07175.091.09781.0367.02605.0784.04433.1224.05369.044.00937.0895.00963.1336.00077.0442-.00885.086-.02664.123-.05227l.82-.36c.1977-.07787.3856-.17855.56-.3z"
+                    />
+                    <path
+                      d="m14.61 9.53998c.9831-1.52825 1.3644-3.36684 1.07-5.16-.1667-.72672-.4843-1.41028-.9322-2.00634-.4479-.59607-1.0161-1.09133-1.6678-1.453655-1.2785-.740548-2.763-1.04586-4.22999-.8700002-1.76193.1498122-3.46087.7264232-4.95 1.6799952-.99886.71126-1.75889 1.70836-2.18 2.86-.46359 1.2415-.42774 2.61439.1 3.83.50975 1.19957 1.45219 2.16342 2.64 2.70002.34248.1471.70189.2513 1.07.31.52643.0809 1.05753.1277 1.59.14.30314.0152.60686.0152.91 0h.34c.07.22.15.43.2.65.11.47.2.94.27 1.42l.16.81.14.48c-.01003.0326-.01003.0674 0 .1.03431.0655.0817.1232.13924.1696.05753.0464.12397.0805.19522.1002s.14578.0245.21898.0142c.07319-.0102.1435-.0355.20656-.074.20979-.1153.38839-.2801.51999-.48.1878-.3178.3451-.6526.47-1l.37-1.16.41-1.23c.5996-.0519 1.1784-.2447 1.6893-.5627s.9394-.7523 1.2507-1.26732zm-4.17 2.74002-.48999 1-.07.14c-.14-.4-.28-.79-.45-1.18s-.31-.68-.49-1 0 0 0-.06 0 0-.06 0c-.03849-.0417-.08875-.0708-.14411-.0833s-.11321-.0078-.16589.0133c-.19383-.0129-.3853-.0498-.57-.11-.29 0-.58-.05-.87-.07-.4998-.0304-.99734-.0905-1.49-.18-.30727-.0652-.60594-.1659-.89-.3-.96657-.5005-1.70919-1.34666-2.08-2.37002-.38445-.99268-.37371-2.09498.03-3.08.47432-1.18654 1.36739-2.15789 2.51-2.73 1.19162-.57401 2.47412-.93609 3.79-1.07 1.22129-.16023 2.46179.07455 3.53999.67.5372.27338 1.0108.6569 1.3899 1.12557.379.46866.6551 1.01194.8101 1.59443.2484 1.29074.0985 2.6265-.43 3.83-.1997.58978-.5585 1.11293-1.0367 1.51172-.4782.3988-1.0572.6578-1.6733.7483-.0862-.0327-.1819-.03-.2661.0075-.0843.0374-.1504.1066-.1839.1925z"
+                    />
+                    <path
+                      d="m22.45 6.37997c-.1869-.75163-.5273-1.45642-1-2.07-.4666-.61739-1.0905-1.09811-1.8065-1.39188-.716-.29378-1.4977-.38983-2.2635-.27812-.0433.00201-.0856.01337-.1241.03331s-.0722.04798-.0988.08219-.0455.07379-.0554.116c-.0098.0422-.0104.08605-.0017.1285.001.04085.0107.08103.0283.11789.0176.03687.0428.06959.074.09603.0311.02643.0675.04599.1068.05738.0392.01139.0804.01435.1209.0087.6293-.01187 1.2508.14052 1.8032.44215s1.0166.74206 1.3468 1.27785c.3381.52111.585 1.096.73 1.7.1663.60182.2105 1.23084.13 1.85-.0734.66117-.3106 1.29359-.69 1.84003-.3736.5481-.9302.9451-1.57 1.12-.0879.0214-.1642.0761-.2126.1526-.0485.0764-.0655.1687-.0474.2574 0 0 0 .06.06.09-.0778-.0341-.1654-.0386-.2464-.0129-.0809.0258-.1497.0801-.1936.1529l-.53.79-.09.1c-.0169-.2203-.0572-.4382-.12-.65-.0405-.1881-.1226-.3648-.2403-.5171-.1177-.1522-.2679-.2762-.4397-.3629-.1513-.0645-.3175-.0853-.48-.06-.23 0-.54.18-.69.2-.2613.048-.525.0814-.79.1l-1.25.06c-.0402-.0027-.0806.0027-.1186.0159-.0381.0133-.0731.034-.103.0611s-.054.0599-.0709.0965-.0262.0762-.0275.1165c-.0004.0799.0292.1571.0829.2163.0536.0592.1275.0962.2071.1037l2.13.25c.83 0 .45-.93 1 1.57 0 .1.44.61.88.22.15-.14.52-.54.54-.57l.31-.49.44-.91c.0319-.051.0489-.1099.0489-.17 0-.0602-.017-.1191-.0489-.17.0687.0192.1413.0192.21 0 .8295-.1528 1.5775-.5959 2.11-1.25.5399-.6381.9112-1.40139 1.08-2.22003.118-.76732.0737-1.55086-.13-2.3z"
+                    />
+                  </g>
+                </svg>
+                <div class="accordion-heading-text">
+                  Покращити взаєморозуміння між програмістами
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <p>
+                  Патерни виступають у ролі спільної термінології, доступної
+                  всім учасникам процесу.
+                </p>
+                <p>
+                  Навіть якщо хтось із команди не знайомий із конкретним
+                  патерном, він завжди може знайти його формальне визначення в
+                  інтернеті, уникнувши неоднозначного трактування ваших слів.
+                  Розуміння та використання патернів сприяє більш точній та
+                  стислій передачі інформації, а також зменшує ймовірність її
+                  неправильного сприйняття.
+                </p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion">
+              <summary class="accordion-heading">
+                <svg
+                  class="accordion-heading-icon"
+                  fill="none"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <clipPath id="a"><path d="m0 0h24v24h-24z" /></clipPath>
+                  <g clip-path="url(#a)" fill="currentColor">
+                    <path
+                      d="m23.73 3.73c.0156-.25022-.029-.50054-.13-.73-.056-.11354-.141-.2103-.2463-.28053s-.2273-.11144-.3537-.11947c-.2732-.00817-.5423.0687-.77.22-.4358.32276-.968.48843-1.51.47-.177-.00485-.3495-.05661-.5-.15-.29-.23294-.5341-.51779-.72-.84-.1901-.24797-.4637-.41853-.77-.48-.1274-.02578-.259-.02301-.3852.00811s-.244.08983-.3448.17189c-.2708.30244-.5801.56804-.92.79-.2463.11565-.5189.16395-.79.14-.7373-.08141-1.4337-.38083-2-.86-.0728-.05659-.1575-.09593-.2477-.11507s-.1836-.01758-.2731.00455c-.0895.02214-.1728.06428-.2437.12326s-.1275.13326-.1655.21726c-.1587.31613-.2731.65263-.34 1-.0428.49886-.0495 1.00017-.02 1.5 0 .39-.11 2-.09 3.48-.0264.7878.0036 1.57649.09 2.36.2265.7067.6539 1.3322 1.23 1.8.8032.6956 1.7485 1.2075 2.77 1.5.0354.0122.073.0169.1103.0138s.0736-.0139.1065-.0318c.0329-.0178.0618-.0424.0847-.072s.0395-.0637.0485-.1c.019-.0716.0099-.1477-.0254-.2128-.0353-.065-.0942-.1141-.1646-.1372-.7659-.2389-1.4836-.6113-2.12-1.1-.6252-.4262-1.0898-1.0492-1.32-1.77-.042-.74608-.042-1.49393 0-2.24 0-1.51.19-3 .22-3.44.0169-.44596.0637-.89029.14-1.33.0302-.17735.0771-.35146.14-.52.5699.49924 1.2587.84359 2 1 .4542.03189.9089-.05423 1.32-.25.2961-.14857.5635-.34831.79-.59.0762-.08504.1463-.17526.21-.27.14.05.19.22.29.37.2106.31407.4786.5855.79.8.304.18122.6468.28749 1 .31.4362.02735.873-.0409 1.28-.2.2446-.10366.4818-.22394.71-.36.0543.22308.0878.45073.1.68 0 .52 0 1-.06 1.2s-.22 1.86-.46 3.44c-.13.86-.27 1.68-.4 2.21-.4054.6527-.9977 1.1683-1.7 1.48-.7219.367-1.5116.5814-2.32.63-.042.0013-.0834.0109-.1217.0281-.0383.0173-.0729.042-.1017.0727-.0288.0306-.0512.0666-.0661.106-.0149.0393-.0218.0812-.0205.1232.0051.084.0421.1629.1035.2205.0613.0576.1423.0897.2265.0895.9035-.0323 1.7912-.2466 2.61-.63.864-.3721 1.5958-.9958 2.1-1.79v-.08c.16-.54.33-1.41.5-2.32.29-1.6.55-3.31.57-3.48.0949-.68281.1483-1.37074.16-2.06z"
+                    />
+                    <path
+                      d="m.789997 4.22c-.232617.22561-.39365.51473-.463006.83128-.069356.31654-.043965.64651.073006.94872.013143.03398.033029.06496.058461.09105.025432.0261.055883.04678.08952.06079.033636.01402.069761.02108.106198.02076.036438-.00031.072435-.008.105821-.0226.034922-.01188.066916-.03106.093857-.05626.02694-.02519.048211-.05584.062398-.08989.014188-.03405.020968-.07073.019889-.1076-.001078-.03687-.00999-.07309-.026144-.10625-.032914-.13599-.034721-.27765-.005287-.41443s.089351-.26516.17529-.37557c.10977-.16394.24875-.30631.41-.42.3-.47.31-.82-.27-.76-.15838.11619-.302683.25042-.430003.4z"
+                    />
+                    <path
+                      d="m19.14 17.91c.05.38-.15.53-.29.93-.1987.4251-.528.7754-.94 1-.6773.3966-1.3989.7121-2.15.94l-3.67 1.22c-1.057.448-2.17088.7475-3.30999.89-.71107.0511-1.42343-.0797-2.07-.38-.07849-.0628-.14317-.1411-.19-.23-.11-.17-.19-.37-.27-.52-.23-.44-.44-.89-.65-1.35s-.4-.92-.58-1.38c-.92-2.29-2-4.81-2.8-7.35-.56548-1.6307-.974-3.31165-1.22-5.01999-.00235-.03738-.012452-.07386-.029663-.10713-.017212-.03327-.041156-.06259-.070312-.0861-.029155-.02351-.062884-.0407-.099041-.05047-.036158-.00978-.073953-.01192-.110984-.0063-.037381.00235-.073864.01245-.107131.02967-.033266.01721-.062587.04115-.0861.07031-.023512.02915-.040702.06288-.050475.09904s-.011916.07395-.006294.11098c.163967 1.76493.498871 3.50979 1 5.20999.73 2.59 1.72 5.16 2.55 7.5.19.49.38 1 .59 1.45s.43.94.67 1.4c.12904.3029.28994.5912.48.86.12914.1589.29347.2856.48.37.81886.401 1.73178.5704 2.64.49 1.23789-.162 2.44659-.4987 3.58999-1l3.61-1.35c.8099-.2805 1.585-.6529 2.31-1.11.5198-.3548.9315-.8462 1.19-1.42.1088-.1945.1781-.4086.2039-.63.0257-.2214.0074-.4457-.0539-.66-.06-.31-.46-.23-.56.08z"
+                    />
+                    <path
+                      d="m18.64 15.23c-.0223-.0356-.0515-.0663-.086-.0903-.0346-.0239-.0736-.0406-.1147-.049-.0412-.0084-.0836-.0084-.1247.0001-.0412.0085-.0801.0252-.1146.0492-.0359.0232-.0668.0534-.0909.0888s-.0408.0752-.0492.1172-.0083.0852.0003.1271.0256.0817.0498.1169c.2459.367.419.7777.51 1.21-.5356.4324-1.1409.7706-1.79 1-.89.33-1.78.63-2.67.94l-2.38.92c-.78.31-1.55.63-2.35.86-.55364.1689-1.11833.2992-1.69.39-.7-1.53-1.31-3.12-1.86-4.73-.43-1.28-.82-2.58-1.2-3.87s-.79-2.62999-1.13-3.92999c-.29-1-.66-2.07-.93-3.12-.12-.44-.22-.87-.3-1.26.28-.17.59-.33.92-.49l.42-.18.71.94c.08.11.17.28.26.41.05973.09148.13405.17256.22.24.14737.07717.31556.1052.48.08.33619-.01745.67052-.06091 1-.13.31804-.03727.63245-.10082.94-.19.67-.18 1.32-.45 2-.62.299-.05755.59318-.13778.88-.24.1637-.05667.3043-.1656.4-.31.0801-.14622.1343-.30525.16-.47 0-.25 0-.56.05-.74.0407-.31013.1008-.6174.18-.92 0-.16.1-.31.15-.459998.36-.08.72-.15 1.06-.2.1808-.043322.3692-.043322.55 0 .0922.037084.1736.09686.2365.17378.0629.076921.1054.168498.1235.266218 0 0 .12.13.29.1.0624-.0123.1193-.04411.1624-.09085.0431-.04673.0703-.10597.0776-.16915v-.109998c-.0767-.240212-.2272-.450148-.43-.6-.3347-.2429438-.7504-.3468754-1.16-.28999987-1.6332.14719087-3.24981.44172287-4.83.87999987-1.06493.289628-2.10493.664158-3.11 1.119998-1 .47-2.39.89-2.26 2.28.05.38.11.75.18 1.12.21 1.07.48 2.13.69 3.19.19.89.38 1.78999.61 2.67999.34 1.32.75 2.64 1.21 3.93.75754 2.116 1.66656 4.1747 2.72 6.16.03156.0507.0759.0921.12856.1202s.11179.0418.17144.0398c1.19985-.0663 2.3913-.2404 3.56-.52.48-.13.95-.28 1.43-.45.68-.24 1.36-.54 2-.81.87-.39 1.75-.76 2.61-1.17.57-.27 1.3-.84 1.86-1.16.79-.53.09-1.58-.33-2.18zm-13.64-12.46999c.83-.32 1.73-.62 2.64-.9s1.79-.52 2.64-.73c0 0-.23.7-.32 1l-.16.74c-.8.2-4.38 1.3-4.38 1.3-.15.04-1.14-1.17-1.14-1.17z"
+                    />
+                    <path
+                      d="m18 11.48c.238-.1056.4447-.2709.6-.48.2695-.3451.5135-.7094.73-1.08999.52-.89.93-1.84 1.51-2.69.2239-.36266.489-.69822.79-1 .0306-.02897.0549-.06386.0715-.10254.0167-.03868.0253-.08035.0253-.12246s-.0086-.08378-.0253-.12246c-.0166-.03868-.0409-.07357-.0715-.10254-.0599-.05924-.1407-.09246-.225-.09246-.0842 0-.1651.03322-.225.09246-.4946.38281-.9323.83399-1.3 1.34-.54.71-1 1.49-1.49 2.22-.11.18-.28.47-.46.73999-.0551.1018-.1187.1988-.19.29-.06-.1-1.81-1.89999-1.81-1.89999-.0252-.02632-.0555-.04726-.089-.06157s-.0696-.02168-.106-.02168-.0725.00737-.106.02168-.0638.03525-.089.06157c-.0266.02607-.0477.05719-.0622.09153-.0144.03434-.0218.07122-.0218.10847s.0074.07413.0218.10847c.0145.03434.0356.06546.0622.09153l1.4 1.89999s.3.42.42.56c.074.0937.1769.1602.2927.1891s.2379.0187.3473-.0291z"
+                    />
+                  </g>
+                </svg>
+                <div class="accordion-heading-text">
+                  Підвищити ефективність рішень, які ви пропонуєте бізнесу
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <p>
+                  Чим менше часу ви витрачаєте на розробку та підтримку коду —
+                  тим більше часу залишається на вирішення реальних
+                  бізнес-проблем.
+                </p>
+                <p>
+                  Чим ефективніше ви розв’язуєте прикладні задачі — тим вищою є
+                  ваша цінність для команди, компанії та ринку загалом. А отже —
+                  тим більшою стає і ваша професійна свобода.
+                </p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion">
+              <summary class="accordion-heading">
+                <svg
+                  class="accordion-heading-icon"
+                  fill="none"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <clipPath id="a"><path d="m0 0h24v24h-24z" /></clipPath>
+                  <g
+                    clip-path="url(#a)"
+                    clip-rule="evenodd"
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                  >
+                    <path
+                      d="m9.18 21.63c-.21599-.1463-.41111-.3212-.58-.52l-.18-.11.84-.9.76-.84c.0356-.0223.0663-.0516.0903-.0861.0239-.0345.0406-.0735.049-.1146.0084-.0412.0084-.0836-.0001-.1247-.0084-.0412-.0252-.0801-.0492-.1146-.0232-.0359-.0534-.0669-.0888-.0909-.03539-.0241-.07523-.0408-.11719-.0492-.04195-.0084-.08516-.0083-.12708.0003-.04191.0086-.08167.0256-.11693.0498l-1.05.69c-.23.17-.65.37-1 .61-.18357.1452-.33652.3253-.45.53-.05048.1045-.07669.219-.07669.335s.02621.2305.07669.335c.15187.2993.35882.5673.61.79.21286.1641.44051.308.68.43.49.23 1 .38 1.5.61.0838.0478.183.061.2764.0367.0935-.0243.1737-.0841.2236-.1667.0265-.0408.0441-.0866.0519-.1346s.0055-.097-.0067-.1441c-.0123-.047-.0342-.091-.0643-.1291-.0302-.0381-.0679-.0695-.1109-.0922-.32-.32-.76-.54-1.14-.8z"
+                    />
+                    <path
+                      d="m13.15 17.4c-.0797-.0264-.1664-.0215-.2426.0138s-.136.0983-.1674.1762c-.33.64-.7 1.24-1 1.89-.1344.2736-.2546.554-.36.84-.1.29-.2.58-.28.87-.2.7-.34 1.4-.48 2.11-.0139.0453-.0187.0929-.0141.14.0046.0472.0184.093.0407.1348s.0526.0788.0892.1089c.0367.03.0788.0526.1242.0663.0928.0283.1931.019.2791-.0259.0861-.0449.151-.1218.1809-.2141.28-.67.61-1.3.9-2 .19-.45.37-.89.52-1.35.26-.78.41-1.58.6-2.37.0231-.077.0164-.1599-.0188-.2321-.0352-.0723-.0963-.1287-.1712-.1579z"
+                    />
+                    <path
+                      d="m16.1 19.54c-.3216-.198-.6556-.375-1-.53-.3238-.1532-.658-.2836-1-.39-.0386-.0184-.0806-.0288-.1233-.0306-.0427-.0019-.0854.0049-.1255.0198s-.0768.0377-.1079.067c-.0311.0294-.056.0646-.0733.1038-.0182.0379-.0284.0791-.0302.1211-.0017.042.0051.0839.0201.1232.0149.0393.0377.0751.067.1053.0292.0302.0643.0542.1031.0704.2761.1753.54.3691.79.58.2507.2044.4878.4249.71.66l.12.06c-.1129.1798-.24.3503-.38.51l-.49.56-.86.87c-.082.0532-.1396.1367-.1602.2323s-.0026.1954.0502.2777c.0564.0783.1405.1322.2352.1508s.193.0004.2748-.0508l1.12-.74.66-.5c.2167-.2013.4142-.4222.59-.66.146-.2114.2387-.455.27-.71.0154-.0932.0089-.1886-.0188-.2788-.0278-.0903-.0761-.1728-.1412-.2412-.1538-.1428-.3212-.2701-.5-.38z"
+                    />
+                    <path
+                      d="m14.19 8.44c.0147-.09485.0071-.19181-.022-.28325-.0292-.09144-.0792-.17486-.1461-.24369s-.1488-.12119-.2394-.15296c-.0906-.03176-.1873-.04207-.2825-.0301-.1649.0201-.3167.09985-.4268.2242s-.1709.2847-.1709.4508c0 .16609.0608.32644.1709.45079s.2619.2041.4268.22421c.0891.01194.1798.00403.2655-.02317.0858-.02721.1644-.07303.2304-.13419.0659-.06116.1175-.13615.1511-.21959.0335-.08344.0482-.17327.043-.26305z"
+                    />
+                    <path
+                      d="m10.54 8.54c.0147-.09485.0071-.19181-.022-.28325-.0292-.09144-.0792-.17486-.1461-.24368-.0669-.06883-.1488-.12119-.2394-.15296s-.18727-.04207-.2825-.03011c-.16487.02011-.31668.09986-.42679.22421s-.1709.2847-.1709.45079c0 .1661.06079.32644.1709.4508.11011.12435.26192.2041.42679.2242.08848.00849.1778-.00185.262-.03033.0842-.02847.1614-.07445.2266-.13489.0651-.06045.1168-.134.1515-.21583s.0517-.17008.0499-.25895z"
+                    />
+                    <path
+                      d="m10.56 11.74c.2144.1255.453.2039.7.23.2377.0282.4786.0112.71-.05.526-.1319.9914-.4387 1.32-.87.0684-.0693.1068-.1627.1068-.26 0-.0974-.0384-.1908-.1068-.26-.0693-.0684-.1627-.1068-.26-.1068s-.1907.0384-.26.1068c-.2005.1256-.4245.209-.6584.2451-.2338.0362-.4725.0242-.7016-.0351-.125-.0137-.2487-.0371-.37-.07-.3235-.0583-.6129-.2369-.81-.5-.0351-.079-.0998-.1411-.1802-.17292-.08046-.03179-.17014-.03075-.2498.0029-.03967.01522-.07577.03842-.10609.06822-.03031.0298-.05418.0655-.07012.1049-.01594.0393-.02362.0816-.02255.1241.00107.0424.01086.0842.02876.1228.04921.2746.15798.535.31865.7631.16065.228.36935.4181.61135.5569z"
+                    />
+                    <path
+                      d="m4.68 18.63c-.06015.3938-.09024.7916-.09 1.19-.01986.3964-.01986.7936 0 1.19.08448.9231.25182 1.8368.5 2.73.00843.0467.02599.0912.05168.1311.0257.0398.05902.0742.09805.1012.03902.0269.08299.0459.12938.0558.04638.0099.09426.0105.14089.0019.0473-.0071.09263-.0239.1332-.0492.04058-.0253.07553-.0587.10271-.0981.02717-.0393.04599-.0838.0553-.1307.0093-.0469.00889-.0953-.00121-.142 0-.5-.07-1-.08-1.51s0-1 0-1.5v-1.5-1.78c0-.78-.84-.07-1 .5.04.33.01.48-.04.81z"
+                    />
+                    <path
+                      d="m15.14 14.46c-.0892-.0383-.1897-.0409-.2808-.0075-.0911.0335-.166.1006-.2092.1875-.2371.3658-.5592.6687-.9389.8829-.3796.2142-.8054.3333-1.2411.3471-.5135.0627-1.0344.0184-1.53-.13-.3234-.0849-.6262-.2346-.89-.44-.18614-.156-.33625-.3504-.44-.57 0-.09-.14-.17-.41 0 0 0-.34.36-.29.49.08578.2989.23597.5753.44.81.40346.4733.9346.8204 1.53 1 .5735.1583 1.1758.1822 1.76.07.5918-.0951 1.1495-.3398 1.6202-.7108.4708-.371.839-.8561 1.0698-1.4092.0266-.0457.0428-.0967.0474-.1493.0047-.0526-.0023-.1056-.0204-.1553-.0182-.0496-.047-.0946-.0845-.1319-.0375-.0372-.0827-.0657-.1325-.0835z"
+                    />
+                    <path
+                      d="m18.1 18.74c0 .6.14 1.2.22 1.8.13.89.29 1.77.4 2.68 0 .0955.0379.1871.1054.2546.0676.0675.1591.1054.2546.1054s.187-.0379.2546-.1054c.0675-.0675.1054-.1591.1054-.2546 0-.91.08-1.8 0-2.7 0-.39 0-.77-.09-1.15-.0355-.3835-.0957-.7642-.18-1.14-.0424-.2497-.0991-.4968-.17-.74-.1-.4-.86-1.12-1.06-.59.06.79.06 1.04.16 1.84z"
+                    />
+                    <path
+                      d="m23.19 21.7c-.1537-.6234-.3612-1.2324-.62-1.82-.445-.9666-1.0094-1.8737-1.68-2.7-.6812-.8224-1.4642-1.5549-2.33-2.18-1.1804-.8358-2.5281-1.4055-3.95-1.67.3437-.2913.6464-.6277.9-1 .7765-1.187 1.174-2.58197 1.14-4.00001 0-.09813-.039-.19224-.1084-.26163s-.1635-.10837-.2616-.10837-.1922.03898-.2616.10837-.1084.1635-.1084.26163c-.0531 1.04061-.366 2.05131-.91 2.94001-.4556.8297-1.2157 1.45-2.12 1.73-.7908.2062-1.6262.1608-2.39-.13-.52379-.1789-1.01144-.4498-1.44-.8-.54676-.4561-.97379-1.0389-1.24393-1.6977-.27014-.65882-.37521-1.37365-.30607-2.08231.00707-.04151.00561-.08403-.00429-.12496-.00991-.04092-.02804-.0794-.05331-.11309-.02526-.03369-.05713-.06187-.09365-.08284-.03651-.02097-.07692-.03428-.11875-.03911-.08611-.01142-.17325.01157-.24252.06399s-.11507.13003-.12748.21601c-.16774.84066-.12297 1.7099.13023 2.52891.25321.819.70684 1.5618 1.31977 2.1611.21017.1998.43774.3806.68.54-1.2715.2903-2.47622.8197-3.55 1.56-.86463.6189-1.64751 1.3446-2.33 2.16-.67057.8263-1.23496 1.7334-1.68 2.7-.25883.5876-.466267 1.1966-.62 1.82-.169094.632-.236604 1.2868-.2 1.94-.009147.0476-.007361.0966.005222.1435.012584.0468.035636.0901.067418.1267.031781.0366.071461.0655.116044.0845s.092904.0277.141316.0253c.042029-.0013.08339-.0109.12172-.0282.03833-.0172.07288-.0419.10167-.0726.02879-.0306.05126-.0666.06612-.106.01486-.0393.02182-.0812.02049-.1232.02123-.578.13606-1.1488.34-1.69.19795-.5546.44562-1.0901.74-1.6.472-.8247 1.03193-1.5959 1.67-2.3.29-.35 1.43-1.34 1.95-1.87.37211-.3195.7628-.6167 1.17-.89 1.00984-.4961 2.05624-.914 3.13-1.25.9641.3464 2.0113.3883 3 .12.1 0 .19-.12.29-.16.4833.0877.9608.2046 1.43.35.7003.2318 1.3714.5439 2 .93 1.1315.777 2.151 1.7057 3.03 2.76.6089.7061 1.1575 1.4621 1.64 2.26.2944.5099.5421 1.0454.74 1.6.2039.5412.3188 1.112.34 1.69-.0013.042.0056.0839.0205.1232.0149.0394.0373.0754.0661.106.0288.0307.0633.0554.1017.0726.0383.0173.0797.0269.1217.0282s.0839-.0056.1232-.0205c.0394-.0149.0754-.0373.106-.0661.0307-.0288.0554-.0634.0727-.1017.0172-.0383.0268-.0797.0281-.1217.0464-.6516-.011-1.3064-.17-1.94z"
+                    />
+                    <path
+                      d="m4.7 8.18999c.50004-.15657 1.01162-.2736 1.53-.35.79-.13 1.6-.2 2.39-.28 1-.12 1.88-.18 2.8-.24s1.87-.12 2.8-.11c1.266.00839 2.5296.11201 3.78.31.0921.01274.1855-.00963.2619-.06267.0763-.05303.1298-.13285.15-.22357.0202-.09073.0054-.18571-.0412-.26608-.0467-.08037-.1219-.14023-.2107-.16768-.22-.06-.43-.08-.65-.13.0932-.32515.1403-.66176.14-1-.0433-.58537-.1713-1.16137-.38-1.71-.1676-.43352-.3787-.84897-.63-1.24-.2614-.39616-.5779-.75307-.94-1.06-.6264-.52048-1.3909-.847132-2.2-.939998-.3271-.318681-.7296-.549201-1.17-.6700003-.7498-.1596117-1.5303-.0899245-2.24.2000003-.36704.142073-.70571.34866-1 .61-.05561.06582-.10578.136051-.15.209998-.79262.27062-1.50916.7266-2.09 1.33-.29326.30101-.5485.63685-.76 1-.21702.37482-.38825.77435-.51 1.19-.20464.85121-.20464 1.7388 0 2.59-.36361.10227-.72089.22581-1.07.37-.04605.01198-.08896.03376-.1258.06387-.03683.03011-.06672.06783-.08762.11057s-.0323.0895-.03344.13706.00803.09481.02686.1385c.01333.04019.03474.07722.06293.10881.02819.0316.06255.05708.10097.07488.03841.0178.08007.02755.1224.02863.04232.00109.08442-.00651.1237-.02232zm10.56-5.25c.3518.4476.6567.93013.91 1.44.2004.35249.3646.72439.49 1.11.0903.32524.1141.66535.07 1-.9662-.20121-1.9452-.33487-2.93-.4.09-.32.2-.65.26-1 .1017-.48956.1818-.98338.24-1.48.0351-.41259.0351-.82741 0-1.24-.0251-.20542-.0755-.40695-.15-.6.12.08.24.16.35.25.2813.28245.5357.59044.76.92zm-4.71-1.55c.4594-.18616.9622-.23817 1.45-.15.2288.04305.4448.1374.6319.27597.187.13856.3403.31773.4481.52403.1116.21453.1796.44905.2.69.025.2928.025.5872 0 .88 0 .52-.05 1-.1 1.42-.0504.33716-.1205.67107-.21 1-.7228-.03985-1.4472-.03985-2.17 0-.37 0-.75.11-1.12.17-.09-.38-.17-.75-.22-1.12-.04699-.48184-.06702-.96592-.06-1.45-.02318-.33293-.02318-.66707 0-1 .02769-.1815.08513-.35719.17-.52.08137-.15514.20206-.28617.35-.38.195-.13909.4067-.25331.63-.34zm-3.39 2.66c.16612-.31668.36023-.61788.58-.9.18532-.24524.39287-.47287.62-.68-.00485.40185.02526.80337.09 1.2.0649.54191.16174 1.07951.29 1.61.08815.36523.19496.7257.32 1.08l-.6.09c-.74.18-1.46.34-2.19.55.02433-.6868.16991-1.36389.43-2 .13745-.32411.29097-.64117.46-.95z"
+                    />
+                  </g>
+                </svg>
+                <div class="accordion-heading-text">
+                  Надайте своїм словам ваги
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <p>
+                  З покращенням якості вашого коду та результатів роботи, колеги
+                  й роботодавці уважніше ставитимуться до вашої думки. Адже вона
+                  буде підкріплена не лише теоретичною базою, а й реальними
+                  практичними результатами.
+                </p>
+              </div>
+            </details>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Authors -->
+    <section class="authors" id="authors">
+      <div class="inner authors-inner">
+        <h2 class="authors-heading">Автори, запрошені експерти та ментори</h2>
+
+        <ol class="authors-grid">
+          <li class="author">
+            <img
+              class="author-photo"
+              alt="Фото Тимура Шемсединова"
+              src="./files/timur.webp"
+            />
+
+            <div>
+              <hgroup class="author-header">
+                <h3 class="author-name">Тимур Шемсединов</h3>
+                <p class="author-position">
+                  Автор тренінгу, лектор і ведучий семінарів.
+                </p>
+              </hgroup>
+
+              <p class="author-about">
+                30 років в ІТ, контриб'ютор у проєкти з відкритим кодом, експерт
+                у Node.js, JavaScript, архітектурі розподілених та навантажених
+                корпоративних систем і баз даних.
+              </p>
+            </div>
+          </li>
+
+          <li class="author">
+            <img
+              class="author-photo"
+              alt="Фото Тимура Шемсединова"
+              src="./files/illya.webp"
+            />
+
+            <div>
+              <hgroup class="author-header">
+                <h3 class="author-name">Ілля Климов</h3>
+                <p class="author-position">
+                  Запрошений гість Допомагає розібратися з патернами у фронтенді
+                  та комунікацією в команді.
+                </p>
+              </hgroup>
+
+              <p class="author-about">
+                21 рік в ІТ, Staff Frontend Engineer @ GitLab
+              </p>
+            </div>
+          </li>
+
+          <li class="author">
+            <img
+              class="author-photo"
+              alt="Фото Тимура Шемсединова"
+              src="./files/dmytro.webp"
+            />
+
+            <div>
+              <hgroup class="author-header">
+                <h3 class="author-name">Дмитро Нечай</h3>
+                <p class="author-position">Ментор тренінгу Patterns</p>
+              </hgroup>
+
+              <p class="author-about">
+                CHIEF ARCHITECT у PLATMA CTO в Handy.ai Лектор у КПІ та Metarhia
+              </p>
+            </div>
+          </li>
+
+          <li class="author">
+            <img
+              class="author-photo"
+              alt="Фото Тимура Шемсединова"
+              src="./files/denys.webp"
+            />
+
+            <div>
+              <hgroup class="author-header">
+                <h3 class="author-name">Денис Отришко</h3>
+                <p class="author-position">
+                  Principal Engineer Node.js Core Contributor Metarhia Core
+                  Contributor
+                </p>
+              </hgroup>
+
+              <p class="author-about">10+ років у продуктовій розробці</p>
+            </div>
+          </li>
+
+          <li class="author">
+            <img
+              class="author-photo"
+              alt="Фото Тимура Шемсединова"
+              src="./files/timur_s.webp"
+            />
+
+            <div>
+              <hgroup class="author-header">
+                <h3 class="author-name">Тимур Севимли</h3>
+                <p class="author-position">
+                  Senior SWE в Metactos OSS Contributor Metarhia Core
+                  Contributor
+                </p>
+              </hgroup>
+
+              <p class="author-about">Підприємець. Прихильник open source</p>
+            </div>
+          </li>
+
+          <li class="author">
+            <img
+              class="author-photo"
+              alt="Фото Тимура Шемсединова"
+              src="./files/mykola.webp"
+            />
+
+            <div>
+              <hgroup class="author-header">
+                <h3 class="author-name">Микола Бєлочуб</h3>
+                <p class="author-position">
+                  Senior SWE OSS Contributor Metarhia Core Contributor
+                </p>
+              </hgroup>
+
+              <p class="author-about">10+ років у продуктовій розробці</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Programm -->
+    <section class="programm" id="programm">
+      <div class="inner programm-inner">
+        <h2 class="programm-heading">
+          Екосистема навчання та підтримки на прикладі одного тижня
+        </h2>
+
+        <ul class="programm-list">
+          <li class="programm-item">
+            <div class="programm-item-body">
+              <h3 class="programm-title">Освітня частина</h3>
+              <div class="programm-description">
+                <p>Відеолекція на тему тижня.</p>
+                <p>
+                  Навчання займає до 2 годин на тиждень у зручний для вас час.
+                </p>
+              </div>
+            </div>
+          </li>
+          <li class="programm-item">
+            <div class="programm-item-body">
+              <h3 class="programm-title">Семінар Q/A</h3>
+              <div class="programm-description">
+                <p>
+                  Тимур розбирає практичні приклади застосування знань та
+                  відповідає на запитання на тему тижня.
+                </p>
+                <p>
+                  Початок — у понеділок або вівторок. Тривалість — 1 година.
+                </p>
+              </div>
+            </div>
+          </li>
+          <li class="programm-item">
+            <div class="programm-item-body">
+              <h3 class="programm-title">Виконання домашнього завдання</h3>
+            </div>
+          </li>
+          <li class="programm-item">
+            <div class="programm-item-body">
+              <h3 class="programm-title">Code review call</h3>
+              <div class="programm-description">
+                <p>
+                  Групова зустріч з ментором для аналізу коду та надання
+                  рекомендацій.
+                </p>
+                <p>
+                  Дається ще тиждень на доопрацювання та здачу домашнього
+                  завдання
+                </p>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <figure class="programm-schedule">
+          <img src="./files/schedule.webp" alt="" />
+
+          <figcaption>
+            У малій групі від 5 до 10 осіб. Тривалість зустрічі — від 50 до 100
+            хв.
+          </figcaption>
+        </figure>
+
+        <div class="programm-group">
+          <p>У малій групі від 5 до 10 осіб.</p>
+          <p>Тривалість зустрічі — від 50 до 100 хв.</p>
+        </div>
+
+        <h3 class="programm-heading plan-heading">
+          План навчання Patterns 2025
+        </h3>
+        <ol class="programm-schedule-list">
+          <li>
+            <details class="accordion no-padding">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">
+                  Unit 1: Структури та системи модульності (Week 1–4)
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <p>Структура та модульність.</p>
+                <p>
+                  Чому важливо переосмислити та адаптувати GoF, SOLID і GRASP
+                  для сучасного JavaScript/TypeScript?
+                </p>
+                <p>Як це зробити ефективно?</p>
+                <br />
+                <br />
+                <p>Завдання Unit-y 1:</p>
+                <ul>
+                  <li>- Покращення структури та характеристик коду</li>
+                  <li>- Оптимальне використання обчислювальних ресурсів</li>
+                  <li>
+                    - Розуміння принципів побудови комплексних застосунків
+                  </li>
+                  <li>- Зрозумілі, підтримувані програмні модулі</li>
+                  <li>- Менше часу на виконання щоденних задач</li>
+                </ul>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">
+                  📆 Week 1: Характеристики коду та стратегії оптимізації
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <p>
+                  🧩 Існує шлях, який веде до радикального покращення структури
+                  і характеристик коду. Ми розглянемо принципи і шаблони GoF,
+                  SOLID, GRASP, як їх застосовувати і що вони дають.
+                  Характеристики коду: читабельність, надійність, тестованість,
+                  підтримуваність, повторне використання, гнучкість, безпека.
+                  Оптимальне використання обчислювальних ресурсів: процесор,
+                  памʼять, введення-виведення і когнітивні ресурси розробників.
+                </p>
+                <br /><br />
+                <p>
+                  ⭐ Характеристики коду і стратегії оптимізації, V8 машинерія,
+                  SOLID: SRP, SoC
+                </p>
+                <p>⭐ GRASP принципи розподілу відповідальності</p>
+                <p>💡 Принципи SOLID</p>
+                <p>💡 Шаблони GoF</p>
+                <p>
+                  💡 Мономорфний і поліморфний код, inline-кеш, приховані класи
+                  в JavaScript
+                </p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">
+                  📆 Week 2: Вбудовані можливості в мові і платформі
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <p>
+                  JavaScript має вбудовані контракти: Thenable, Iterable,
+                  AsyncIterator, Callback-last, Callable, Cancelable,
+                  Observable, але культура розробки через контракти і інтерфейси
+                  не дуже поширена в спільноті. Як покращити продуктивність
+                  розробки за допомогою підходу, заснованого на знаннях. Як
+                  шаблони можуть допомогти нам у цьому: реалізовувати нові фічі
+                  швидко і ефективно, бути продуктивними, робити щоденну роботу
+                  цікавою, бути вмотивованими і не вигорати.
+                </p>
+                <br /><br />
+                <p>⭐ Контракти Callback і Callback-last-error-first</p>
+                <p>⭐ Контракт Thenable</p>
+                <p>⭐ Контракти Iterator і AsyncIterator</p>
+                <p>⭐ Promise</p>
+                <p>💡 Патерн Спостерігач (Observer + Observable)</p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">
+                  📆 Week 3: Інстанціювання: породжувальні шаблони і техніки
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <p>
+                  Породжувальні шаблони: Constructor, Singleton, Factory, Pool,
+                  Builder, Prototype, Flyweight, інші шаблони і техніки. Давайте
+                  знайдемо повʼязані принципи і переосмислимо прикладне значення
+                  GRASP: Creator; GRASP: Polymorphism, SOLID: ISP; Aggregation і
+                  Composition. Як економити памʼять та інші ресурси; як
+                  ефективно застосовувати оптимізацію і кешування.
+                </p>
+                <p>
+                  Як розробляти надзвичайно швидкий код і мінімізувати latency,
+                  зробити код кросплатформним і зрозумілим для колег.
+                </p>
+                <br /><br />
+                <p>⭐ GRASP: 👉 Information Expert, Creator, Polymorphism</p>
+                <p>⭐ SOLID: Interface Segregation Principle (ISP)</p>
+                <p>
+                  ⭐ Instantiation: Constructor, Factory Method, Object Pool
+                </p>
+                <p>
+                  ⭐ Decomposition, Instantiation, Encapsulation, Aggregation,
+                  Composition, Association, Delegation
+                </p>
+                <p>
+                  ⭐ GoF Creational Patterns: 👉 Builder, 👉 Prototype, 👉
+                  Singleton, 👉 Flyweight
+                </p>
+                <p>⭐ Патерн Revealing Constructor — відкритий конструктор</p>
+                <p>💡 Фабрики і пули обʼєктів</p>
+                <p>💡 Асоціація, агрегація і композиція обʼєктів</p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">
+                  📆 Week 4: Ізоляція і розділення відповідальності (SoC)
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <p>
+                  Separation of Concerns (SoC) — це загальний інженерний
+                  принцип, спрямований на створення гнучких, надійних і легко
+                  модифікованих систем. Ми можемо використовувати шаблони GoF:
+                  Mediator, Bridge, Abstract Factory, Strategy (у
+                  JavaScript-реалізації:
+                  <code>Map&lt;PropertyKey, Implementation&gt;</code>); Системи
+                  модульності; GRASP принципи Information Expert, Indirection і
+                  Protected Variations; SOLID: SRP. Це покращить тестованість
+                  коду і знизить витрати на інтеграцію.
+                </p>
+                <br /><br />
+                <p>
+                  ⭐ Структура застосунків: системи модульності, пакети і
+                  залежності
+                </p>
+                <p>⭐ Шари і впровадження залежностей</p>
+                <p>
+                  ⭐ GoF Patterns: 👉 Abstract Factory, 👉 Factory Method, 👉
+                  Strategy, 👉 Pool
+                </p>
+                <p>⭐ GRASP: Indirection principle, Protected Variations</p>
+                <p>
+                  💡 AsyncPool — Шаблон асинхронного програмування «Асинхронний
+                  пул»
+                </p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion no-padding">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">
+                  Unit 2: Контрактне програмування і системи виконання коду
+                  (Week 5–8)
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <p>
+                  Ми навчимося оптимізувати звʼязність і зчеплення між
+                  компонентами програмних систем і проєктувати їх таким чином,
+                  щоб вони були готові до колаборативної розробки великою
+                  кількістю учасників без конфліктів. Ми розберемося, як
+                  побудувати застосунок таким чином, щоб він був готовий
+                  обробити будь-який обсяг даних і був готовий зреагувати на всі
+                  можливі помилки та виняткові ситуації.
+                </p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">
+                  🗓️ Week 5: Контракти: інтерфейси для взаємодії компонентів
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <p>
+                  Патерни: Adapter (Wrapper), Facade, Bridge, Composite, Proxy,
+                  Promisify; Front controller; GRASP: Low Coupling and High
+                  Cohesion; SOLID: LSP (Liskov); і SOLID: OCP (Open-Closed).
+                  Застосування контрактів відкриває можливість поетапного
+                  рефакторингу, усунення технічного боргу і підвищення
+                  стабільності підсистем; зниження залежності (звʼязаності) між
+                  шарами і модулями. На рівні управління проєктом це дозволяє
+                  масштабувати команду, керувати пріоритетами і приймати
+                  архітектурні рішення.
+                </p>
+                <br /><br />
+                <p>⭐ Контрактне програмування</p>
+                <p>
+                  ⭐ Layers and Low Coupling на прикладі конфига і транспорту
+                </p>
+                <p>⭐ GoF: 👉 Adapter, 👉 Proxy, 👉 Facade, 👉 Composite</p>
+                <p>⭐ GRASP: Зчеплення і звʼязаність — Coupling and Cohesion</p>
+                <p>
+                  💡 SOLID: Принцип підстановки Барбари Лісков (Liskov
+                  substitution principle, LSP)
+                </p>
+                <p>
+                  💡 Семінар з адаптерів для Node.js і асинхронного
+                  програмування
+                </p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">
+                  🗓️ Week 6: Послаблення зчеплення в коді через події та
+                  повідомлення
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <p>
+                  Наступний підхід — це застосування шин подій всередині
+                  застосунку і між підсистемами. Це поширено в користувацьких
+                  інтерфейсах, розподілених системах, спільному доступі до
+                  розділюваних ресурсів. На основі асинхронного і подієвого
+                  програмування побудовано рішення з не блокувальним
+                  введенням-виведенням у Node.js. Ми розглянемо GRASP: Pure
+                  Fabrication і Low Coupling; AsyncQueue, Async collections та
+                  інші.
+                </p>
+                <br /><br />
+                <p>⭐ Події: EventTarget, EventEmitter</p>
+                <p>⭐ GRASP: Чиста вигадка — Pure Fabrication</p>
+                <p>💡 GoF: Патерн Спостерігач (Observer + Observable)</p>
+                <p>💡 Фази Event-loop у V8 і Node.js</p>
+                <p>💡 Стрім з розбором Event loop і асинхронності</p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">
+                  🗓️ Week 7: Streams: Потоки даних і перетворення
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <p>
+                  Реактивне програмування розвинулося в окрему парадигму; потоки
+                  і сигнали ґрунтуються на GoF: Observer; GRASP: Pure
+                  Fabrication і подієвому підході з потоками даних та
+                  операторами перетворення даних. Це широко використовується в
+                  мережевих протоколах, доступі до даних і файлових систем,
+                  розробці ігор, фінансових і аналітичних системах, керуванні
+                  вбудованими системами, телеметрії та інших галузях. Це дає
+                  виразний синтаксис, вищий рівень абстракції, гнучкість і
+                  продуктивність для покращення користувацького досвіду.
+                </p>
+                <br /><br />
+                <p>
+                  ⭐ Стріми: Readable, Writable, Transform, відкритий
+                  конструктор, буферизація, backpressure
+                </p>
+                <p>💡 Асинхронність на RxJS і потоки подій</p>
+                <p>💡 Робота з файлами, буферами і файловими потоками</p>
+                <p>💡 Actor model — модель акторів</p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">
+                  🗓️ Week 8: Обробка помилок: виключення Exceptions і Soft
+                  Failures
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <p>
+                  Ми розглянемо найкращі практики обробки помилок як з
+                  використанням виключень, так і доменних помилок. Як Graceful
+                  shutdown, Gracefully recover і обробка доменних помилок
+                  підвищують загальну продуктивність системи. Ми будемо
+                  використовувати Chain of Responsibility, SOLID, Promises,
+                  fallback-механізми для некритичних помилок; GRASP: Protected
+                  Variations і кастомні, специфічні для JavaScript
+                  AggregateError і Error.prototype.cause, а також серіалізацію
+                  помилок для передачі мережею.
+                </p>
+                <br /><br />
+                <p>⭐ Обробка помилок, логування і агрегування</p>
+                <p>
+                  ⭐ Семінар: Обробка прикладних, операційних і доменних
+                  помилок, виключення, відновлення і логування
+                </p>
+                <p>
+                  💡 Реалізація Graceful shutdown у Node.js, unhandled
+                  exceptions, async stack trace
+                </p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion no-padding">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">
+                  Unit 3: Середовище виконання прикладного коду (Week 9–12)
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <p>
+                  Об’єднання всіх розглянутих технік і підходів у реальних
+                  умовах. У цьому юніті ми розглянемо, як основні концепції
+                  побудови структури застосунків, такі як контрактне
+                  програмування і патерни, перетворюються на працюючі та
+                  масштабовані застосунки.
+                </p>
+                <p>
+                  Цей модуль зосереджений на тому, як особливості середовища
+                  виконання накладаються на завдання структури та архітектури
+                  застосунків. Ви отримаєте навички впровадження технік
+                  програмування, що перетворюють програмне рішення на платформу,
+                  розраховану на довготривалу експлуатацію; це включає підтримку
+                  зміни інструментарію, розширення команди, постійне інтенсивне
+                  нарощування функціональності та навантажень.
+                </p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">
+                  🗓️ Week 9: Семантика: виразні DSL
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <p>
+                  Для покращення виразності коду і чіткості семантики будь-яке
+                  складне програмне забезпечення потребує створення DSL (мов,
+                  спеціалізованих для предметної області). Під час розробки DSL
+                  можна використовувати добре відомі синтаксиси, такі як JSON,
+                  JSON5, Markdown і навіть сам JavaScript. Ми розглянемо
+                  патерни: Command, Interpreter, State, Strategy, Visitor. DSL
+                  робить код зрозумілим для аналітиків предметної області і
+                  навіть для досвідчених користувачів. Це покращує комунікацію і
+                  розуміння, пришвидшує розробку, адаптацію рішень до нових
+                  вимог, спрощує навчання і передачу знань, приховує технічну
+                  складність і дозволяє фахівцям зосередитися на своїй галузі,
+                  покращуючи загальну передбачуваність проєкту.
+                </p>
+                <br /><br />
+                <p>
+                  ⭐ DSL (спеціалізовані мови), AST, Pattern Interpreter,
+                  підмножина JavaScript, Markdown, LISP
+                </p>
+                <p>
+                  ⭐ Pattern Interpreter — реалізація AST і LISP на JavaScript
+                </p>
+                <p>⭐ Pattern Command</p>
+                <p>⭐ Приклад: електронна таблиця з формулами</p>
+                <p>💡 CQS, CQRS, Event Sourcing, транзакції</p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">
+                  🗓️ Week 10: All-agnostic як стратегія за замовчуванням
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <p>
+                  Розробка систем, незалежних від фреймворків, платформ,
+                  протоколів, баз даних і хмарних рішень — як стандартний підхід
+                  для забезпечення гнучкості та свободи архітектурних рішень.
+                  Такий підхід усуває залежність від постачальників хмарних
+                  сервісів і фреймворків. Звісно, не обов’язково впроваджувати
+                  всі аспекти агностичного підходу, але деякі з них принесуть
+                  значні переваги в масштабуванні системи та в процесі її
+                  експлуатації. Ми будемо використовувати ізоляцію, GRASP:
+                  Controller; SOLID: DIP; принципи IoC і DI; інтерфейси та
+                  патерн Strategy для відв'язання від конкретних реалізацій.
+                </p>
+                <br /><br />
+                <p>
+                  ⭐ SOLID: DIP — Принцип інверсії залежностей (Dependency
+                  Inversion Principle)
+                </p>
+                <p>⭐ Service Locator</p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">
+                  🗓️ Week 11: Масштабування застосунків і архітектурні стилі
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <p>
+                  На цьому тижні ми розглянемо, як проєктувати системи, які
+                  можуть масштабуватися і розвиватися ефективно, використовуючи
+                  різні архітектурні стилі: DDD, шарова архітектура, SOA,
+                  мікросервіси, подієва архітектура, монолітна, порти і
+                  адаптери, чиста архітектура, Event-Sourcing, CQRS, Pipeline,
+                  Peer-to-Peer, Client-Server архітектура — і як застосовувати
+                  SOLID, GRASP та GoF для реалізації архітектури.
+                </p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">
+                  🗓️ Week 12: Методологія: як почати застосовувати концепції
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <p>
+                  Завершальна частина програми тренінгу зосереджена на
+                  практичному застосуванні всіх знань у комплексі. Ми
+                  розглянемо, як почати впроваджувати концепції і шаблони,
+                  вивчені на курсі, в реальних проєктах. Цей модуль надає
+                  практичні стратегії для створення дорожньої карти їх
+                  впровадження. Як виявити потребу в шаблонах і принципах та
+                  врахувати можливі негативні аспекти. <br />
+                  Ре факторинг успадкованих систем, впровадження нових методів
+                  розробки та активностей у команді. Як спланувати власне
+                  навчання і налагодити розвиток команди з використанням знань
+                  із цього тренінгу.
+                </p>
+                <br /><br />
+                <p>⭐ Bridge;</p>
+                <p>⭐ Mediator;</p>
+                <p>
+                  ⭐ Як застосовувати патерни на прикладі Mediator і Bridge в
+                  ООП, ФП, мультипарадигмовому стилі
+                </p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion no-padding">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">
+                  Unit 4: Архітектура та Бізнес (Week 13-16)
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <p>
+                  Дізнайтеся, як шаблони проєктування підтримують масштабовану,
+                  надійну архітектуру та довгострокову підтримку системи.
+                  Зосередьтеся на стратегічних рішеннях і командному
+                  впровадженні практик для досягнення успішних результатів і
+                  створення бізнес-цінності. У цій частині буде розглянуто, як
+                  впроваджувати шаблони проєктування в команди бекенду та
+                  фронтенду, а також як бізнес-фактори впливають на архітектурні
+                  рішення.
+                </p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">
+                  🗓️ Модуль: Software Structure & Architecture
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <p>⭐️ Огляд і класифікація архітектури ПЗ</p>
+                <p>
+                  ⭐️ Багатошарова архітектура ПЗ, DDD, чиста архітектура ПЗ
+                </p>
+                <p>⭐️ Структура застосунку: модульність, DI, DTO, моделі</p>
+                <p>
+                  ⭐️ Черги: Pub/Sub, Push/Pull, CQS, CQRS, Event Sourcing,
+                  Command, Query Object
+                </p>
+                <p>⭐️ Vertical Slice Architecture і Feature-Slice Design</p>
+                <p>⭐️ Архітектура Web: DDD для фронтенду і бекенду</p>
+                <p>
+                  ⭐️ Багатопоточність для Web: Atomics/CAS, workers, locks,
+                  races
+                </p>
+                <p>
+                  ⭐️ Local-first, розподілені системи, блокчейн для Web 3.0
+                </p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">
+                  🗓️ Модуль Іллі Клімова: Як впроваджувати шаблони проєктування
+                  в команду?
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <p>
+                  ⭐ Розбір того, чому більшість впроваджень навіть найкращих
+                  ідей часто зазнають поразки.
+                </p>
+                <p>
+                  ⭐ Що таке «репутація інженера» і яку роль вона відіграє в
+                  успіху (або провалі) змін.
+                </p>
+                <p>
+                  ⭐ Як учасники проєкту — від розробників до менеджерів —
+                  по-різному сприймають інженерні практики та їх впровадження.
+                </p>
+                <p>
+                  ⭐ Типові проблеми, з якими стикаються команди під час спроб
+                  упровадити інженерні підходи, — та практичні рішення, які
+                  справді працюють.
+                </p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">
+                  🗓️ Модуль Іллі Клімова: Шаблони у Фронтенді
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <p>
+                  ⭐ Список найпоширеніших патернів проєктування на фронтенді.
+                </p>
+                <p>
+                  ⭐ Чим фронтенд відрізняється від бекенду в контексті
+                  застосування патернів?
+                </p>
+                <p>
+                  ⭐ Чи варто боротися за чистоту концепцій, чи все ж краще
+                  довіритися фреймворкам? Спойлер: радше друге, ніж перше.
+                </p>
+                <p>
+                  ⭐ Який результат: розуміння того, як застосовувати отримані
+                  знання у фронтенді — і де цього робити не варто.
+                </p>
+              </div>
+            </details>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Tariffs -->
+    <section class="tariffs" id="tariffs">
+      <div class="inner tariffs-inner">
+        <h2 class="tariffs-heading">Тарифи</h2>
+
+        <ol class="tariffs-list">
+          <li class="tariff">
+            <hgroup class="tariff-heading">
+              <h3 class="tariff-heading-name">Minimal</h3>
+              <p class="tariff-heading-price">$650</p>
+              <p class="tariff-heading-latency">3 місяці / &infin;</p>
+            </hgroup>
+            <ol class="tariff-options">
+              <li>Патерни;</li>
+              <li>Без перевірки ДЗ;</li>
+              <li>Семінар Q/A з Тимуром;</li>
+              <li>Приватний канал у Telegram з новинами курсу;</li>
+            </ol>
+            <a
+              href="https://telegram.me/js_patterns_bot"
+              target="_blank"
+              type="button"
+              class="tariff-submit"
+              >Купити</a
+            >
+          </li>
+          <li class="tariff">
+            <hgroup class="tariff-heading">
+              <h3 class="tariff-heading-name">Standard</h3>
+              <p class="tariff-heading-price">$1400</p>
+              <p class="tariff-heading-latency">3 місяці / 200 місць</p>
+            </hgroup>
+            <ol class="tariff-options">
+              <li>Патерни;</li>
+              <li>Домашні завдання;</li>
+              <li>Семінар Q/A з Тимуром;</li>
+              <li>Чат з ментором і групою з 10 учасників;</li>
+              <li>Code Review Call;</li>
+              <li>Модуль "Архітектура застосунків";</li>
+              <li>Модуль Іллі Климова "Патерни у фронтенді";</li>
+              <li>Сертифікат про завершення тренінгу з підписом Тимура;</li>
+              <li>Приватний канал у Telegram з новинами курсу;</li>
+            </ol>
+            <a
+              href="https://telegram.me/js_patterns_bot"
+              target="_blank"
+              type="button"
+              class="tariff-submit"
+              >Купити</a
+            >
+          </li>
+          <li class="tariff">
+            <hgroup class="tariff-heading">
+              <h3 class="tariff-heading-name">Professional</h3>
+              <p class="tariff-heading-price">$3100</p>
+              <p class="tariff-heading-latency">4 місяці / 50 місць</p>
+            </hgroup>
+            <ol class="tariff-options">
+              <li>Патерни;</li>
+              <li>Домашні завдання;</li>
+              <li>Семінар Q/A з Тимуром;</li>
+              <li>
+                Перевірка завдань ментором рівня Senior+ з досвідом розробки
+                комплексних та високонавантажених систем у групі із 5 осіб;
+              </li>
+              <li>Code Review Call;</li>
+              <li>Спільні зустрічі на вільні теми;</li>
+              <li>Чат з ментором і групою з 10 учасників;</li>
+              <li>Модуль "Архітектура застосунків";</li>
+              <li>Модуль Іллі Климова "Патерни у фронтенді";</li>
+              <li>
+                Модуль Іллі Климова "Як впроваджувати патерни проєктування в
+                команду?";
+              </li>
+              <li>Сертифікат про завершення тренінгу з підписом Тимура;</li>
+              <li>Приватний канал у Telegram з новинами курсу;</li>
+            </ol>
+            <a
+              href="https://telegram.me/js_patterns_bot"
+              target="_blank"
+              type="button"
+              class="tariff-submit"
+              >Купити</a
+            >
+          </li>
+          <li class="tariff">
+            <hgroup class="tariff-heading">
+              <h3 class="tariff-heading-name">Exclusive</h3>
+              <p class="tariff-heading-price">$10000</p>
+              <p class="tariff-heading-latency">4 місяці / 3 місця</p>
+            </hgroup>
+            <ol class="tariff-options">
+              <li>Патерни;</li>
+              <li>Домашні завдання;</li>
+              <li>Семінар Q/A з Тимуром;</li>
+              <li>Перевірка завдань Тимуром 1 раз на тиждень;</li>
+              <li>Чат із Тимуром, відповіді на запитання день у день;</li>
+              <li>Code Review Call;</li>
+              <li>Спільні зустрічі на вільні теми;</li>
+              <li>Модуль "Архітектура застосунків";</li>
+              <li>Модуль Іллі Климова "Патерни у фронтенді";</li>
+              <li>
+                Модуль Іллі Климова "Як впроваджувати патерни проєктування в
+                команду?";
+              </li>
+              <li>Сертифікат про завершення тренінгу з підписом Тимура;</li>
+              <li>Приватний канал у Telegram з новинами курсу;</li>
+            </ol>
+            <a
+              href="https://telegram.me/js_patterns_bot"
+              target="_blank"
+              type="button"
+              class="tariff-submit"
+              >Купити</a
+            >
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Feedback -->
+    <section class="feedback" id="feedback">
+      <div class="inner feedback-inner">
+        <h3 class="feedback-heading">Відгуки студентів Patterns 2024</h3>
+
+        <div class="feedback-video">
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/ktZR4Vyv-i8?si=Mu7Qns-vxXuccOKz"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+      <div class="inner faq-inner">
+        <h3 class="faq-heading">FAQ</h3>
+
+        <ol>
+          <li>
+            <details class="accordion">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">
+                  Підкажіть, якщо я проходив минулий курс з патернів, чи має
+                  сенс записуватися на новий?
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <p>
+                  Так, якщо ви відвідали всі заняття, але бажаєте більше
+                  практики чи отримати доступ до додаткових модулів.
+                </p>
+                <p>
+                  Доступ до існуючих матеріалів та їх оновлень у вас
+                  зберігається незалежно від участі в наступних ітераціях курсу.
+                </p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">
+                  Різниця між Standard і Professional в тарифі?
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <p>
+                  У Standard-форматі студенти навчаються в групах по 10 осіб, у
+                  Senior — по 5. У Senior більш кваліфіковані розробники, які
+                  прямо займаються активно розробкою складних,
+                  високонавантажених систем, їх дизайном, підтримкою.
+                </p>
+                <p>
+                  У Standard передбачено основний, базовий курс, спроєктований
+                  як самодостатній і оптимізований, без перевантаження. У
+                  Prefessional додатково включено всі матеріали, які Тимур
+                  підготував, але свідомо не включив до базового курсу — щоб не
+                  ускладнювати структуру навчання для тих, хто має обмежений
+                  час.
+                </p>
+                <p>
+                  Учасники Prefessional-формату зможуть переглядати ці додаткові
+                  лекції самостійно й обговорювати їх із менторами.
+                </p>
+                <p>
+                  Також у Prefessional входить окремий курс по архітектурі від
+                  Тимура, курс по soft skills від Іллі, і загальна тривалість
+                  навчання — 4 місяці — через наявність двох додаткових модулів.
+                </p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">
+                  Чи можна платити криптовалютою?
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <p>
+                  Так, доступна оплата на крипту, для цього в чаті оберіть
+                  зв'язок з менеджером турботи.
+                </p>
+              </div>
+            </details>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <a href="./files/public-offer.pdf">Оферта</a>
+    </footer>
+
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById('navigation')
+        const button = document.getElementById('menuToggle')
+
+        menu.classList.toggle('active')
+        button.classList.toggle('active')
+      }
+    </script>
+  </body>
+</html>
