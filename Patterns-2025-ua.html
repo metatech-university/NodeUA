@@ -976,9 +976,12 @@
             <li><a href="#feedback">Відгуки</a></li>
           </ol>
 
-          <select class="navigation-lang">
-            <option value="ua">UA</option>
-            <option value="ru">RU</option>
+          <select
+            class="navigation-lang"
+            onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);"
+          >
+            <option value="https://nodeua.com/Patterns-2025-ua.html">UA</option>
+            <option value="https://nodeua.com/Patterns-2025.html">RU</option>
           </select>
         </nav>
 
@@ -1543,8 +1546,7 @@
           <img src="./files/schedule.webp" alt="" />
 
           <figcaption>
-            У малій групі від 5 до 10 осіб. Тривалість зустрічі — від 50 до 100
-            хв.
+            Приблизний розклад виконання завдань одного тижня тренінгу
           </figcaption>
         </figure>
 

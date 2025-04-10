@@ -981,9 +981,12 @@
             <li><a href="#feedback">Отзывы</a></li>
           </ol>
 
-          <select class="navigation-lang">
-            <option value="ua">UA</option>
-            <option value="ru">RU</option>
+          <select
+            class="navigation-lang"
+            onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);"
+          >
+            <option value="https://nodeua.com/Patterns-2025-ua.html">UA</option>
+            <option value="https://nodeua.com/Patterns-2025.html">RU</option>
           </select>
         </nav>
 
