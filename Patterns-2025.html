@@ -172,6 +172,36 @@
         }
       }
 
+      .button {
+        display: flex;
+        align-items: center;
+        height: 40px;
+        margin-block-start: auto;
+        margin-inline: auto;
+        padding-inline: 24px;
+        background: transparent;
+        border: 1px solid #8ab4f8;
+        border-radius: 2px;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+          Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
+          sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        text-transform: uppercase;
+        text-decoration: none;
+        letter-spacing: 1px;
+        color: #8ab4f8;
+        cursor: pointer;
+        transition: 0.2s ease-in-out;
+
+        @media (hover: hover) {
+          &:hover {
+            background-color: #8ab4f8;
+            color: #212121;
+          }
+        }
+      }
+
       /* Accordion */
       .accordion {
         &:open {
@@ -488,8 +518,13 @@
         }
 
         & .intro-begining {
-          margin-top: 24px;
+          margin-block: 24px;
           font-size: 22px;
+        }
+
+        & .intro-submit {
+          width: max-content;
+          margin-inline-start: 36px;
         }
       }
 
@@ -877,7 +912,7 @@
         display: inline-block;
         font-weight: 500;
         text-decoration: line-through;
-        min-height: 1em
+        min-height: 1em;
       }
 
       .tariff-options {
@@ -994,7 +1029,9 @@
             onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);"
           >
             <option value="https://nodeua.com/Patterns-2025-ua.html">UA</option>
-            <option value="https://nodeua.com/Patterns-2025.html" selected>RU</option>
+            <option value="https://nodeua.com/Patterns-2025.html" selected>
+              RU
+            </option>
           </select>
         </nav>
 
@@ -1029,8 +1066,11 @@
             <li>Сообщество, которое поможет вам в развитии</li>
             <li>Предварительная подготовка</li>
           </ol>
-          <p class="intro-begining">🔥 1 апреля: началась Предварительная подготовка</p>
+          <p class="intro-begining">
+            🔥 1 апреля: началась Предварительная подготовка
+          </p>
           <p class="intro-begining">📅 1 мая: старт курса</p>
+          <a href="#tariffs" class="button intro-submit">Забронировать</a>
         </div>
         <div class="intro-photo">
           <img src="./files/timur.webp" alt="Фото Тимура Шемсединова" />
@@ -2170,7 +2210,7 @@
     <!-- Tariffs -->
     <section class="tariffs" id="tariffs">
       <div class="inner tariffs-inner">
-        <h2 class="tariffs-heading">Тарифи</h2>
+        <h2 class="tariffs-heading">Тарифы</h2>
 
         <ol class="tariffs-list">
           <li class="tariff">
@@ -2192,7 +2232,7 @@
               target="_blank"
               type="button"
               class="tariff-submit"
-              >Купить</a
+              >Забронировать</a
             >
           </li>
           <li class="tariff">
@@ -2220,7 +2260,7 @@
               target="_blank"
               type="button"
               class="tariff-submit"
-              >Купить</a
+              >Забронировать</a
             >
           </li>
           <li class="tariff">
@@ -2254,7 +2294,7 @@
               target="_blank"
               type="button"
               class="tariff-submit"
-              >Купить</a
+              >Забронировать</a
             >
           </li>
           <li class="tariff">
@@ -2265,28 +2305,28 @@
               <p class="tariff-heading-latency">4 месяца / 3 места</p>
             </hgroup>
             <ol class="tariff-options">
-              <li>>Паттерны</li>
-              <li>>Домашние задания</li>
-              <li>>Q/A-семинар с Тимуром</li>
-              <li>>Проверка заданий Тимуром 1 раз в неделю</li>
-              <li>>Чат с Тимуром - ответы на вопросы в течение дня</li>
-              <li>>Code Review Call</li>
-              <li>>Совместные встречи на свободные темы</li>
-              <li>>Модуль «Архитектура приложений»</li>
-              <li>>Модуль Ильи Климова «Паттерны во фронтенде»</li>
+              <li>Паттерны</li>
+              <li>Домашние задания</li>
+              <li>Q/A-семинар с Тимуром</li>
+              <li>Проверка заданий Тимуром 1 раз в неделю</li>
+              <li>Чат с Тимуром - ответы на вопросы в течение дня</li>
+              <li>Code Review Call</li>
+              <li>Совместные встречи на свободные темы</li>
+              <li>Модуль «Архитектура приложений»</li>
+              <li>Модуль Ильи Климова «Паттерны во фронтенде»</li>
               <li>
-                >Модуль Ильи Климова «Как внедрять паттерны проектирования в
+                Модуль Ильи Климова «Как внедрять паттерны проектирования в
                 команду?»
               </li>
-              <li>>Сертификат о завершении тренинга с подписью Тимура</li>
-              <li>>Приватный канал в Telegram с новостями курса</li>
+              <li>Сертификат о завершении тренинга с подписью Тимура</li>
+              <li>Приватный канал в Telegram с новостями курса</li>
             </ol>
             <a
               href="https://patterns-js.com/sgy90t"
               target="_blank"
               type="button"
               class="tariff-submit"
-              >Купить</a
+              >Забронировать</a
             >
           </li>
         </ol>
