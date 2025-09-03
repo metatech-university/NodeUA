@@ -456,23 +456,39 @@
       }
 
       .intro-photo {
+        position: relative;
         flex-shrink: 0;
         width: 240px;
         height: 250px;
         margin-inline: auto;
-        border-radius: 36px;
-        overflow: hidden;
 
         @media (min-width: 840px) {
           width: 360px;
           height: 440px;
           margin-inline: unset;
+          border-radius: 36px;
         }
 
         & img {
           width: 100%;
           height: 100%;
           object-fit: cover;
+        }
+      }
+
+      .photo-caption {
+        position: absolute;
+        left: 50%;
+        bottom: -20px;
+        transform: rotate(-5deg) translateX(-50%);
+        font-size: 25px;
+        font-weight: 700;
+        line-height: 18px;
+        color: var(--color-blue);
+
+        @media (min-width: 840px) {
+          font-size: 46px;
+          line-height: 32px;
         }
       }
 
@@ -712,7 +728,7 @@
             <p class="item">
               📅 <span class="accent">Старт:</span> 27 августа о 15:00
             </p>
-            <p class="item">💸 <span class="accent">Стоимость:</span> 50$</p>
+            <p class="item">💸 <span class="accent">Стоимость:</span> <s>50$</s> <span class="free">Бесплатно</span></p>
           </div>
           <h2 class="intro-heading">
             <span class="accent-violet">3-денний інтенсив:</span>
@@ -730,25 +746,26 @@
 
         <div class="intro-links mobile">
           <a
-            href="https://forms.gle/ENXGB84bRY4fCiYZ8b"
+            href="https://wep.wf/03r3zd"
             class="button intro-submit-button"
           >
-            Зарегистрироваться
+            Зарегистрироваться бесплатно
           </a>
         </div>
 
         <div class="intro-photo">
-          <img src="./files/timur.webp" alt="Фото Дмитро Брагінця" />
+          <img src="./files/timur.webp" alt="Фото Тимура Шемсединова" />
+          <p class="photo-caption">от Тимура Шемсединова</p>
         </div>
       </div>
 
       <div class="inner">
         <div class="intro-links desktop">
           <a
-            href="https://forms.gle/ENXGB84bRY4fCiYZ8b"
+            href="https://wep.wf/03r3zd"
             class="button intro-submit-button"
           >
-            Зарегистрироваться
+            Зарегистрироваться бесплатно
           </a>
         </div>
       </div>
@@ -783,10 +800,10 @@
         </ol>
 
         <a
-          href="https://forms.gle/ENXGB84bRY4fCiYZ8b"
+          href="https://wep.wf/03r3zd"
           class="button section-cta-button"
         >
-          Зарегистрироваться
+          Зарегистрироваться бесплатно
         </a>
       </div>
     </section>
@@ -820,10 +837,10 @@
         </ol>
 
         <a
-          href="https://forms.gle/ENXGB84bRY4fCiYZ8b"
+          href="https://wep.wf/03r3zd"
           class="button section-cta-button"
         >
-          Зарегистрироваться
+          Зарегистрироваться бесплатно
         </a>
       </div>
     </section>
@@ -858,10 +875,10 @@
         </ol>
 
         <a
-          href="https://forms.gle/ENXGB84bRY4fCiYZ8b"
+          href="https://wep.wf/03r3zd"
           class="button section-cta-button"
         >
-          Зарегистрироваться
+          Зарегистрироваться бесплатно
         </a>
       </div>
     </section>
@@ -896,10 +913,10 @@
         </ol>
 
         <a
-          href="https://forms.gle/ENXGB84bRY4fCiYZ8b"
+          href="https://wep.wf/03r3zd"
           class="button section-cta-button"
         >
-          Зарегистрироваться
+          Зарегистрироваться бесплатно
         </a>
       </div>
     </section>
