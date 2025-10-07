@@ -1,0 +1,2828 @@
+<!DOCTYPE html>
+<html lang="ua">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Node.js and Async 2025 Training Course</title>
+    <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t["async"]=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","t4zdgarqm3");</script>
+    <style>
+      html,
+      body,
+      div,
+      span,
+      applet,
+      object,
+      iframe,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      blockquote,
+      pre,
+      a,
+      abbr,
+      acronym,
+      address,
+      big,
+      cite,
+      code,
+      del,
+      dfn,
+      em,
+      img,
+      ins,
+      kbd,
+      q,
+      s,
+      samp,
+      small,
+      strike,
+      strong,
+      sub,
+      sup,
+      tt,
+      var,
+      b,
+      u,
+      i,
+      center,
+      dl,
+      dt,
+      dd,
+      ol,
+      ul,
+      li,
+      fieldset,
+      form,
+      label,
+      legend,
+      table,
+      caption,
+      tbody,
+      tfoot,
+      thead,
+      tr,
+      th,
+      td,
+      article,
+      aside,
+      canvas,
+      details,
+      embed,
+      figure,
+      figcaption,
+      footer,
+      header,
+      hgroup,
+      menu,
+      nav,
+      output,
+      ruby,
+      section,
+      summary,
+      time,
+      mark,
+      audio,
+      video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+      }
+      /* html5 display-role reset for older browsers */
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      body {
+        line-height: 1;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      blockquote,
+      q {
+        quotes: none;
+      }
+      blockquote:before,
+      blockquote:after,
+      q:before,
+      q:after {
+        content: '';
+        content: none;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'jura', courier, monospace;
+        line-height: 1.4;
+        background: #1a1919;
+        color: #ffffff;
+      }
+
+      h1,
+      h2,
+      h3 {
+        color: #ffffff;
+
+        & .accent {
+          color: #2bc643;
+        }
+      }
+
+      a {
+        text-decoration: none;
+        color: #fff;
+        transition: 0.1s ease-in-out;
+
+        @media (hover: hover) {
+          &:hover {
+            color: #2bc643;
+          }
+        }
+      }
+
+      button,
+      select,
+      textarea {
+        font-family: 'courier new', courier, monospace;
+      }
+
+      .radiobutton {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 19px;
+        cursor: pointer;
+
+        & input {
+          width: 0;
+          height: 0;
+          overflow: hidden;
+        }
+
+        &::before {
+          display: block;
+          width: 26px;
+          height: 26px;
+          border: 6px solid #363636;
+          background-color: #363636;
+          transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.25s;
+          content: '';
+        }
+
+        &:has(input:checked)::before {
+          background-color: #2bc643;
+        }
+      }
+
+      .inner {
+        width: 100%;
+        max-width: 1280px;
+        margin-inline: auto;
+        padding-inline: 12px;
+
+        @media (min-width: 1280px) {
+          padding-inline: 24px;
+        }
+      }
+
+      .button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: max-content;
+        height: 64px;
+        margin-block-start: auto;
+        margin-inline: auto;
+        padding-inline: 24px;
+        background: #ffffff;
+        border: 1px solid #ffffff;
+        font-family: 'jura', courier, monospace;
+        font-size: 20px;
+        font-weight: 700;
+        text-decoration: none;
+        letter-spacing: 1px;
+        color: #1a1919;
+        cursor: pointer;
+        transition: 0.2s ease-in-out;
+
+        @media (min-width: 1280px) {
+          padding-inline: 60px;
+        }
+
+        @media (hover: hover) {
+          &:hover {
+            background-color: transparent;
+            color: #fff;
+          }
+        }
+
+        &.dark {
+          background-color: #2d2d2d;
+          border-color: #2d2d2d;
+          color: #fff;
+        }
+      }
+
+      .accent-gold {
+        color: #2bc643;
+      }
+
+      .accent-purple {
+        color: #b70dea;
+      }
+
+      /* accordion */
+      .accordion {
+        &:open {
+          & .accordion-heading {
+            border-color: #2bc643;
+            color: #2bc643;
+
+            &::after {
+              transform: translatey(-50%) rotate(180deg);
+              filter: brightness(0) saturate(100%) invert(60%) sepia(35%)
+                saturate(1011%) hue-rotate(78deg) brightness(97%) contrast(89%);
+            }
+          }
+        }
+      }
+
+      .accordion-heading {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding-block: 15px;
+        padding-inline-start: 20px;
+        padding-inline-end: 40px;
+        border: 2px solid #999999;
+        font-size: 18px;
+        font-weight: 600;
+        color: #999999;
+        cursor: pointer;
+        transition: 0.15s ease-in-out;
+
+        @media (min-width: 768px) {
+          gap: 24px;
+        }
+
+        &::after {
+          position: absolute;
+          inset-block-start: 50%;
+          inset-inline-end: 20px;
+          transform: translatey(-50%);
+          width: 34px;
+          height: 34px;
+          background-image: url('./files/icons/icon-chevron.svg');
+          transition: 0.15s linear;
+          content: '';
+        }
+
+        @media (hover: hover) {
+          &:hover {
+            color: #ffffff;
+            border-color: #ffffff;
+
+            &::after {
+              filter: brightness(0) saturate(100%) invert(100%);
+            }
+          }
+        }
+
+        &::marker {
+          content: '';
+        }
+
+        &::-webkit-details-marker {
+          display: none;
+        }
+      }
+
+      .accordion-heading-icon {
+        width: 32px;
+        height: 32px;
+        flex-shrink: 0;
+
+        @media (min-width: 1280px) {
+          width: 40px;
+          height: 40px;
+        }
+      }
+
+      .accordion-body {
+        padding-block: 24px;
+
+        @media (min-width: 1280px) {
+          padding-inline: 42px;
+        }
+      }
+
+      .accordion-body-list {
+        font-size: 24px;
+
+        & li + li {
+          margin-block-start: 20px;
+        }
+
+        & p + p {
+          margin-block-start: 16px;
+        }
+
+        & h6 {
+          font-weight: 700;
+        }
+      }
+
+      /* footer */
+      .footer {
+        display: flex;
+        justify-content: space-around;
+        gap: 40px;
+        padding-block: 40px;
+        text-align: center;
+        background-color: #212121;
+        border-top: 1px solid rgb(255 255 255 / 0.2);
+
+        & a {
+          font-size: 20px;
+        }
+      }
+
+      /* intro */
+      .intro {
+        padding-block: 50px;
+
+        @media (min-width: 1280px) {
+          text-align: center;
+        }
+      }
+
+      .intro-heading {
+        margin-block-end: 12px;
+        font-size: 40px;
+        font-weight: 700;
+
+        @media (min-width: 1280px) {
+          margin-block-end: 20px;
+        }
+      }
+
+      .intro-subheading {
+        margin-block-end: 24px;
+        font-size: 28px;
+        font-weight: 500;
+
+        @media (min-width: 1280px) {
+          margin-block-end: 56px;
+        }
+      }
+
+      .intro-video {
+        width: max-content;
+        margin-inline: auto;
+        margin-bottom: 20px;
+        border: 1px solid #363636;
+
+        @media (min-width: 1280px) {
+          margin-block-end: 40px;
+        }
+      }
+
+      .intro-message {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        margin-inline: auto;
+        margin-block-start: 20px;
+        padding: 15px 5px;
+        background-color: #363636;
+        text-align: left;
+        font-size: 18px;
+
+        @media (min-width: 768px) {
+          max-width: 690px;
+          padding: 15px 30px;
+        }
+
+        & .accent {
+          font-weight: 700;
+          color: #2bc643;
+        }
+
+        &::before {
+          position: absolute;
+          left: 50%;
+          top: 0;
+          transform: translate(-50%, -100%);
+          width: 6px;
+          height: 20px;
+          background-color: #363636;
+          content: '';
+        }
+      }
+
+      /* about */
+      .about {
+        padding-block: 50px 4px;
+        background-color: #212121;
+
+        @media (min-width: 768px) {
+          padding-block: 60px;
+        }
+
+        &.about-next {
+          background-color: transparent;
+        }
+      }
+
+      .about .inner {
+        max-width: 1000px;
+      }
+
+      .about h2 {
+        max-width: 680px;
+        margin-block-end: 40px;
+        margin-inline: auto;
+        font-size: 40px;
+        font-weight: 700;
+        text-align: center;
+      }
+
+      .about-grid {
+        display: grid;
+        gap: 40px;
+
+        @media (min-width: 1280px) {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 28px;
+        }
+      }
+
+      .about-subheading {
+        margin-bottom: 26px;
+        font-size: 24px;
+        font-weight: 700;
+      }
+
+      .about-list {
+        font-size: 23px;
+
+        & li + li {
+          margin-block-start: 14px;
+        }
+
+        & li {
+          position: relative;
+        }
+
+        & li::before {
+          position: relative;
+          top: 7px;
+          display: inline-block;
+          width: 24px;
+          height: 24px;
+          margin-inline-end: 12px;
+          content: '';
+        }
+
+        &.green {
+          li::before {
+            background: url('./files/icons/icon-check-green.svg') no-repeat
+              center center;
+            background-size: contain;
+          }
+        }
+
+        &.purple {
+          li::before {
+            background: url('./files/icons/icon-check-purple.svg') no-repeat
+              center center;
+            background-size: contain;
+          }
+        }
+      }
+
+      .about-message {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        margin-block-start: 40px;
+        padding-inline: 15px;
+      }
+
+      .about-message-inner {
+        display: grid;
+        gap: 40px;
+        width: 100%;
+        max-width: 1160px;
+        padding: 20px 10px;
+        border: 1px solid #2bc643;
+        text-align: center;
+        font-size: 24px;
+
+        @media (min-width: 1280px) {
+          padding: 30px;
+        }
+      }
+
+      /* prices */
+
+      .prices {
+        padding-block: 50px;
+        background-color: #212121;
+
+        @media (min-width: 1280px) {
+          padding-block: 60px;
+        }
+      }
+
+      .prices-heading {
+        max-width: 640px;
+        margin-inline: auto;
+        margin-block-end: 40px;
+        font-size: 40px;
+        font-weight: 700;
+
+        @media (min-width: 1280px) {
+          text-align: center;
+        }
+      }
+
+      .prices-list {
+        width: 100%;
+        max-width: 1160px;
+        margin-inline: auto;
+        font-size: 24px;
+
+        & li + li {
+          margin-top: 12px;
+        }
+
+        & .accent-gold {
+          font-weight: 700;
+        }
+
+        & .prices-list-arrow {
+          display: block;
+          margin-block-start: 12px;
+          margin-inline: auto;
+          max-width: 100%;
+        }
+      }
+
+      /* authors */
+
+      .authors-inner {
+        padding-block: 50px;
+
+        @media (min-width: 768px) {
+          padding-block: 60px;
+        }
+      }
+
+      .authors-heading {
+        margin-block-end: 40px;
+        font-size: 32px;
+        font-weight: 700;
+
+        @media (min-width: 1280px) {
+          text-align: center;
+        }
+      }
+
+      .authors-grid {
+        display: grid;
+        gap: 40px;
+
+        @media (min-width: 768px) {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (min-width: 1024px) {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .author {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        text-align: center;
+      }
+
+      .author-photo {
+        width: 200px;
+        flex-shrink: 0;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        border: 3px solid #363636;
+        border-radius: 50%;
+      }
+
+      .author-name {
+        font-size: 24px;
+        font-weight: 700;
+      }
+
+      .author-position {
+        font-size: 20px;
+      }
+
+      .author-about {
+        font-size: 20px;
+        color: #999999;
+      }
+
+      /* programm */
+
+      .programm-inner {
+        padding-block: 50px;
+
+        @media (min-width: 1280px) {
+          padding-block: 60px;
+        }
+      }
+
+      .programm-heading {
+        position: relative;
+        margin-block-end: 64px;
+        font-size: 64px;
+
+        @media (min-width: 1280px) {
+          text-align: center;
+        }
+
+        &::after {
+          position: absolute;
+          bottom: -32px;
+          left: 50%;
+          transform: translatex(-50%);
+          width: 270px;
+          height: 1px;
+          background-color: #2bc643;
+          content: '';
+        }
+
+        & .accent-gold {
+          font-weight: 700;
+        }
+      }
+
+      .program-unit-heading {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        margin-block-end: 40px;
+        font-size: 39px;
+
+        .accent-gold {
+          font-size: 40px;
+          font-weight: 700;
+        }
+      }
+
+      .programm-item {
+        position: relative;
+        display: flex;
+        padding-inline-start: 40px;
+        align-items: flex-start;
+        counter-increment: counter;
+
+        @media (min-width: 1280px) {
+          padding: 0;
+        }
+
+        &::before,
+        &::after {
+          position: absolute;
+          inset-inline-start: 0;
+          background-color: #121212;
+          font-size: 18px;
+          font-weight: 700;
+          line-height: 1.4;
+          color: #8ab4f8;
+          transform: translatey(-10%);
+
+          @media (min-width: 1280px) {
+            position: static;
+            width: 75px;
+            text-align: center;
+            font-size: 32px;
+            transform: translatey(-27%);
+          }
+        }
+
+        &:nth-child(even) {
+          @media (min-width: 1280px) {
+            text-align: right;
+          }
+
+          &::after {
+            content: counter(counter);
+          }
+        }
+
+        &:nth-child(odd) {
+          @media (min-width: 1280px) {
+            justify-content: flex-end;
+            text-align: left;
+          }
+
+          &::before {
+            content: counter(counter);
+          }
+        }
+      }
+
+      .programm-item-body {
+        @media (min-width: 1280px) {
+          width: 47%;
+        }
+      }
+
+      .programm-description {
+        line-height: 1.2;
+      }
+
+      .programm-schedule-list {
+        display: grid;
+        gap: 24px;
+
+        &:not(:last-child) {
+          margin-block-end: 40px;
+        }
+      }
+
+      /* cta */
+      .cta {
+        padding-block: 50px;
+        background-color: #212121;
+
+        @media (min-width: 1280px) {
+          padding-block: 60px;
+        }
+      }
+
+      .cta-heading {
+        margin-block-end: 25px;
+        font-size: 40px;
+        font-weight: 700;
+
+        @media (min-width: 1280px) {
+          text-align: center;
+        }
+      }
+
+      .cta-subheading {
+        margin-block-end: 40px;
+        font-size: 26px;
+
+        @media (min-width: 1280px) {
+          text-align: center;
+        }
+      }
+
+      .cta-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        max-width: 840px;
+        margin-inline: auto;
+
+        @media (min-width: 1280px) {
+          flex-direction: row;
+        }
+
+        & .label-text {
+          display: block;
+          width: 0;
+          height: 0;
+          overflow: hidden;
+        }
+
+        & input {
+          width: 100%;
+          height: 64px;
+          padding-inline: 20px;
+          background-color: transparent;
+          border: 1px solid #fff;
+          font-family: 'jura', sans-serif;
+          font-size: 19px;
+          color: #fff;
+          outline: none;
+          transition: 0.25s ease-in-out;
+
+          &:focus {
+            border-color: #2bc643;
+          }
+        }
+      }
+
+      .cta-form-cell {
+        flex: 1;
+        width: 100%;
+      }
+
+      /* tariffs */
+
+      .tariffs-inner {
+        padding-block: 50px;
+
+        @media (min-width: 1280px) {
+          padding-block: 60px;
+        }
+      }
+
+      .tariffs-heading {
+        margin-block-end: 25px;
+        font-size: 40px;
+        font-weight: 700;
+
+        @media (min-width: 1280px) {
+          text-align: center;
+        }
+      }
+
+      .tariffs-subheading {
+        margin-block-end: 40px;
+        font-size: 24px;
+
+        @media (min-width: 1280px) {
+          text-align: center;
+        }
+      }
+
+      table {
+        width: 100%;
+
+        & thead {
+          & td {
+            text-align: center;
+          }
+        }
+
+        & tbody {
+          & tr {
+            border-bottom: 1px solid #444;
+          }
+
+          & td {
+            padding: 12px;
+            font-size: 16px;
+            vertical-align: middle;
+            text-align: center;
+
+            &:first-child {
+              width: 300px;
+              text-align: left;
+            }
+          }
+        }
+
+        & tfoot {
+          & td {
+            padding-block: 12px;
+            text-align: center;
+            vertical-align: middle;
+
+            .amount {
+              margin-block-end: 12px;
+              font-size: 20px;
+              font-weight: 700;
+
+              br {
+                @media (min-width: 1280px) {
+                  display: none;
+                }
+              }
+            }
+
+            .button {
+              width: 100%;
+            }
+          }
+        }
+      }
+
+      .tariff-label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 164px;
+        font-size: 24px;
+        font-weight: 700;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        transform: rotate(180deg);
+
+        @media (min-width: 768px) {
+          height: 52px;
+          transform: none;
+          writing-mode: unset;
+        }
+
+        &.minimal {
+          background-color: #f6f6f6;
+          color: #2bc643;
+        }
+
+        &.standard {
+          background-color: #ffffff;
+          color: #b70dea;
+        }
+
+        &.professional {
+          background-color: #2bc643;
+          color: #ffffff;
+        }
+
+        &.exclusive {
+          background-color: #b70dea;
+          color: #ffffff;
+        }
+      }
+
+      .tariff-price {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        padding: 12px;
+        font-size: 24px;
+
+        @media (min-width: 1280px) {
+          flex-direction: row;
+        }
+
+        & small {
+          font-size: 20px;
+          text-decoration: line-through;
+        }
+      }
+
+      .tariff-period {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 12px;
+        font-size: 20px;
+        font-weight: 700;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        transform: rotate(180deg);
+
+        @media (min-width: 768px) {
+          display: initial;
+          width: auto;
+          writing-mode: unset;
+          transform: none;
+        }
+      }
+
+      .tariff-submit {
+        display: none;
+        height: 52px;
+        padding-inline: 8px;
+        font-size: 18px;
+
+        @media (min-width: 1280px) {
+          display: flex;
+        }
+      }
+
+      .tariff-message {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-block: 40px;
+        padding: 30px 15px;
+        border: 2px solid #b70dea;
+        font-size: 24px;
+
+        .accent-purple {
+          font-weight: 700;
+        }
+
+        .inner {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 32px;
+          width: 100%;
+          max-width: 720px;
+        }
+      }
+
+      /* feedback */
+      .feedback {
+        background-color: #212121;
+      }
+
+      .feedback-inner {
+        padding-block: 32px;
+
+        @media (min-width: 768px) {
+          padding-block: 64px;
+        }
+      }
+
+      .feedback-heading {
+        margin-block-end: 64px;
+        font-size: 40px;
+
+        @media (min-width: 1280px) {
+          text-align: center;
+        }
+
+        & .accent-gold {
+          font-weight: 700;
+        }
+      }
+
+      .video-item {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        & video {
+          width: 100%;
+          aspect-ratio: 0.55;
+        }
+      }
+
+      .video-caption {
+        font-size: 24px;
+      }
+
+      .feedback-slider {
+        position: relative;
+        padding-inline: 50px;
+        margin-block-end: 40px;
+      }
+
+      .slider {
+        overflow: hidden;
+      }
+
+      .slides {
+        display: flex;
+        transition: transform 0.4s ease;
+      }
+
+      .slide {
+        min-width: 100%;
+        padding-inline: 14px;
+        box-sizing: border-box;
+
+        @media (min-width: 768px) {
+          min-width: 25%;
+        }
+      }
+
+      .arrow {
+        position: absolute;
+        top: 50%;
+        transform: translatey(-50%);
+        padding: 0;
+        margin: 0;
+        border: none;
+        background: none;
+        cursor: pointer;
+        transition: cubic-bezier(0.165, 0.84, 0.44, 1) 0.25s;
+
+        @media (hover: hover) {
+          &:hover {
+            filter: brightness(1.2);
+          }
+        }
+
+        &.prev {
+          inset-inline-start: 0;
+          transform: translatey(-50%) rotate(-180deg);
+        }
+
+        &.next {
+          inset-inline-end: 0;
+          transform: translatey(-50%);
+        }
+      }
+
+      /* modal */
+      .modal {
+        position: fixed;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+        background-color: rgba(0, 0, 0, 0.8);
+
+        &.is-open {
+          display: flex;
+        }
+      }
+
+      .modal-close {
+        position: absolute;
+        inset-block-start: 20px;
+        inset-inline-end: 20px;
+        margin: 0;
+        padding: 0;
+        border: none;
+        background: none;
+        cursor: pointer;
+        transition: cubic-bezier(0.165, 0.84, 0.44, 1) 0.25s;
+
+        @media (hover: hover) {
+          &:hover {
+            filter: brightness(1.5);
+          }
+        }
+      }
+
+      .modal-content {
+        position: relative;
+        width: 100%;
+        padding: 50px 15px;
+        background-color: #1a1918;
+
+        @media (min-width: 768px) {
+          max-width: 700px;
+          padding: 50px 100px;
+        }
+
+        @media (min-width: 1280px) {
+          max-width: 1000px;
+        }
+      }
+
+      .suvey-form {
+        display: grid;
+        flex-direction: column;
+        gap: 40px;
+
+        @media (min-width: 768px) {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        & + & {
+          margin-block-start: 40px;
+        }
+      }
+
+      .survey-cell {
+        display: grid;
+        gap: 16px;
+      }
+
+      .survey-heading {
+        margin-block-end: 16px;
+        font-size: 26px;
+        font-weight: 700;
+      }
+
+      .survey-back,
+      .survey-submit {
+        width: 100%;
+        min-width: 240px;
+        max-width: max-content;
+        margin: 0;
+      }
+
+      .survey-message {
+        margin-bottom: 45px;
+        text-align: center;
+        font-size: 26px;
+        font-weight: 700;
+
+        @media (min-width: 768px) {
+          margin-bottom: 75px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- intro -->
+    <section class="intro">
+      <div class="inner intro-grid">
+        <div class="intro-description">
+          <h1 class="intro-heading">
+            повний огляд курсу <span class="accent">patterns 2.0</span>
+          </h1>
+          <h2 class="intro-subheading">
+            детально про програму, формат та користь
+          </h2>
+
+          <div class="intro-video">
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube-nocookie.com/embed/c9LQXHQl1GM?t=774s&si=anuifjhqddcvko1j&amp;controls=0"
+              title="youtube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+          </div>
+
+          <button type="button" class="button intro-submit">
+            забронювати місце на курсі
+          </button>
+
+          <div class="intro-message">
+            <img src="./files/icons/icon-shield.svg" alt="" />
+            <p>
+              забронюйте місце <span class="accent">зараз лише за 100$</span> і
+              будьте впевнені, що ваше місце
+              <span class="accent">не займуть</span>! повну оплату ви зможете
+              внести пізніше
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- about -->
+    <section class="about" id="about">
+      <div class="inner">
+        <h2>просте навчання, налаштоване під ваш ритм життя!</h2>
+        <div class="about-grid">
+          <div>
+            <h4 class="about-subheading">
+              курс <span class="accent-gold">легко пройти</span> в умовах:
+            </h4>
+            <ul class="about-list green">
+              <li>дедлайнів</li>
+              <li>факапів</li>
+              <li>недосипів</li>
+              <li>поганої мотивації</li>
+              <li>проблем з тайм менеджментом</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="about-subheading">
+              цей курс підходить, для розробників рівня
+              <span class="accent-purple">middle</span> та
+              <span class="accent-purple">senior</span>, які хочуть:
+            </h4>
+            <ul class="about-list purple">
+              <li>кращої результативності</li>
+              <li>+30% до швидкості роботи</li>
+              <li>менше багів та переписувань</li>
+              <li>більше професіоналізму</li>
+              <li>вищу зарплатню</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- about next -->
+    <section class="about about-next" id="about-next">
+      <div class="inner">
+        <h2>цей курс для вас, <span class="accent-gold">якщо</span>:</h2>
+        <div class="about-grid">
+          <div>
+            <ul class="about-list green">
+              <li>вас не бачать як експерта</li>
+              <li>не вистачає хардскілів</li>
+              <li>відчуваєте вигорання, стагнацію</li>
+              <li>роками пишете однотипне</li>
+              <li>працюєте без результату</li>
+              <li>не росте зарплатня</li>
+            </ul>
+          </div>
+
+          <div>
+            <ul class="about-list green">
+              <li>у вас погана комунікація</li>
+              <li>втрачаєте фокус</li>
+              <li>нема поваги від колег</li>
+              <li>нема зацікавленості в справі</li>
+              <li>переключаєте контексти</li>
+              <li>нема відчуття цінності</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-message">
+        <div class="about-message-inner">
+          <p>ви в глухому куті, але хочеш професійного росту і грошей</p>
+          <p class="accent-gold">
+            ми допоможемо глибоко зрозуміти суть і особливості реалізації
+            кожного патерна та принципу!
+          </p>
+        </div>
+
+        <button type="button" class="button intro-submit">
+          забронювати місце на курсі
+        </button>
+      </div>
+    </section>
+
+    <!-- prices -->
+    <section class="prices" id="prices">
+      <div class="inner">
+        <h2 class="prices-heading">
+          в чому різниця між <span class="accent-gold">цим</span> і
+          <span class="accent-purple">попередніми запусками</span>?
+        </h2>
+
+        <ul class="prices-list">
+          <li>
+            ми фокусуємось на результативності навчання для наших студентів — це
+            значить, що по закінченню коду вони
+            <span class="accent-gold">
+              повинні підвищити свою продуктивність на 30%
+            </span>
+            шляхом збільшення швидкості розробки фіч, зменшення багів і
+            переписувань.
+
+            <img
+              class="prices-list-arrow one"
+              src="./files/prices-arrow-one.svg"
+              alt=""
+            />
+          </li>
+          <li>
+            ми зрозуміли що наші учні будуть проходити його в умовах роботи
+            релізів і факапів, а тому третя ітерація буде простою до сприйняття
+            і
+            <span class="accent-gold">
+              доступною для проходження кожній людині</span
+            >.
+
+            <img
+              class="prices-list-arrow two"
+              src="./files/prices-arrow-two.svg"
+              alt=""
+            />
+          </li>
+          <li>
+            ми зібрали <span>практичні завдання в спільний проєкт</span>, щоб ви
+            відчули як всі освоєні знання взаємодіють між собою і складають в
+            цілісну картину.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- programm -->
+    <section class="programm" id="programm">
+      <div class="inner programm-inner">
+        <h2 class="programm-heading">
+          програма <span class="accent-gold">patterns 2.0</span>
+        </h2>
+
+        <h4 class="program-unit-heading">
+          <span class="accent-gold">unit 1</span>
+          <span>структури та системи модульності </span>
+        </h4>
+        <ol class="programm-schedule-list">
+          <li>
+            <details class="accordion no-padding">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">
+                  характеристики та оптимізація
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <ul class="accordion-body-list">
+                  <li>
+                    <h6>🎯 ціль:</h6>
+                    зрозуміти, що робить код якісним (читабельним, надійним,
+                    розширюваним, ефективним)
+                  </li>
+                  <li>
+                    <h6>🔧 засоби:</h6>
+                    парадигми програмування, gof, solid: srp, soc, grasp,
+                    оптимізації v8
+                  </li>
+                  <li>
+                    <h6>📦 висновок:</h6>
+                    існує шлях, що веде до радикального спрощення коду разом із
+                    його прискоренням
+                  </li>
+                  <li>
+                    <h6>⚡ фокус:</h6>
+                    баланс характеристик коду, прийняття рішень про оптимізацію
+                    та їх обґрунтування
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion no-padding">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">
+                  вбудовані можливості мови та платформи
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <ul class="accordion-body-list">
+                  <li>
+                    javascript має вбудовані контракти: thenable, iterable,
+                    asynciterator, callback-last, callable, cancelable,
+                    observable, але культура розробки через контракти і
+                    інтерфейси не дуже поширена в спільноті. як покращити
+                    продуктивність розробки за допомогою підходу, заснованого на
+                    знаннях. як шаблони можуть допомогти нам у цьому:
+                    реалізовувати нові фічі швидко і ефективно, бути
+                    продуктивними, робити щоденну роботу цікавою, бути
+                    вмотивованими і не вигорати.
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion no-padding">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">інстанціювання</div>
+              </summary>
+              <div class="accordion-body">
+                <ul class="accordion-body-list">
+                  <li>
+                    породжувальні шаблони: constructor, singleton, factory,
+                    pool, builder, prototype, flyweight, інші шаблони і техніки.
+                    давайте знайдемо повʼязані принципи і переосмислимо
+                    прикладне значення grasp: creator; grasp: polymorphism,
+                    solid: isp; aggregation і composition. як економити памʼять
+                    та інші ресурси; як ефективно застосовувати оптимізацію і
+                    кешування.
+                  </li>
+                  <li>
+                    як розробляти надзвичайно швидкий код і мінімізувати
+                    latency, зробити код кросплатформним і зрозумілим для колег.
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion no-padding">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">ізоляція та soc</div>
+              </summary>
+              <div class="accordion-body">
+                <ul class="accordion-body-list">
+                  <li>
+                    separation of concerns (soc) — це загальний інженерний
+                    принцип, спрямований на створення гнучких, надійних і легко
+                    модифікованих систем. ми можемо використовувати шаблони gof:
+                    mediator, bridge, abstract factory, strategy (у
+                    javascript-реалізації: map&lt;propertykey,
+                    implementation&gt;); системи модульності; grasp принципи
+                    information expert, indirection і protected variations;
+                    solid: srp. це покращить тестованість коду і знизить витрати
+                    на інтеграцію.
+                  </li>
+                  <li>
+                    <p>
+                      ⭐ структура застосунків: системи модульності, пакети і
+                      залежності
+                    </p>
+                    <p>⭐ шари і впровадження залежностей</p>
+                    <p>
+                      ⭐ gof patterns: 👉 abstract factory, 👉 factory method,
+                      👉 strategy, 👉 pool
+                    </p>
+                    <p>⭐ grasp: indirection principle, protected variations</p>
+                    <p>
+                      💡 asyncpool — шаблон асинхронного програмування
+                      «асинхронний пул»
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </li>
+        </ol>
+
+        <h4 class="program-unit-heading">
+          <span class="accent-gold">unit 2</span>
+          <span>контрактне програмування та системи виконання коду</span>
+        </h4>
+
+        <ol class="programm-schedule-list">
+          <li>
+            <details class="accordion no-padding">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">
+                  контракти та інтерфейси
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <ul class="accordion-body-list">
+                  <li>
+                    патерни: adapter (wrapper), facade, bridge, composite,
+                    proxy, promisify; front controller; grasp: low coupling and
+                    high cohesion; solid: lsp (liskov); і solid: ocp
+                    (open-closed). застосування контрактів відкриває можливість
+                    поетапного рефакторингу, усунення технічного боргу і
+                    підвищення стабільності підсистем; зниження залежності
+                    (звʼязаності) між шарами і модулями. на рівні управління
+                    проєктом це дозволяє масштабувати команду, керувати
+                    пріоритетами і приймати архітектурні рішення.
+                  </li>
+                  <li>
+                    <p>⭐ контрактне програмування</p>
+                    <p>
+                      ⭐ layers and low coupling на прикладі конфига і
+                      транспорту
+                    </p>
+                    <p>⭐ gof: 👉 adapter, 👉 proxy, 👉 facade, 👉 composite</p>
+                    <p>
+                      ⭐ grasp: зчеплення і звʼязаність — coupling and cohesion
+                    </p>
+                    <p>
+                      💡 solid: принцип підстановки барбари лісков (liskov
+                      substitution principle, lsp)
+                    </p>
+                    <p>
+                      💡 семінар з адаптерів для node.js і асинхронного
+                      програмування
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion no-padding">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">події та повідомлення</div>
+              </summary>
+              <div class="accordion-body">
+                <ul class="accordion-body-list">
+                  <li>
+                    наступний підхід — це застосування шин подій всередині
+                    застосунку і між підсистемами. це поширено в користувацьких
+                    інтерфейсах, розподілених системах, спільному доступі до
+                    розділюваних ресурсів. на основі асинхронного і подієвого
+                    програмування побудовано рішення з не блокувальним
+                    введенням-виведенням у node.js. ми розглянемо grasp: pure
+                    fabrication і low coupling; asyncqueue, async collections та
+                    інші.
+                  </li>
+                  <li>
+                    <p>⭐ події: eventtarget, eventemitter</p>
+                    <p>⭐ grasp: чиста вигадка — pure fabrication</p>
+                    <p>💡 gof: патерн спостерігач (observer + observable)</p>
+                    <p>💡 фази event-loop у v8 і node.js</p>
+                    <p>💡 стрім з розбором event loop і асинхронності</p>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion no-padding">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">
+                  потоки та трансформації
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <ul class="accordion-body-list">
+                  <li>
+                    реактивне програмування розвинулося в окрему парадигму;
+                    потоки і сигнали ґрунтуються на gof: observer; grasp: pure
+                    fabrication і подієвому підході з потоками даних та
+                    операторами перетворення даних. це широко використовується в
+                    мережевих протоколах, доступі до даних і файлових систем,
+                    розробці ігор, фінансових і аналітичних системах, керуванні
+                    вбудованими системами, телеметрії та інших галузях. це дає
+                    виразний синтаксис, вищий рівень абстракції, гнучкість і
+                    продуктивність для покращення користувацького досвіду.
+                  </li>
+                  <li>
+                    <p>
+                      ⭐ стріми: readable, writable, transform, відкритий
+                      конструктор, буферизація, backpressure
+                    </p>
+                    <p>💡 асинхронність на rxjs і потоки подій</p>
+                    <p>💡 робота з файлами, буферами і файловими потоками</p>
+                    <p>💡 actor model — модель акторів</p>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion no-padding">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">помилки та винятки</div>
+              </summary>
+              <div class="accordion-body">
+                <ul class="accordion-body-list">
+                  <li>
+                    ми розглянемо найкращі практики обробки помилок як з
+                    використанням виключень, так і доменних помилок. як graceful
+                    shutdown, gracefully recover і обробка доменних помилок
+                    підвищують загальну продуктивність системи. ми будемо
+                    використовувати chain of responsibility, solid, promises,
+                    fallback-механізми для некритичних помилок; grasp: protected
+                    variations і кастомні, специфічні для javascript
+                    aggregateerror і error.prototype.cause, а також серіалізацію
+                    помилок для передачі мережею.
+                  </li>
+                  <li>
+                    <p>⭐ обробка помилок, логування і агрегування</p>
+                    <p>
+                      ⭐ семінар: обробка прикладних, операційних і доменних
+                      помилок, виключення, відновлення і логування
+                    </p>
+                    <p>
+                      💡 реалізація graceful shutdown у node.js, unhandled
+                      exceptions, async stack trace
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </li>
+        </ol>
+
+        <h4 class="program-unit-heading">
+          <span class="accent-gold">unit 3</span>
+          <span>середовище виконання прикладного коду</span>
+        </h4>
+
+        <ol class="programm-schedule-list">
+          <li>
+            <details class="accordion no-padding">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">семантика: виразні dsl</div>
+              </summary>
+              <div class="accordion-body">
+                <ul class="accordion-body-list">
+                  <li>
+                    для покращення виразності коду і чіткості семантики будь-яке
+                    складне програмне забезпечення потребує створення dsl (мов,
+                    спеціалізованих для предметної області). під час розробки
+                    dsl можна використовувати добре відомі синтаксиси, такі як
+                    json, json5, markdown і навіть сам javascript. ми розглянемо
+                    патерни: command, interpreter, state, strategy, visitor. dsl
+                    робить код зрозумілим для аналітиків предметної області і
+                    навіть для досвідчених користувачів. це покращує комунікацію
+                    і розуміння, пришвидшує розробку, адаптацію рішень до нових
+                    вимог, спрощує навчання і передачу знань, приховує технічну
+                    складність і дозволяє фахівцям зосередитися на своїй галузі,
+                    покращуючи загальну передбачуваність проєкту.
+                  </li>
+                  <li>
+                    <p>
+                      ⭐ dsl (спеціалізовані мови), ast, pattern interpreter,
+                      підмножина javascript, markdown, lisp
+                    </p>
+                    <p>
+                      ⭐ pattern interpreter — реалізація ast і lisp на
+                      javascript
+                    </p>
+                    <p>⭐ pattern command</p>
+                    <p>⭐ приклад: електронна таблиця з формулами</p>
+                    <p>💡 cqs, cqrs, event sourcing, транзакції</p>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion no-padding">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">all-agnostic strategy</div>
+              </summary>
+              <div class="accordion-body">
+                <ul class="accordion-body-list">
+                  <li>
+                    розробка систем, незалежних від фреймворків, платформ,
+                    протоколів, баз даних і хмарних рішень — як стандартний
+                    підхід для забезпечення гнучкості та свободи архітектурних
+                    рішень. такий підхід усуває залежність від постачальників
+                    хмарних сервісів і фреймворків. звісно, не обов’язково
+                    впроваджувати всі аспекти агностичного підходу, але деякі з
+                    них принесуть значні переваги в масштабуванні системи та в
+                    процесі її експлуатації. ми будемо використовувати ізоляцію,
+                    grasp: controller; solid: dip; принципи ioc і di; інтерфейси
+                    та патерн strategy для відв'язання від конкретних
+                    реалізацій.
+                  </li>
+                  <li>
+                    <p>
+                      ⭐ solid: dip — принцип інверсії залежностей (dependency
+                      inversion principle)
+                    </p>
+                    <p>⭐ service locator</p>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion no-padding">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">
+                  масштабування та архітектура
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <ul class="accordion-body-list">
+                  <li>
+                    на цьому тижні ми розглянемо, як проєктувати системи, які
+                    можуть масштабуватися і розвиватися ефективно,
+                    використовуючи різні архітектурні стилі: ddd, шарова
+                    архітектура, soa, мікросервіси, подієва архітектура,
+                    монолітна, порти і адаптери, чиста архітектура,
+                    event-sourcing, cqrs, pipeline, peer-to-peer, client-server
+                    архітектура — і як застосовувати solid, grasp та gof для
+                    реалізації архітектури.
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion no-padding">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">
+                  як застосувати концепти
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <ul class="accordion-body-list">
+                  <li>
+                    <p>
+                      завершальна частина програми тренінгу зосереджена на
+                      практичному застосуванні всіх знань у комплексі. ми
+                      розглянемо, як почати впроваджувати концепції і шаблони,
+                      вивчені на курсі, в реальних проєктах. цей модуль надає
+                      практичні стратегії для створення дорожньої карти їх
+                      впровадження. як виявити потребу в шаблонах і принципах та
+                      врахувати можливі негативні аспекти.
+                    </p>
+                    <p>
+                      рефакторинг успадкованих систем, впровадження нових
+                      методів розробки та активностей у команді. як спланувати
+                      власне навчання і налагодити розвиток команди з
+                      використанням знань із цього тренінгу.
+                    </p>
+                  </li>
+                  <li>
+                    <p>⭐ bridge;</p>
+                    <p>⭐ mediator;</p>
+                    <p>
+                      ⭐ як застосовувати патерни на прикладі mediator і bridge
+                      в ооп, фп, мультипарадигмовому стилі
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </li>
+        </ol>
+
+        <h4 class="program-unit-heading">
+          <span class="accent-gold">unit 4</span>
+          <span>архітектура та бізнесі</span>
+        </h4>
+
+        <ol class="programm-schedule-list">
+          <li>
+            <details class="accordion no-padding">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">
+                  software structure & architecture
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <ul class="accordion-body-list">
+                  <li>
+                    <p>⭐️ огляд і класифікація архітектури пз</p>
+                    <p>
+                      ⭐️ багатошарова архітектура пз, ddd, чиста архітектура пз
+                    </p>
+                    <p>
+                      ⭐️ структура застосунку: модульність, di, dto, моделі
+                    </p>
+                    <p>
+                      ⭐️ черги: pub/sub, push/pull, cqs, cqrs, event sourcing,
+                      command, query object
+                    </p>
+                    <p>
+                      ⭐️ vertical slice architecture і feature-slice design
+                    </p>
+                    <p>⭐️ архітектура web: ddd для фронтенду і бекенду</p>
+                    <p>
+                      ⭐️ багатопоточність для web: atomics/cas, workers, locks,
+                      races
+                    </p>
+                    <p>
+                      ⭐️ local-first, розподілені системи, блокчейн для web 3.0
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion no-padding">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">
+                  як впроваджувати патерни проектування в команду?
+                </div>
+              </summary>
+              <div class="accordion-body">
+                <ul class="accordion-body-list">
+                  <li>
+                    <p>
+                      ⭐ розбір того, чому більшість впроваджень навіть
+                      найкращих ідей часто зазнають поразки.
+                    </p>
+                    <p>
+                      ⭐ що таке «репутація інженера» і яку роль вона відіграє в
+                      успіху (або провалі) змін.
+                    </p>
+                    <p>
+                      ⭐ як учасники проєкту — від розробників до менеджерів —
+                      по-різному сприймають інженерні практики та їх
+                      впровадження.
+                    </p>
+                    <p>
+                      ⭐ типові проблеми, з якими стикаються команди під час
+                      спроб упровадити інженерні підходи, — та практичні
+                      рішення, які справді працюють.
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="accordion no-padding">
+              <summary class="accordion-heading">
+                <div class="accordion-heading-text">патерни у фронтенді</div>
+              </summary>
+              <div class="accordion-body">
+                <ul class="accordion-body-list">
+                  <li>
+                    <p>
+                      ⭐ список найпоширеніших патернів проєктування на
+                      фронтенді.
+                    </p>
+                    <p>
+                      ⭐ чим фронтенд відрізняється від бекенду в контексті
+                      застосування патернів?
+                    </p>
+                    <p>
+                      ⭐ чи варто боротися за чистоту концепцій, чи все ж краще
+                      довіритися фреймворкам? спойлер: радше друге, ніж перше.
+                    </p>
+                    <p>
+                      ⭐ який результат: розуміння того, як застосовувати
+                      отримані знання у фронтенді — і де цього робити не варто.
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- cta -->
+    <section class="cta">
+      <div class="inner">
+        <h2 class="cta-heading">
+          виникли <span class="accent-gold">додаткові питання</span>?
+        </h2>
+        <h3 class="cta-subheading">
+          залиште свої контакті данні, наш
+          <span class="accent-purple">менеджер звʼяжеться з вами</span>
+        </h3>
+
+        <form class="cta-form" action="">
+          <div class="cta-form-cell">
+            <label class="label-text" for="full_name">ім'я</label>
+            <input
+              type="text"
+              id="full_name"
+              name="full_name"
+              required
+              placeholder="ім'я"
+            />
+          </div>
+          <div class="cta-form-cell">
+            <label class="label-text" for="phone">телефон</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              required
+              placeholder="телефон"
+            />
+          </div>
+          <button type="button" class="button" onclick="opensuvey()">
+            далі
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- tariffs -->
+    <section class="tariffs" id="tariffs">
+      <div class="inner tariffs-inner">
+        <h2 class="tariffs-heading"><span class="accent-gold">тарифи</span></h2>
+        <h3 class="tariffs-subheading">
+          скористайтесь спеціальною пропозицією — пізніше ціна підніметься!
+        </h3>
+
+        <div сlass="table">
+          <table>
+            <thead>
+              <tr>
+                <td></td>
+                <td>
+                  <p class="tariff-label minimal">minimal</p>
+                  <p class="tariff-price accent-gold">
+                    <span>390$</span>
+                    <small>550$</small>
+                  </p>
+                  <p class="tariff-period">3 місяці</p>
+                </td>
+                <td>
+                  <p class="tariff-label standard">standard</p>
+                  <p class="tariff-price accent-gold">
+                    <span>890$</span>
+                    <small>1250$</small>
+                  </p>
+                  <p class="tariff-period">3 місяці</p>
+                </td>
+                <td>
+                  <p class="tariff-label professional">profesional</p>
+                  <p class="tariff-price accent-gold">
+                    <span>1390$</span>
+                    <small>2050$</small>
+                  </p>
+                  <p class="tariff-period">3 місяці</p>
+                </td>
+                <td>
+                  <p class="tariff-label exclusive">exclusive</p>
+                  <p class="tariff-price accent-purple">
+                    <span>10 000$</span>
+                  </p>
+                  <p class="tariff-period">4 місяці</p>
+                </td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>патерни</td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-green.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-green.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-green.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-purple.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>приватний телеграм канал з новинами курсу</td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-green.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-green.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-purple.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>домашні завдання</td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-green.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-green.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-green.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-purple.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>qa семінар з тимуром</td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-green.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+                <td></td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-green.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-purple.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>перевірка домашніх завдань</td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-green.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-green.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-green.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>перевірка домашніх завдань тимуром</td>
+                <td>
+                  <img
+                    src="./files/icons/icon-remove.svg"
+                    alt="опція недоступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-remove.svg"
+                    alt="опція недоступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-remove.svg"
+                    alt="опція недоступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-green.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>чат з тимуром, відповіді на запитання протягом дня</td>
+                <td>
+                  <img
+                    src="./files/icons/icon-remove.svg"
+                    alt="опція недоступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-remove.svg"
+                    alt="опція недоступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-remove.svg"
+                    alt="опція недоступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-remove.svg"
+                    alt="опція недоступна"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>code review call</td>
+                <td>
+                  <img
+                    src="./files/icons/icon-remove.svg"
+                    alt="опція недоступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-green.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-green.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-purple.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>спільні зустрічі на вільні теми/td></td>
+                <td>
+                  <img
+                    src="./files/icons/icon-remove.svg"
+                    alt="опція недоступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-green.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-green.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-purple.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>модуль іллі климова “патерни в frontend”</td>
+                <td>
+                  <img
+                    src="./files/icons/icon-remove.svg"
+                    alt="опція недоступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-remove.svg"
+                    alt="опція недоступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-green.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-purple.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>модуль “архітектура застосунків”</td>
+                <td>
+                  <img
+                    src="./files/icons/icon-remove.svg"
+                    alt="опція недоступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-remove.svg"
+                    alt="опція недоступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-green.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-purple.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  модуль іллі климова “як упроваджувати патерни проєктування в
+                  команду”
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-green.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-green.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-green.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-purple.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>сертифікат про завершення курсу</td>
+                <td>
+                  <img
+                    src="./files/icons/icon-remove.svg"
+                    alt="опція недоступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-green.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-green.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="./files/icons/icon-check-purple.svg"
+                    alt="опція доступна"
+                  />
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td></td>
+                <td>
+                  <p class="amount">∞</p>
+                  <button type="button" class="button tariff-submit">
+                    зареєструватись
+                  </button>
+                </td>
+                <td>
+                  <p class="amount">
+                    200 <br />
+                    місць
+                  </p>
+                  <button type="button" class="button tariff-submit">
+                    зареєструватись
+                  </button>
+                </td>
+                <td>
+                  <p class="amount">
+                    50 <br />
+                    місць
+                  </p>
+                  <button type="button" class="button tariff-submit">
+                    зареєструватись
+                  </button>
+                </td>
+                <td>
+                  <p class="amount">
+                    3 <br />
+                    місця
+                  </p>
+                  <button type="button" class="button tariff-submit">
+                    зареєструватись
+                  </button>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <div class="tariff-message">
+          <div class="inner">
+            <img src="./files/icons/icon-clock.svg" alt="" />
+            <p>
+              у нас доступне
+              <span class="accent-purple">розтермінування на 3 місяці</span> —
+              оплачуйте зручно частинами
+              <span class="accent-purple">без переплат</span>
+            </p>
+          </div>
+        </div>
+
+        <button class="button" type="button">забронювати місце на курсі</button>
+      </div>
+    </section>
+
+    <!-- feedback -->
+    <section class="feedback" id="feedback">
+      <div class="inner feedback-inner">
+        <h3 class="feedback-heading">
+          відгуки від <span class="accent-gold">наших учнів</span>
+        </h3>
+
+        <div class="feedback-slider">
+          <button class="arrow prev js-prev">
+            <img src="./files/icons/icon-slider-control.svg" alt="" />
+          </button>
+          <div class="slider">
+            <ul class="video-list slides js-slides">
+              <li class="video-item slide js-slide">
+                <video poster="./files/video/img_4015_poster.webp" controls>
+                  <source src="./files/video/img_4015.mp4" type="video/mp4" />
+                </video>
+                <p class="video-caption">ми фокусуємось на результативності</p>
+              </li>
+              <li class="video-item slide js-slide">
+                <video poster="./files/video/img_4017_poster.webp" controls>
+                  <source src="./files/video/img_4017.mp4" type="video/mp4" />
+                </video>
+                <p class="video-caption">ми фокусуємось на результативності</p>
+              </li>
+              <li class="video-item slide js-slide">
+                <video poster="./files/video/img_4019_poster.webp" controls>
+                  <source src="./files/video/img_4019.mp4" type="video/mp4" />
+                </video>
+                <p class="video-caption">ми фокусуємось на результативності</p>
+              </li>
+              <li class="video-item slide js-slide">
+                <video
+                  poster="./files/video/video_2025-10-06_10-19-39_poster.webp"
+                  controls
+                >
+                  <source
+                    src="./files/video/video_2025-10-06_10-19-39.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+                <p class="video-caption">ми фокусуємось на результативності</p>
+              </li>
+              <li class="video-item slide js-slide">
+                <video
+                  poster="./files/video/video_2025-10-06_10-19-54_poster.webp"
+                  controls
+                >
+                  <source
+                    src="./files/video/video_2025-10-06_10-19-54.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+                <p class="video-caption">ми фокусуємось на результативності</p>
+              </li>
+            </ul>
+          </div>
+          <button class="arrow next js-next">
+            <img src="./files/icons/icon-slider-control.svg" alt="" />
+          </button>
+        </div>
+
+        <button type="button" class="button">забронювати місце на курсі</button>
+      </div>
+    </section>
+
+    <!-- authors -->
+    <section class="authors" id="authors">
+      <div class="inner authors-inner">
+        <h2 class="authors-heading">автори, запрошені експерти та ментори</h2>
+
+        <ol class="authors-grid">
+          <li class="author">
+            <img
+              class="author-photo"
+              alt="фото тимура шемсединова"
+              src="./files/timur.webp"
+            />
+            <h5 class="author-name">тимур шемсединов</h5>
+            <p class="author-position">
+              автор тренінгу, лектор і ведучий семінарів.
+            </p>
+            <p class="author-about">
+              30 років в іт, контриб'ютор у проєкти з відкритим кодом, експерт у
+              node.js, javascript, архітектурі розподілених та навантажених
+              корпоративних систем і баз даних.
+            </p>
+          </li>
+
+          <li class="author">
+            <img
+              class="author-photo"
+              alt="фото іллі климова"
+              src="./files/illya.webp"
+            />
+
+            <h5 class="author-name">ілля климов</h5>
+            <p class="author-position">
+              запрошений гість допомагає розібратися з патернами у фронтенді та
+              комунікацією в команді.
+            </p>
+            <p class="author-about">
+              21 рік в іт, staff frontend engineer @ gitlab
+            </p>
+          </li>
+
+          <li class="author">
+            <img
+              class="author-photo"
+              alt="фото дмитра нечая"
+              src="./files/dmytro.webp"
+            />
+            <h5 class="author-name">дмитро нечай</h5>
+            <p class="author-position">ментор тренінгу patterns</p>
+            <p class="author-about">
+              chief architect у platma cto в handy.ai лектор у кпі та metarhia
+            </p>
+          </li>
+
+          <li class="author">
+            <img
+              class="author-photo"
+              alt="фото дениса отришко"
+              src="./files/denys.webp"
+            />
+            <h5 class="author-name">денис отришко</h5>
+            <p class="author-position">
+              principal engineer node.js core contributor metarhia core
+              contributor
+            </p>
+            <p class="author-about">10+ років у продуктовій розробці</p>
+          </li>
+
+          <li class="author">
+            <img
+              class="author-photo"
+              alt="фото тимура севимли"
+              src="./files/timur_s.webp"
+            />
+            <h3 class="author-name">тимур севимли</h3>
+            <p class="author-position">
+              senior swe в metactos oss contributor metarhia core contributor
+            </p>
+            <p class="author-about">підприємець. прихильник open source</p>
+          </li>
+
+          <li class="author">
+            <img
+              class="author-photo"
+              alt="фото миколи бєлочуба"
+              src="./files/mykola.webp"
+            />
+            <h3 class="author-name">микола бєлочуб</h3>
+            <p class="author-position">
+              senior swe oss contributor metarhia core contributor
+            </p>
+            <p class="author-about">10+ років у продуктовій розробці</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- footer -->
+    <footer class="footer">
+      <a href="./files/public-offer.pdf">політика конфіденційності</a>
+      <a href="#">згода на обробку даних</a>
+    </footer>
+
+    <!-- survey modal -->
+    <div role="dialog" class="modal">
+      <button
+        class="modal-close"
+        aria-label="закрити вікно"
+        onclick="closebtn()"
+      >
+        <img src="./files/icons/icon-remove.svg" alt="" />
+      </button>
+
+      <div class="modal-content">
+        <form id="survey-form">
+          <!-- step 1 -->
+          <div class="step-1" id="survey-form-step-1">
+            <div class="suvey-form">
+              <fieldset>
+                <div class="survey-cell">
+                  <legend class="survey-heading">
+                    скільки років досвіду в it?
+                  </legend>
+                  <label for="experience-0-1" class="radiobutton">
+                    <span>0–1 рік</span>
+                    <input
+                      id="experience-0-1"
+                      type="radio"
+                      name="experience"
+                      value="0-1"
+                    />
+                  </label>
+                  <label for="experience-1-3" class="radiobutton">
+                    <span>1–3 роки</span>
+                    <input
+                      id="experience-1-3"
+                      type="radio"
+                      name="experience"
+                      value="1-3"
+                    />
+                  </label>
+                  <label for="experience-3-5" class="radiobutton">
+                    <span>3–5 років</span>
+                    <input
+                      id="experience-3-5"
+                      type="radio"
+                      name="experience"
+                      value="3-5"
+                    />
+                  </label>
+                  <label for="experience-5" class="radiobutton">
+                    <span>5+ років</span>
+                    <input
+                      id="experience-5"
+                      type="radio"
+                      name="experience"
+                      value="5+"
+                    />
+                  </label>
+                </div>
+              </fieldset>
+
+              <fieldset>
+                <div class="survey-cell">
+                  <legend class="survey-heading">яка ваша поточна роль?</legend>
+                  <label for="junior-developer" class="radiobutton">
+                    <span>junior розробник</span>
+                    <input
+                      id="junior-developer"
+                      type="radio"
+                      name="role"
+                      value="junior"
+                    />
+                  </label>
+                  <label for="middle-developer" class="radiobutton">
+                    <span>middle розробник</span>
+                    <input
+                      id="middle-developer"
+                      type="radio"
+                      name="role"
+                      value="middle"
+                    />
+                  </label>
+                  <label for="senior-developer" class="radiobutton">
+                    <span>senior розробник</span>
+                    <input
+                      id="senior-developer"
+                      type="radio"
+                      name="role"
+                      value="senior"
+                    />
+                  </label>
+                  <label for="team-leader" class="radiobutton">
+                    <span>team lead / архітектор</span>
+                    <input
+                      id="team-leader"
+                      type="radio"
+                      name="role"
+                      value="team-leader"
+                    />
+                  </label>
+                  <label for="cto-tech-lead" class="radiobutton">
+                    <span>cto / tech lead</span>
+                    <input
+                      id="cto-tech-lead"
+                      type="radio"
+                      name="role"
+                      value="cto-tech-lead"
+                    />
+                  </label>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="suvey-form">
+              <div class="survey-cell">
+                <button type="button" class="button dark survey-back">
+                  назад
+                </button>
+              </div>
+              <div class="survey-cell">
+                <button
+                  class="button survey-submit"
+                  type="button"
+                  onclick="gotostep2()"
+                >
+                  далі
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- step 2 -->
+          <div class="step-2" id="survey-form-step-2" style="display: none">
+            <div class="suvey-form">
+              <fieldset>
+                <div class="survey-cell">
+                  <legend class="survey-heading">
+                    чи були на минулому курсі patterns
+                  </legend>
+
+                  <label for="has_attended_yes" class="radiobutton">
+                    <span>так</span>
+                    <input
+                      id="has_attended_yes"
+                      type="radio"
+                      name="has_attended"
+                      value="yes"
+                    />
+                  </label>
+
+                  <label for="has_attended_no" class="radiobutton">
+                    <span>ні</span>
+                    <input
+                      id="has_attended_no"
+                      type="radio"
+                      name="has_attended"
+                      value="no"
+                    />
+                  </label>
+                </div>
+              </fieldset>
+
+              <fieldset>
+                <div class="survey-cell">
+                  <legend class="survey-heading">
+                    на скільки ви готові до покупки?
+                  </legend>
+
+                  <label for="how_ready_ready" class="radiobutton">
+                    <span>хочу купити курс</span>
+                    <input
+                      id="how_ready_ready"
+                      type="radio"
+                      name="how_ready"
+                      value="ready"
+                    />
+                  </label>
+
+                  <label for="how_ready_detail" class="radiobutton">
+                    <span>потрібно уточнити деталі</span>
+                    <input
+                      id="how_ready_detail"
+                      type="radio"
+                      name="how_ready"
+                      value="details"
+                    />
+                  </label>
+
+                  <label for="how_ready_considering" class="radiobutton">
+                    <span>ще думаю </span>
+                    <input
+                      id="how_ready_considering"
+                      type="radio"
+                      name="how_ready"
+                      value="considering"
+                    />
+                  </label>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="suvey-form">
+              <div class="survey-cell">
+                <button
+                  type="button"
+                  class="button dark survey-back"
+                  onclick="gotostep1()"
+                >
+                  назад
+                </button>
+              </div>
+              <div class="survey-cell">
+                <button class="button survey-submit" type="submit">
+                  відправити заявку
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- step 3 -->
+          <div id="survey-form-step-3" style="display: none">
+            <p class="survey-message">
+              дякуємо за створену заявку,
+              <span class="accent-gold">
+                ми зв’яжемось з вами в найближчий час!
+              </span>
+            </p>
+
+            <button type="button" class="button" onclick="closesurveymodal()">
+              повернутись до сайту
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>const slides=document.queryselector(".js-slides");const slideitems=document.queryselectorall(".js-slide");const btnleft=document.queryselector(".js-prev");const btnright=document.queryselector(".js-next");let currentindex=0;function getvisibleslides(){return window.innerwidth<768?1:4}btnright.addeventlistener("click",()=>{if(currentindex<slideitems.length-getvisibleslides()){currentindex++;updateslider()}});btnleft.addeventlistener("click",()=>{if(currentindex>0){currentindex--;updateslider()}});function updateslider(){const shift=-(100/getvisibleslides())*currentindex;slides.style.transform=`translatex(${shift}%)`}window.addeventlistener("resize",updateslider);const surveydata={full_name:"",phone:"",experience:"",role:"",has_attended:"",how_ready:""};const $=(sel,root=document)=>root.queryselector(sel);const getcheckedval=name=>{const el=document.queryselector(`input[name="${name}"]:checked`);return el?el.value:""};const show=el=>el.style.display="";const hide=el=>el.style.display="none";const modal=$(".modal");const step1=$("#survey-form-step-1");const step2=$("#survey-form-step-2");const step3=$("#survey-form-step-3");const closebtn=$(".modal-close");const backbtns=document.queryselectorall(".survey-back");const surveyform=$("#survey-form");window.opensuvey=function opensuvey(){const full_name=$("#full_name")?.value.trim();const phone=$("#phone")?.value.trim();if(!full_name||!phone){alert("будь ласка, заповніть ім’я та телефон");return}surveydata.full_name=full_name;surveydata.phone=phone;show(step1);hide(step2);hide(step3);modal.classlist.add("is-open")};window.gotostep2=function gotostep2(){const experience=getcheckedval("experience");const role=getcheckedval("role");if(!experience||!role){alert("будь ласка, оберіть досвід і роль");return}surveydata.experience=experience;surveydata.role=role;hide(step1);show(step2)};window.gotostep1=function gotostep1(){hide(step2);show(step1)};window.closesurveymodal=function(){modal.classlist.remove("is-open");step1.style.display="none";step2.style.display="none";step3.style.display="none"};closebtn?.addeventlistener("click",()=>{modal.classlist.remove("is-open")});backbtns.foreach(btn=>{btn.addeventlistener("click",()=>{if(step2.style.display!=="none")gotostep1();else modal.classlist.remove("is-open")})});surveyform.addeventlistener("submit",async e=>{e.preventdefault();const has_attended=getcheckedval("has_attended");const how_ready=getcheckedval("how_ready");if(!has_attended||!how_ready){alert("будь ласка, дайте відповіді на обидва питання");return}surveydata.has_attended=has_attended;surveydata.how_ready=how_ready;const payload={...surveydata,submittedat:(new date).toisostring()};console.log("payload to send:",payload);try{const resp=await fetch("https://pattern-960410420882.europe-central2.run.app",{method:"post",headers:{"content-type":"application/json",accept:"application/json"},body:json.stringify(payload)});const resptext=await resp.text();if(!resp.ok){console.error("http status:",resp.status);console.error("response body:",resptext);alert("сервер відхилив запит (http "+resp.status+"). деталі в консолі.");return}let data;try{data=json.parse(resptext)}catch{}hide(step1);hide(step2);show(step3)}catch(err){alert("сталася мережна помилка. перевірте консоль.")}});</script>
+    <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t["async"]=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","992407839606853");fbq("track","PageView");</script>
+    <noscript>
+      <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=992407839606853&ev=PageView&noscript=1"/>
+    </noscript>
+  </body>
+</html>
