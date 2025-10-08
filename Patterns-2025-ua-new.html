@@ -225,11 +225,11 @@
         height: 64px;
         margin-block-start: auto;
         margin-inline: auto;
-        padding-inline: 24px;
+        padding-inline: 18px;
         background: #ffffff;
         border: 1px solid #ffffff;
         font-family: 'Jura', Courier, monospace;
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 700;
         text-decoration: none;
         letter-spacing: 1px;
@@ -239,6 +239,7 @@
 
         @media (min-width: 1280px) {
           padding-inline: 60px;
+          font-size: 20px;
         }
 
         @media (hover: hover) {
@@ -368,12 +369,17 @@
       /* Footer */
       .footer {
         display: flex;
+        flex-direction: column;
         justify-content: space-around;
         gap: 40px;
         padding-block: 40px;
         text-align: center;
         background-color: #212121;
         border-top: 1px solid rgb(255 255 255 / 0.2);
+
+        @media (min-width: 768px) {
+          flex-direction: row;
+        }
 
         & a {
           font-size: 20px;
@@ -533,6 +539,7 @@
 
         & li {
           position: relative;
+          display: flex;
         }
 
         & li::before {
@@ -655,6 +662,7 @@
       .authors-grid {
         display: grid;
         gap: 40px;
+        margin-bottom: 40px;
 
         @media (min-width: 768px) {
           grid-template-columns: repeat(2, 1fr);
@@ -931,10 +939,14 @@
           }
 
           & td {
-            padding: 12px;
+            padding: 6px;
             font-size: 16px;
             vertical-align: middle;
             text-align: center;
+
+            @media (min-width: 1280px) {
+              padding: 12px;
+            }
 
             &:first-child {
               width: 300px;
@@ -978,7 +990,7 @@
         justify-content: center;
         width: 100%;
         height: 164px;
-        font-size: 24px;
+        font-size: 18px;
         font-weight: 700;
         writing-mode: vertical-rl;
         text-orientation: mixed;
@@ -986,6 +998,7 @@
 
         @media (min-width: 768px) {
           height: 52px;
+          font-size: 24px;
           transform: none;
           writing-mode: unset;
         }
@@ -1017,11 +1030,12 @@
         align-items: center;
         justify-content: center;
         gap: 4px;
-        padding: 12px;
+        padding: 6px;
         font-size: 16px;
 
         @media (min-width: 1280px) {
           flex-direction: row;
+          padding: 12px;
           font-size: 24px;
         }
 
@@ -1071,9 +1085,14 @@
         align-items: center;
         justify-content: center;
         margin-block: 40px;
-        padding: 30px 15px;
+        padding: 15px;
         border: 2px solid #b70dea;
-        font-size: 24px;
+        font-size: 18px;
+
+        @media (min-width: 1280px) {
+          padding: 30px 15px;
+          font-size: 24px;
+        }
 
         .accent-purple {
           font-weight: 700;
@@ -2545,7 +2564,7 @@
           </li>
         </ol>
 
-        <button type="button" class="button intro-submit" onclick="window.location.href='https://secure.wayforpay.com/button/b1db8f631db2a'">
+        <button type="button" class="button">
           Забронювати місце на курсі
         </button>
       </div>
