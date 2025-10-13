@@ -1155,6 +1155,21 @@
         }
       }
 
+      .tariff-selection {
+        display: flex;
+        align-items: center;
+        margin-block: 40px;
+        gap: 12px;
+
+        @media (min-width: 1280px) {
+          display: none;
+        }
+
+        & button {
+          flex: 1;
+        }
+      }
+
       /* Feedback */
       .feedback {
         background-color: #212121;
@@ -1379,7 +1394,7 @@
           </div>
 
           <button type="button" class="button intro-submit" onclick="window.location.href='https://secure.wayforpay.com/payment/s948f83e1a739'">
-            Забронювати місце на курсі за 100$
+            Забронювати місце на курсі
           </button>
 
           <div class="intro-message">
@@ -1470,7 +1485,7 @@
         </div>
 
         <button type="button" class="button intro-submit">
-          Забронювати місце на курсі за 100$
+          Забронювати місце на курсі
         </button>
       </div>
     </section>
@@ -2439,18 +2454,16 @@
 
         <div class="tariffs-selection">
           <label class="label" for="tariff-selection">
-            Зареєструватись на курс
+            Оберіть курс*
           </label>
           <select
             name="tariff-select"
             id="tariff-selection"
-            onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);"
           >
-            <option value="">Оберіть курс</option>
             <option value="https://secure.wayforpay.com/button/b85f44ebb8e36">
               Standard
             </option>
-            <option value="https://secure.wayforpay.com/button/b35a1363a0f6f">
+            <option value="https://secure.wayforpay.com/button/b35a1363a0f6f" selected>
               Mentoring
             </option>
             <option value="https://secure.wayforpay.com/button/b9884a3be0cf2">
@@ -2460,6 +2473,12 @@
               Exclusive
             </option>
           </select>
+        </div>
+
+        <div class="tariff-selection">
+          <button class="button" type="button" onclick="window.location.href=document.getElementById('tariff-selection').value">
+            Купити курс
+          </button>
         </div>
 
         <div class="tariff-message">
@@ -2475,7 +2494,7 @@
         </div>
 
         <button class="button" type="button" onclick="window.location.href='https://secure.wayforpay.com/payment/s948f83e1a739'">
-          Забронювати місце на курсі за 100$
+          Забронювати місце на курсі
         </button>
       </div>
     </section>
@@ -2542,7 +2561,7 @@
         </div>
 
         <button class="button" type="button" onclick="window.location.href='https://secure.wayforpay.com/payment/s948f83e1a739'">
-          Забронювати місце на курсі за 100$
+          Забронювати місце на курсі
         </button>
       </div>
     </section>
@@ -2642,7 +2661,7 @@
         </ol>
 
         <button type="button" class="button intro-submit" onclick="window.location.href='https://secure.wayforpay.com/payment/s948f83e1a739'">
-          Забронювати місце на курсі за 100$
+          Забронювати місце на курсі
         </button>
       </div>
     </section>

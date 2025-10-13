@@ -1100,6 +1100,7 @@
       .tariffs-selection {
         display: flex;
         align-items: center;
+        margin-block: 40px;
         gap: 12px;
 
         @media (min-width: 1280px) {
@@ -1124,6 +1125,21 @@
           background-image: url('./files/icons/icon-chevron-down.svg');
           background-position: center right 12px;
           background-repeat: no-repeat;
+        }
+      }
+
+      .tariff-selection {
+        display: flex;
+        align-items: center;
+        margin-block: 40px;
+        gap: 12px;
+
+        @media (min-width: 1280px) {
+          display: none;
+        }
+
+        & button {
+          flex: 1;
         }
       }
 
@@ -1379,7 +1395,7 @@
           </div>
 
           <button type="button" class="button intro-submit" onclick="window.location.href='https://secure.wayforpay.com/payment/s948f83e1a739'">
-            Забронировать место на курсе за 100$
+            Забронировать место на курсе
           </button>
 
           <div class="intro-message">
@@ -1470,7 +1486,7 @@
         </div>
 
         <button type="button" class="button intro-submit" onclick="window.location.href='https://secure.wayforpay.com/payment/s948f83e1a739'">
-          Забронировать место на курсе за 100$
+          Забронировать место на курсе
         </button>
       </div>
     </section>
@@ -2440,18 +2456,16 @@
 
         <div class="tariffs-selection">
           <label class="label" for="tariff-selection">
-            Зарегистрироваться на курс
+            Выберите курс*
           </label>
           <select
             name="tariff-select"
             id="tariff-selection"
-            onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);"
           >
-            <option value="">Выберите курс</option>
             <option value="https://secure.wayforpay.com/button/b85f44ebb8e36">
               Standard
             </option>
-            <option value="https://secure.wayforpay.com/button/b35a1363a0f6f">
+            <option value="https://secure.wayforpay.com/button/b35a1363a0f6f" selected>
               Mentoring
             </option>
             <option value="https://secure.wayforpay.com/button/b9884a3be0cf2">
@@ -2462,6 +2476,13 @@
             </option>
           </select>
         </div>
+
+        <div class="tariff-selection">
+          <button class="button" type="button" onclick="window.location.href=document.getElementById('tariff-selection').value">
+            Купить курс
+          </button>
+        </div>
+
 
         <div class="tariff-message">
           <div class="inner">
@@ -2476,7 +2497,7 @@
         </div>
 
         <button class="button" type="button" onclick="window.location.href='https://secure.wayforpay.com/payment/s948f83e1a739'">
-          Забронировать место на курсе за 100$
+          Забронировать место на курсе
         </button>
       </div>
     </section>
@@ -2543,7 +2564,7 @@
         </div>
 
         <button class="button" type="button" onclick="window.location.href='https://secure.wayforpay.com/payment/s948f83e1a739'">
-          Забронировать место на курсе за 100$
+          Забронировать место на курсе
         </button>
       </div>
     </section>
@@ -2642,7 +2663,7 @@
           </li>
         </ol>
         <button type="button" class="button intro-submit" onclick="window.location.href='https://secure.wayforpay.com/payment/s948f83e1a739'">
-          Забронировать место на курсе за 100$
+          Забронировать место на курсе
         </button>
       </div>
     </section>
