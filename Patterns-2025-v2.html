@@ -1097,6 +1097,36 @@
         }
       }
 
+      .tariffs-selection {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        @media (min-width: 1280px) {
+          display: none;
+        }
+
+        & .label {
+          flex: 0.5;
+        }
+
+        & select {
+          flex: 1;
+          height: 48px;
+          padding-inline: 12px;
+          appearance: none;
+          outline: none;
+          border: none;
+          border-radius: 0;
+          font-family: 'Jura', sans-serif;
+          font-size: 20px;
+          font-weight: 700;
+          background-image: url('./files/icons/icon-chevron-down.svg');
+          background-position: center right 12px;
+          background-repeat: no-repeat;
+        }
+      }
+
       .tariff-message {
         display: flex;
         align-items: center;
@@ -1320,8 +1350,8 @@
         class="navigation-lang"
         onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);"
       >
-        <option value="https://nodeua.com/Patterns-2025-ua-new.html">UA</option>
-        <option value="https://nodeua.com/Patterns-2025-new.html" selected>
+        <option value="https://nodeua.com/Patterns-2025-ua">UA</option>
+        <option value="https://nodeua.com/Patterns-2025" selected>
           RU
         </option>
       </select>
@@ -1329,7 +1359,7 @@
       <div class="inner intro-grid">
         <div class="intro-description">
           <h1 class="intro-heading">
-            Полный обзор курса <span class="accent">Patterns 2.0</span>
+            Полный обзор курса <span class="accent">Patterns 2025</span>
           </h1>
           <h2 class="intro-subheading">
             Подробно о программе, формате и пользе
@@ -1449,8 +1479,8 @@
     <section class="prices" id="prices">
       <div class="inner">
         <h2 class="prices-heading">
-          В чём разница между <span class="accent-gold">этим</span> и
-          <span class="accent-purple">предыдущими запусками</span>?
+          В чём разница между <span class="accent-purple">предыдущими</span>
+          набором и <span class="accent-gold">новой программой</span> курса?
         </h2>
 
         <ul class="prices-list">
@@ -1496,7 +1526,7 @@
     <section class="programm" id="programm">
       <div class="inner programm-inner">
         <h2 class="programm-heading">
-          Програма <span class="accent-gold">Patterns 2.0</span>
+          Програма <span class="accent-gold">Patterns 2025</span>
         </h2>
 
         <h4 class="program-unit-heading">
@@ -2255,7 +2285,7 @@
                 </td>
               </tr>
               <tr>
-                <td>Модуль Илли Климова “Паттерны во frontend”</td>
+                <td>Модуль Ильи Климова “Паттерны во frontend”</td>
                 <td>
                   <img
                     src="./files/icons/icon-remove.svg"
@@ -2310,7 +2340,7 @@
               </tr>
               <tr>
                 <td>
-                  Модуль Илли Климова “Как внедрять паттерны проектирования в
+                  Модуль Ильи Климова “Как внедрять паттерны проектирования в
                   команду”
                 </td>
                 <td>
@@ -2405,6 +2435,32 @@
               </tr>
             </tfoot>
           </table>
+        </div>
+
+
+        <div class="tariffs-selection">
+          <label class="label" for="tariff-selection">
+            Зарегистрироваться на курс
+          </label>
+          <select
+            name="tariff-select"
+            id="tariff-selection"
+            onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);"
+          >
+            <option value="">Выберите курс</option>
+            <option value="https://secure.wayforpay.com/button/b85f44ebb8e36">
+              Standard
+            </option>
+            <option value="https://secure.wayforpay.com/button/b35a1363a0f6f">
+              Mentoring
+            </option>
+            <option value="https://secure.wayforpay.com/button/b9884a3be0cf2">
+              Profesional
+            </option>
+            <option value="https://secure.wayforpay.com/button/b58aac0b84441">
+              Exclusive
+            </option>
+          </select>
         </div>
 
         <div class="tariff-message">

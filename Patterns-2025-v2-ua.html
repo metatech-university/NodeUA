@@ -1097,6 +1097,36 @@
         }
       }
 
+      .tariffs-selection {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        @media (min-width: 1280px) {
+          display: none;
+        }
+
+        & .label {
+          flex: 0.5;
+        }
+
+        & select {
+          flex: 1;
+          height: 48px;
+          padding-inline: 12px;
+          appearance: none;
+          outline: none;
+          border: none;
+          border-radius: 0;
+          font-family: 'Jura', sans-serif;
+          font-size: 20px;
+          font-weight: 700;
+          background-image: url('./files/icons/icon-chevron-down.svg');
+          background-position: center right 12px;
+          background-repeat: no-repeat;
+        }
+      }
+
       .tariff-message {
         display: flex;
         align-items: center;
@@ -1978,7 +2008,7 @@
               <tr>
                 <td></td>
                 <td>
-                  <p class="tariff-label minimal">Minimal</p>
+                  <p class="tariff-label minimal">Standart</p>
                   <p class="tariff-price accent-gold">
                     <span>390$</span>
                     <small>550$</small>
@@ -1986,7 +2016,7 @@
                   <p class="tariff-period">3 місяці</p>
                 </td>
                 <td>
-                  <p class="tariff-label standard">Standard</p>
+                  <p class="tariff-label standard">Mentoring</p>
                   <p class="tariff-price accent-gold">
                     <span>890$</span>
                     <small>1250$</small>
@@ -2372,7 +2402,7 @@
                 <td>
                   <p class="amount">∞</p>
                   <button type="button" class="button tariff-submit" onclick="window.location.href='https://secure.wayforpay.com/button/b85f44ebb8e36'">
-                    Зареєструватись
+                    Купити
                   </button>
                 </td>
                 <td>
@@ -2381,7 +2411,7 @@
                     місць
                   </p>
                   <button type="button" class="button tariff-submit" onclick="window.location.href='https://secure.wayforpay.com/button/b35a1363a0f6f'">
-                    Зареєструватись
+                    Купити
                   </button>
                 </td>
                 <td>
@@ -2390,7 +2420,7 @@
                     місць
                   </p>
                   <button type="button" class="button tariff-submit" onclick="window.location.href='https://secure.wayforpay.com/button/b9884a3be0cf2'">
-                    Зареєструватись
+                    Купити
                   </button>
                 </td>
                 <td>
@@ -2399,12 +2429,37 @@
                     місця
                   </p>
                   <button type="button" class="button tariff-submit" onclick="window.location.href='https://secure.wayforpay.com/button/b58aac0b84441'">
-                    Зареєструватись
+                    Купити
                   </button>
                 </td>
               </tr>
             </tfoot>
           </table>
+        </div>
+
+        <div class="tariffs-selection">
+          <label class="label" for="tariff-selection">
+            Зареєструватись на курс
+          </label>
+          <select
+            name="tariff-select"
+            id="tariff-selection"
+            onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);"
+          >
+            <option value="">Оберіть курс</option>
+            <option value="https://secure.wayforpay.com/button/b85f44ebb8e36">
+              Standard
+            </option>
+            <option value="https://secure.wayforpay.com/button/b35a1363a0f6f">
+              Mentoring
+            </option>
+            <option value="https://secure.wayforpay.com/button/b9884a3be0cf2">
+              Profesional
+            </option>
+            <option value="https://secure.wayforpay.com/button/b58aac0b84441">
+              Exclusive
+            </option>
+          </select>
         </div>
 
         <div class="tariff-message">

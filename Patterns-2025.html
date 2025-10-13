@@ -1097,6 +1097,36 @@
         }
       }
 
+      .tariffs-selection {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        @media (min-width: 1280px) {
+          display: none;
+        }
+
+        & .label {
+          flex: 0.5;
+        }
+
+        & select {
+          flex: 1;
+          height: 48px;
+          padding-inline: 12px;
+          appearance: none;
+          outline: none;
+          border: none;
+          border-radius: 0;
+          font-family: 'Jura', sans-serif;
+          font-size: 20px;
+          font-weight: 700;
+          background-image: url('./files/icons/icon-chevron-down.svg');
+          background-position: center right 12px;
+          background-repeat: no-repeat;
+        }
+      }
+
       .tariff-message {
         display: flex;
         align-items: center;
@@ -2405,6 +2435,32 @@
               </tr>
             </tfoot>
           </table>
+        </div>
+
+
+        <div class="tariffs-selection">
+          <label class="label" for="tariff-selection">
+            Зарегистрироваться на курс
+          </label>
+          <select
+            name="tariff-select"
+            id="tariff-selection"
+            onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);"
+          >
+            <option value="">Выберите курс</option>
+            <option value="https://secure.wayforpay.com/button/b85f44ebb8e36">
+              Standard
+            </option>
+            <option value="https://secure.wayforpay.com/button/b35a1363a0f6f">
+              Mentoring
+            </option>
+            <option value="https://secure.wayforpay.com/button/b9884a3be0cf2">
+              Profesional
+            </option>
+            <option value="https://secure.wayforpay.com/button/b58aac0b84441">
+              Exclusive
+            </option>
+          </select>
         </div>
 
         <div class="tariff-message">
