@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ua">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -8,1356 +8,10 @@
       href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Node.js and Async 2025 Training Course</title>
     <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t["async"]=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","t4zdgarqm3");</script>
-    <style>
-      html,
-      body,
-      div,
-      span,
-      applet,
-      object,
-      iframe,
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6,
-      p,
-      blockquote,
-      pre,
-      a,
-      abbr,
-      acronym,
-      address,
-      big,
-      cite,
-      code,
-      del,
-      dfn,
-      em,
-      img,
-      ins,
-      kbd,
-      q,
-      s,
-      samp,
-      small,
-      strike,
-      strong,
-      sub,
-      sup,
-      tt,
-      var,
-      b,
-      u,
-      i,
-      center,
-      dl,
-      dt,
-      dd,
-      ol,
-      ul,
-      li,
-      fieldset,
-      form,
-      label,
-      legend,
-      table,
-      caption,
-      tbody,
-      tfoot,
-      thead,
-      tr,
-      th,
-      td,
-      article,
-      aside,
-      canvas,
-      details,
-      embed,
-      figure,
-      figcaption,
-      footer,
-      header,
-      hgroup,
-      menu,
-      nav,
-      output,
-      ruby,
-      section,
-      summary,
-      time,
-      mark,
-      audio,
-      video {
-        margin: 0;
-        padding: 0;
-        border: 0;
-        font-size: 100%;
-        font: inherit;
-        vertical-align: baseline;
-      }
-      /* HTML5 display-role reset for older browsers */
-      article,
-      aside,
-      details,
-      figcaption,
-      figure,
-      footer,
-      header,
-      hgroup,
-      menu,
-      nav,
-      section {
-        display: block;
-      }
-      body {
-        line-height: 1;
-      }
-      ol,
-      ul {
-        list-style: none;
-      }
-      blockquote,
-      q {
-        quotes: none;
-      }
-      blockquote:before,
-      blockquote:after,
-      q:before,
-      q:after {
-        content: '';
-        content: none;
-      }
-      table {
-        border-collapse: collapse;
-        border-spacing: 0;
-      }
-
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: 'Jura', Courier, monospace;
-        line-height: 1.4;
-        background: #1a1919;
-        color: #ffffff;
-      }
-
-      h1,
-      h2,
-      h3 {
-        color: #ffffff;
-
-        & .accent {
-          color: #2bc643;
-        }
-      }
-
-      a {
-        text-decoration: none;
-        color: #fff;
-        transition: 0.1s ease-in-out;
-
-        @media (hover: hover) {
-          &:hover {
-            color: #2bc643;
-          }
-        }
-      }
-
-      button,
-      select,
-      textarea {
-        font-family: 'Courier New', Courier, monospace;
-      }
-
-      .radiobutton {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 19px;
-        cursor: pointer;
-
-        & input {
-          width: 0;
-          height: 0;
-          overflow: hidden;
-        }
-
-        &::before {
-          display: block;
-          width: 26px;
-          height: 26px;
-          border: 6px solid #363636;
-          background-color: #363636;
-          transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.25s;
-          content: '';
-        }
-
-        &:has(input:checked)::before {
-          background-color: #2bc643;
-        }
-      }
-
-      .inner {
-        width: 100%;
-        max-width: 1280px;
-        margin-inline: auto;
-        padding-inline: 12px;
-
-        @media (min-width: 1280px) {
-          padding-inline: 24px;
-        }
-      }
-
-      .button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: max-content;
-        height: 64px;
-        margin-block-start: auto;
-        margin-inline: auto;
-        padding-inline: 18px;
-        background: #ffffff;
-        border: 1px solid #ffffff;
-        font-family: 'Jura', Courier, monospace;
-        font-size: 18px;
-        font-weight: 700;
-        text-decoration: none;
-        letter-spacing: 1px;
-        color: #1a1919;
-        cursor: pointer;
-        transition: 0.2s ease-in-out;
-
-        @media (min-width: 1280px) {
-          padding-inline: 60px;
-          font-size: 20px;
-        }
-
-        @media (hover: hover) {
-          &:hover {
-            background-color: transparent;
-            color: #fff;
-          }
-        }
-
-        &.dark {
-          background-color: #2d2d2d;
-          border-color: #2d2d2d;
-          color: #fff;
-        }
-      }
-
-      .accent-gold {
-        color: #2bc643;
-      }
-
-      .accent-purple {
-        color: #b70dea;
-      }
-
-      /* Accordion */
-      .accordion {
-        &:open {
-          & .accordion-heading {
-            border-color: #2bc643;
-            color: #2bc643;
-
-            &::after {
-              transform: translateY(-50%) rotate(180deg);
-              filter: brightness(0) saturate(100%) invert(60%) sepia(35%)
-                saturate(1011%) hue-rotate(78deg) brightness(97%) contrast(89%);
-            }
-          }
-        }
-      }
-
-      .accordion-heading {
-        position: relative;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding-block: 15px;
-        padding-inline-start: 20px;
-        padding-inline-end: 40px;
-        border: 2px solid #999999;
-        font-size: 18px;
-        font-weight: 600;
-        color: #999999;
-        cursor: pointer;
-        transition: 0.15s ease-in-out;
-
-        @media (min-width: 768px) {
-          gap: 24px;
-        }
-
-        &::after {
-          position: absolute;
-          inset-block-start: 50%;
-          inset-inline-end: 20px;
-          transform: translateY(-50%);
-          width: 34px;
-          height: 34px;
-          background-image: url('./files/icons/icon-chevron.svg');
-          transition: 0.15s linear;
-          content: '';
-        }
-
-        @media (hover: hover) {
-          &:hover {
-            color: #ffffff;
-            border-color: #ffffff;
-
-            &::after {
-              filter: brightness(0) saturate(100%) invert(100%);
-            }
-          }
-        }
-
-        &::marker {
-          content: '';
-        }
-
-        &::-webkit-details-marker {
-          display: none;
-        }
-      }
-
-      .accordion-heading-icon {
-        width: 32px;
-        height: 32px;
-        flex-shrink: 0;
-
-        @media (min-width: 1280px) {
-          width: 40px;
-          height: 40px;
-        }
-      }
-
-      .accordion-body {
-        padding-block: 24px;
-
-        @media (min-width: 1280px) {
-          padding-inline: 42px;
-        }
-      }
-
-      .accordion-body-list {
-        font-size: 24px;
-
-        & li + li {
-          margin-block-start: 20px;
-        }
-
-        & p + p {
-          margin-block-start: 16px;
-        }
-
-        & h6 {
-          font-weight: 700;
-        }
-      }
-
-      /* Footer */
-      .footer {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        gap: 40px;
-        padding-block: 40px;
-        text-align: center;
-        background-color: #212121;
-        border-top: 1px solid rgb(255 255 255 / 0.2);
-
-        @media (min-width: 768px) {
-          flex-direction: row;
-        }
-
-        & a {
-          font-size: 20px;
-        }
-      }
-
-      /* Intro */
-      .intro {
-        padding-block: 50px;
-
-        @media (min-width: 1280px) {
-          text-align: center;
-        }
-      }
-
-      .intro-heading {
-        margin-block-end: 12px;
-        font-size: 40px;
-        font-weight: 700;
-
-        @media (min-width: 1280px) {
-          margin-block-end: 20px;
-        }
-      }
-
-      .intro-subheading {
-        margin-block-end: 24px;
-        font-size: 28px;
-        font-weight: 500;
-
-        @media (min-width: 1280px) {
-          margin-block-end: 56px;
-        }
-      }
-
-      .intro-video {
-        position: relative;
-        width: 100%;
-        height: 0;
-        margin-inline: auto;
-        margin-bottom: 20px;
-        padding-bottom: 56.25%;
-        border: 1px solid #363636;
-
-        @media (min-width: 1280px) {
-          margin-block-end: 40px;
-        }
-
-        & iframe {
-          position: absolute;
-          left: 0;
-          top: 0;
-          height: 100%;
-          width: 100%;
-        }
-      }
-
-      .intro-message {
-        position: relative;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        width: 100%;
-        margin-inline: auto;
-        margin-block-start: 20px;
-        padding: 15px 5px;
-        background-color: #363636;
-        text-align: left;
-        font-size: 18px;
-
-        @media (min-width: 768px) {
-          max-width: 690px;
-          padding: 15px 30px;
-        }
-
-        & .accent {
-          font-weight: 700;
-          color: #2bc643;
-        }
-
-        &::before {
-          position: absolute;
-          left: 50%;
-          top: 0;
-          transform: translate(-50%, -100%);
-          width: 6px;
-          height: 20px;
-          background-color: #363636;
-          content: '';
-        }
-      }
-
-      .navigation-lang {
-        position: absolute;
-        right: 20px;
-        top: 20px;
-        height: 32px;
-        border: none;
-        background: none;
-        font-family: 'Jura', sans-serif;
-        font-size: 16px;
-        color: #2bc643;
-        cursor: pointer;
-        outline: none;
-        appearance: none;
-      }
-
-      /* About */
-      .about {
-        padding-block: 50px 4px;
-        background-color: #212121;
-
-        @media (min-width: 768px) {
-          padding-block: 60px;
-        }
-
-        &.about-next {
-          background-color: transparent;
-        }
-      }
-
-      .about .inner {
-        max-width: 1000px;
-      }
-
-      .about h2 {
-        max-width: 680px;
-        margin-block-end: 40px;
-        margin-inline: auto;
-        font-size: 40px;
-        font-weight: 700;
-        text-align: center;
-      }
-
-      .about-grid {
-        display: grid;
-        gap: 40px;
-
-        @media (min-width: 1280px) {
-          grid-template-columns: repeat(2, 1fr);
-          gap: 28px;
-        }
-      }
-
-      .about-subheading {
-        margin-bottom: 26px;
-        font-size: 24px;
-        font-weight: 700;
-      }
-
-      .about-list {
-        font-size: 23px;
-
-        & li + li {
-          margin-block-start: 14px;
-        }
-
-        & li {
-          position: relative;
-          display: flex;
-        }
-
-        & li::before {
-          position: relative;
-          top: 7px;
-          display: inline-block;
-          width: 24px;
-          height: 24px;
-          margin-inline-end: 12px;
-          content: '';
-        }
-
-        &.green {
-          li::before {
-            background: url('./files/icons/icon-check-green.svg') no-repeat
-              center center;
-            background-size: contain;
-          }
-        }
-
-        &.purple {
-          li::before {
-            background: url('./files/icons/icon-check-purple.svg') no-repeat
-              center center;
-            background-size: contain;
-          }
-        }
-      }
-
-      .about-message {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 40px;
-        margin-block-start: 40px;
-        padding-inline: 15px;
-      }
-
-      .about-message-inner {
-        display: grid;
-        gap: 40px;
-        width: 100%;
-        max-width: 1160px;
-        padding: 20px 10px;
-        border: 1px solid #2bc643;
-        text-align: center;
-        font-size: 24px;
-
-        @media (min-width: 1280px) {
-          padding: 30px;
-        }
-      }
-
-      /* Prices */
-
-      .prices {
-        padding-block: 50px;
-        background-color: #212121;
-
-        @media (min-width: 1280px) {
-          padding-block: 60px;
-        }
-      }
-
-      .prices-heading {
-        max-width: 640px;
-        margin-inline: auto;
-        margin-block-end: 40px;
-        font-size: 40px;
-        font-weight: 700;
-
-        @media (min-width: 1280px) {
-          text-align: center;
-        }
-      }
-
-      .prices-list {
-        width: 100%;
-        max-width: 1160px;
-        margin-inline: auto;
-        font-size: 24px;
-
-        & li + li {
-          margin-top: 12px;
-        }
-
-        & .accent-gold {
-          font-weight: 700;
-        }
-
-        & .prices-list-arrow {
-          display: block;
-          margin-block-start: 12px;
-          margin-inline: auto;
-          max-width: 100%;
-        }
-      }
-
-      /* Authors */
-
-      .authors-inner {
-        padding-block: 50px;
-
-        @media (min-width: 768px) {
-          padding-block: 60px;
-        }
-      }
-
-      .authors-heading {
-        margin-block-end: 40px;
-        font-size: 32px;
-        font-weight: 700;
-
-        @media (min-width: 1280px) {
-          text-align: center;
-        }
-      }
-
-      .authors-grid {
-        display: grid;
-        gap: 40px;
-        margin-bottom: 40px;
-
-        @media (min-width: 768px) {
-          grid-template-columns: repeat(2, 1fr);
-        }
-
-        @media (min-width: 1024px) {
-          grid-template-columns: repeat(3, 1fr);
-        }
-      }
-
-      .author {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-        text-align: center;
-      }
-
-      .author-photo {
-        width: 200px;
-        flex-shrink: 0;
-        aspect-ratio: 1 / 1;
-        object-fit: cover;
-        border: 3px solid #363636;
-        border-radius: 50%;
-      }
-
-      .author-name {
-        font-size: 24px;
-        font-weight: 700;
-      }
-
-      .author-position {
-        font-size: 20px;
-      }
-
-      .author-about {
-        font-size: 20px;
-        color: #999999;
-      }
-
-      /* Programm */
-
-      .programm-inner {
-        padding-block: 50px;
-
-        @media (min-width: 1280px) {
-          padding-block: 60px;
-        }
-      }
-
-      .programm-heading {
-        position: relative;
-        margin-block-end: 64px;
-        font-size: 64px;
-
-        @media (min-width: 1280px) {
-          text-align: center;
-        }
-
-        &::after {
-          position: absolute;
-          bottom: -32px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 270px;
-          height: 1px;
-          background-color: #2bc643;
-          content: '';
-        }
-
-        & .accent-gold {
-          font-weight: 700;
-        }
-      }
-
-      .program-unit-heading {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        margin-block-end: 40px;
-        font-size: 39px;
-
-        .accent-gold {
-          font-size: 40px;
-          font-weight: 700;
-        }
-      }
-
-      .programm-item {
-        position: relative;
-        display: flex;
-        padding-inline-start: 40px;
-        align-items: flex-start;
-        counter-increment: counter;
-
-        @media (min-width: 1280px) {
-          padding: 0;
-        }
-
-        &::before,
-        &::after {
-          position: absolute;
-          inset-inline-start: 0;
-          background-color: #121212;
-          font-size: 18px;
-          font-weight: 700;
-          line-height: 1.4;
-          color: #8ab4f8;
-          transform: translateY(-10%);
-
-          @media (min-width: 1280px) {
-            position: static;
-            width: 75px;
-            text-align: center;
-            font-size: 32px;
-            transform: translateY(-27%);
-          }
-        }
-
-        &:nth-child(even) {
-          @media (min-width: 1280px) {
-            text-align: right;
-          }
-
-          &::after {
-            content: counter(counter);
-          }
-        }
-
-        &:nth-child(odd) {
-          @media (min-width: 1280px) {
-            justify-content: flex-end;
-            text-align: left;
-          }
-
-          &::before {
-            content: counter(counter);
-          }
-        }
-      }
-
-      .programm-item-body {
-        @media (min-width: 1280px) {
-          width: 47%;
-        }
-      }
-
-      .programm-description {
-        line-height: 1.2;
-      }
-
-      .programm-schedule-list {
-        display: grid;
-        gap: 24px;
-
-        &:not(:last-child) {
-          margin-block-end: 40px;
-        }
-      }
-
-      /* CTA */
-      .cta {
-        padding-block: 50px;
-        background-color: #212121;
-
-        @media (min-width: 1280px) {
-          padding-block: 60px;
-        }
-      }
-
-      .cta-heading {
-        margin-block-end: 25px;
-        font-size: 40px;
-        font-weight: 700;
-
-        @media (min-width: 1280px) {
-          text-align: center;
-        }
-      }
-
-      .cta-subheading {
-        margin-block-end: 40px;
-        font-size: 26px;
-
-        @media (min-width: 1280px) {
-          text-align: center;
-        }
-      }
-
-      .cta-form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-        max-width: 840px;
-        margin-inline: auto;
-
-        @media (min-width: 1280px) {
-          flex-direction: row;
-        }
-
-        & .label-text {
-          display: block;
-          width: 0;
-          height: 0;
-          overflow: hidden;
-        }
-
-        & input {
-          width: 100%;
-          height: 64px;
-          padding-inline: 20px;
-          background-color: transparent;
-          border: 1px solid #fff;
-          font-family: 'Jura', sans-serif;
-          font-size: 19px;
-          color: #fff;
-          outline: none;
-          transition: 0.25s ease-in-out;
-
-          &:focus {
-            border-color: #2bc643;
-          }
-        }
-      }
-
-      .cta-form-cell {
-        flex: 1;
-        width: 100%;
-      }
-
-      /* Tariffs */
-
-      .tariffs-inner {
-        padding-block: 50px;
-
-        @media (min-width: 1280px) {
-          padding-block: 60px;
-        }
-      }
-
-      .tariffs-heading {
-        margin-block-end: 25px;
-        font-size: 40px;
-        font-weight: 700;
-
-        @media (min-width: 1280px) {
-          text-align: center;
-        }
-      }
-
-      .tariffs-subheading {
-        margin-block-end: 12px;
-        font-size: 24px;
-
-        @media (min-width: 1280px) {
-          text-align: center;
-        }
-      }
-
-      .countdown {
-        display: flex;
-        align-items: center;
-        width: max-content;
-        height: 48px;
-        gap: 12px;
-        margin-inline: auto;
-        margin-block-end: 40px;
-        padding-inline: 15px;
-        background-color: #212121;
-        font-size: 24px;
-
-        @media (min-width: 768px) {
-          padding-inline: 40px;
-        }
-      }
-
-      table {
-        width: 100%;
-
-        & thead {
-          & td {
-            text-align: center;
-          }
-        }
-
-        & tbody {
-          & tr {
-            border-bottom: 1px solid #444;
-          }
-
-          & td {
-            padding: 6px;
-            font-size: 16px;
-            vertical-align: middle;
-            text-align: center;
-
-            @media (min-width: 1280px) {
-              padding: 12px;
-            }
-
-            &:first-child {
-              width: 300px;
-              text-align: left;
-            }
-          }
-        }
-
-        & tfoot {
-          & td {
-            padding-block: 12px;
-            text-align: center;
-            vertical-align: middle;
-
-            .amount {
-              margin-block-end: 12px;
-              font-size: 16px;
-              font-weight: 700;
-
-              @media (min-width: 1280px) {
-                font-size: 20px;
-              }
-
-              br {
-                @media (min-width: 1280px) {
-                  display: none;
-                }
-              }
-            }
-
-            .button {
-              width: 100%;
-            }
-          }
-        }
-      }
-
-      .tariff-label {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 164px;
-        font-size: 18px;
-        font-weight: 700;
-        writing-mode: vertical-rl;
-        text-orientation: mixed;
-        transform: rotate(180deg);
-
-        @media (min-width: 768px) {
-          height: 52px;
-          font-size: 24px;
-          transform: none;
-          writing-mode: unset;
-        }
-
-        &.minimal {
-          background-color: #f6f6f6;
-          color: #2bc643;
-        }
-
-        &.standard {
-          background-color: #ffffff;
-          color: #b70dea;
-        }
-
-        &.professional {
-          background-color: #2bc643;
-          color: #ffffff;
-        }
-
-        &.exclusive {
-          background-color: #b70dea;
-          color: #ffffff;
-        }
-      }
-
-      .tariff-price {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 4px;
-        padding: 6px;
-        font-size: 16px;
-
-        @media (min-width: 1280px) {
-          flex-direction: row;
-          padding: 12px;
-          font-size: 24px;
-        }
-
-        & small {
-          font-size: 14px;
-
-          text-decoration: line-through;
-
-          @media (min-width: 1280px) {
-            font-size: 20px;
-          }
-        }
-      }
-
-      .tariff-period {
-        display: flex;
-        align-items: center;
-        width: 100%;
-        padding: 12px;
-        font-size: 20px;
-        font-weight: 700;
-        writing-mode: vertical-rl;
-        text-orientation: mixed;
-        transform: rotate(180deg);
-
-        @media (min-width: 768px) {
-          display: initial;
-          width: auto;
-          writing-mode: unset;
-          transform: none;
-        }
-      }
-
-      .tariff-submit {
-        display: none;
-        height: 52px;
-        padding-inline: 8px;
-        font-size: 18px;
-
-        @media (min-width: 1280px) {
-          display: flex;
-        }
-      }
-
-      .tariffs-selection {
-        display: flex;
-        align-items: center;
-        margin-block: 40px;
-        gap: 12px;
-
-        @media (min-width: 1280px) {
-          display: none;
-        }
-
-        & .label {
-          flex: 0.5;
-        }
-
-        & select {
-          flex: 1;
-          height: 48px;
-          padding-inline: 12px;
-          appearance: none;
-          outline: none;
-          border: none;
-          border-radius: 0;
-          font-family: 'Jura', sans-serif;
-          font-size: 20px;
-          font-weight: 700;
-          background-image: url('./files/icons/icon-chevron-down.svg');
-          background-position: center right 12px;
-          background-repeat: no-repeat;
-        }
-      }
-
-      .tariff-selection {
-        display: flex;
-        align-items: center;
-        margin-block: 40px;
-        gap: 12px;
-
-        @media (min-width: 1280px) {
-          display: none;
-        }
-
-        & button {
-          flex: 1;
-        }
-      }
-
-      .tariff-message {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-block: 40px;
-        padding: 15px;
-        border: 2px solid #b70dea;
-        font-size: 18px;
-
-        @media (min-width: 1280px) {
-          padding: 30px 15px;
-          font-size: 24px;
-        }
-
-        .accent-purple {
-          font-weight: 700;
-        }
-
-        .inner {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 32px;
-          width: 100%;
-          max-width: 720px;
-        }
-      }
-
-      /* Feedback */
-      .feedback {
-        background-color: #212121;
-      }
-
-      .feedback-inner {
-        padding-block: 32px;
-
-        @media (min-width: 768px) {
-          padding-block: 64px;
-        }
-      }
-
-      .feedback-heading {
-        margin-block-end: 64px;
-        font-size: 40px;
-
-        @media (min-width: 1280px) {
-          text-align: center;
-        }
-
-        & .accent-gold {
-          font-weight: 700;
-        }
-      }
-
-      .video-item {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-
-        & video {
-          width: 100%;
-          aspect-ratio: 0.55;
-        }
-      }
-
-      .video-caption {
-        font-size: 24px;
-      }
-
-      .feedback-slider {
-        position: relative;
-        padding-inline: 50px;
-        margin-block-end: 40px;
-      }
-
-      .slider {
-        overflow: hidden;
-      }
-
-      .slides {
-        display: flex;
-        transition: transform 0.4s ease;
-      }
-
-      .slide {
-        min-width: 100%;
-        padding-inline: 14px;
-        box-sizing: border-box;
-
-        @media (min-width: 768px) {
-          min-width: 25%;
-        }
-      }
-
-      .arrow {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        padding: 0;
-        margin: 0;
-        border: none;
-        background: none;
-        cursor: pointer;
-        transition: cubic-bezier(0.165, 0.84, 0.44, 1) 0.25s;
-
-        @media (hover: hover) {
-          &:hover {
-            filter: brightness(1.2);
-          }
-        }
-
-        &.prev {
-          inset-inline-start: 0;
-          transform: translateY(-50%) rotate(-180deg);
-        }
-
-        &.next {
-          inset-inline-end: 0;
-          transform: translateY(-50%);
-        }
-      }
-
-      /* Modal */
-      .modal {
-        position: fixed;
-        inset: 0;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        padding: 15px;
-        background-color: rgba(0, 0, 0, 0.8);
-
-        &.is-open {
-          display: flex;
-        }
-      }
-
-      .modal-close {
-        position: absolute;
-        inset-block-start: 20px;
-        inset-inline-end: 20px;
-        margin: 0;
-        padding: 0;
-        border: none;
-        background: none;
-        cursor: pointer;
-        transition: cubic-bezier(0.165, 0.84, 0.44, 1) 0.25s;
-
-        @media (hover: hover) {
-          &:hover {
-            filter: brightness(1.5);
-          }
-        }
-      }
-
-      .modal-content {
-        position: relative;
-        width: 100%;
-        padding: 50px 15px;
-        background-color: #1a1918;
-
-        @media (min-width: 768px) {
-          max-width: 700px;
-          padding: 50px 100px;
-        }
-
-        @media (min-width: 1280px) {
-          max-width: 1000px;
-        }
-      }
-
-      .suvey-form {
-        display: grid;
-        flex-direction: column;
-        gap: 40px;
-
-        @media (min-width: 768px) {
-          grid-template-columns: repeat(2, 1fr);
-        }
-
-        & + & {
-          margin-block-start: 40px;
-        }
-      }
-
-      .survey-cell {
-        display: grid;
-        gap: 16px;
-      }
-
-      .survey-heading {
-        margin-block-end: 16px;
-        font-size: 26px;
-        font-weight: 700;
-      }
-
-      .survey-back,
-      .survey-submit {
-        width: 100%;
-        min-width: 240px;
-        max-width: max-content;
-        margin: 0;
-      }
-
-      .survey-message {
-        margin-bottom: 45px;
-        text-align: center;
-        font-size: 26px;
-        font-weight: 700;
-
-        @media (min-width: 768px) {
-          margin-bottom: 75px;
-        }
-      }
-    </style>
   </head>
   <body>
     <!-- Intro -->
@@ -1367,9 +21,7 @@
         onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);"
       >
         <option value="https://nodeua.com/Patterns-2025-ua">UA</option>
-        <option value="https://nodeua.com/Patterns-2025" selected>
-          RU
-        </option>
+        <option value="https://nodeua.com/Patterns-2025" selected>RU</option>
       </select>
 
       <div class="inner intro-grid">
@@ -1394,9 +46,12 @@
             ></iframe>
           </div>
 
-          <button type="button" class="button intro-submit" onclick="window.location.href='https://secure.wayforpay.com/payment/s948f83e1a739'">
+          <a
+            class="button intro-submit"
+            href="https://secure.wayforpay.com/payment/s948f83e1a739"
+          >
             Забронировать место на курсе
-          </button>
+          </a>
 
           <div class="intro-message">
             <img src="./files/icons/icon-shield.svg" alt="" />
@@ -1485,9 +140,12 @@
           </p>
         </div>
 
-        <button type="button" class="button intro-submit" onclick="window.location.href='https://secure.wayforpay.com/payment/s948f83e1a739'">
+        <a
+          href="https://secure.wayforpay.com/payment/s948f83e1a739"
+          class="button"
+        >
           Забронировать место на курсе
-        </button>
+        </a>
       </div>
     </section>
 
@@ -1495,8 +153,9 @@
     <section class="prices" id="prices">
       <div class="inner">
         <h2 class="prices-heading">
-          В чём разница между <span class="accent-purple">предыдущими</span>
-          набором и <span class="accent-gold">новой программой</span> курса?
+          В чём разница между
+          <span class="accent-purple">предыдущими</span> набором и
+          <span class="accent-gold">новой программой</span> курса?
         </h2>
 
         <ul class="prices-list">
@@ -1586,9 +245,7 @@
           <li>
             <details class="accordion no-padding">
               <summary class="accordion-heading">
-                <div class="accordion-heading-text">
-                  Native features
-                </div>
+                <div class="accordion-heading-text">Native features</div>
               </summary>
               <div class="accordion-body">
                 <ul class="accordion-body-list">
@@ -1619,9 +276,7 @@
           <li>
             <details class="accordion no-padding">
               <summary class="accordion-heading">
-                <div class="accordion-heading-text">
-                  Instantiation
-                </div>
+                <div class="accordion-heading-text">Instantiation</div>
               </summary>
               <div class="accordion-body">
                 <ul class="accordion-body-list">
@@ -1652,9 +307,7 @@
           <li>
             <details class="accordion no-padding">
               <summary class="accordion-heading">
-                <div class="accordion-heading-text">
-                  Isolation and SoC
-                </div>
+                <div class="accordion-heading-text">Isolation and SoC</div>
               </summary>
               <div class="accordion-body">
                 <ul class="accordion-body-list">
@@ -1693,9 +346,7 @@
           <li>
             <details class="accordion no-padding">
               <summary class="accordion-heading">
-                <div class="accordion-heading-text">
-                  Contracts & Interfaces
-                </div>
+                <div class="accordion-heading-text">Contracts & Interfaces</div>
               </summary>
               <div class="accordion-body">
                 <ul class="accordion-body-list">
@@ -1726,9 +377,7 @@
           <li>
             <details class="accordion no-padding">
               <summary class="accordion-heading">
-                <div class="accordion-heading-text">
-                  Events and Messaging
-                </div>
+                <div class="accordion-heading-text">Events and Messaging</div>
               </summary>
               <div class="accordion-body">
                 <ul class="accordion-body-list">
@@ -1792,9 +441,7 @@
           <li>
             <details class="accordion no-padding">
               <summary class="accordion-heading">
-                <div class="accordion-heading-text">
-                  Errors and Exceptions
-                </div>
+                <div class="accordion-heading-text">Errors and Exceptions</div>
               </summary>
               <div class="accordion-body">
                 <ul class="accordion-body-list">
@@ -1866,9 +513,7 @@
           <li>
             <details class="accordion no-padding">
               <summary class="accordion-heading">
-                <div class="accordion-heading-text">
-                  All-agnostic Strategy
-                </div>
+                <div class="accordion-heading-text">All-agnostic Strategy</div>
               </summary>
               <div class="accordion-body">
                 <ul class="accordion-body-list">
@@ -1932,9 +577,7 @@
           <li>
             <details class="accordion no-padding">
               <summary class="accordion-heading">
-                <div class="accordion-heading-text">
-                  How to Apply Concepts
-                </div>
+                <div class="accordion-heading-text">How to Apply Concepts</div>
               </summary>
               <div class="accordion-body">
                 <ul class="accordion-body-list">
@@ -2024,7 +667,7 @@
               <tr>
                 <td></td>
                 <td>
-                  <p class="tariff-label minimal">Standart</p>
+                  <p class="tariff-label minimal">Standard</p>
                   <p class="tariff-price accent-gold">
                     <span>390$</span>
                     <small>550$</small>
@@ -2417,59 +1060,72 @@
                 <td></td>
                 <td>
                   <p class="amount">∞</p>
-                  <button type="button" class="button tariff-submit" onclick="window.location.href='https://secure.wayforpay.com/button/b85f44ebb8e36'">
-                    Зарегистрироваться
-                  </button>
+                  <a
+                    href="https://secure.wayforpay.com/button/b85f44ebb8e36"
+                    class="button tariff-submit"
+                  >
+                    Купить
+                  </a>
+                  <p class="tariff-foot-label standard">Standard</p>
                 </td>
                 <td>
                   <p class="amount">
                     200 <br />
                     мест
                   </p>
-                  <button type="button" class="button tariff-submit" onclick="window.location.href='https://secure.wayforpay.com/button/b35a1363a0f6f'">
-                    Зарегистрироваться
-                  </button>
+                  <a
+                    href="https://secure.wayforpay.com/button/b35a1363a0f6f"
+                    class="button tariff-submit"
+                  >
+                    Купить
+                  </a>
+                  <p class="tariff-foot-label mentoring">Mentoring</p>
                 </td>
                 <td>
                   <p class="amount">
                     50 <br />
                     мест
                   </p>
-                  <button type="button" class="button tariff-submit" onclick="window.location.href='https://secure.wayforpay.com/button/b9884a3be0cf2'">
-                    Зарегистрироваться
-                  </button>
+                  <a
+                    href="https://secure.wayforpay.com/button/b9884a3be0cf2"
+                    class="button tariff-submit"
+                  >
+                    Купить
+                  </a>
+                  <p class="tariff-foot-label professional">Professional</p>
                 </td>
                 <td>
                   <p class="amount">
                     3 <br />
                     места
                   </p>
-                  <button type="button" class="button tariff-submit" onclick="window.location.href='https://secure.wayforpay.com/button/b58aac0b84441'">
-                    Зарегистрироваться
-                  </button>
+                  <a
+                    href="https://secure.wayforpay.com/button/b58aac0b84441"
+                    class="button tariff-submit"
+                  >
+                    Купить
+                  </a>
+                  <p class="tariff-foot-label exclusive">Exclusive</p>
                 </td>
               </tr>
             </tfoot>
           </table>
         </div>
 
-
         <div class="tariffs-selection">
-          <label class="label" for="tariff-selection">
-            Выберите курс*
-          </label>
-          <select
-            name="tariff-select"
-            id="tariff-selection"
-          >
+          <label class="label" for="tariff-selection"> Выберите курс* </label>
+          <select name="tariff-select" id="tariff-selection">
             <option value="https://secure.wayforpay.com/button/b85f44ebb8e36">
               Standard
             </option>
-            <option value="https://secure.wayforpay.com/button/b35a1363a0f6f" selected>
+            <option
+              selected
+              value="https://secure.wayforpay.com/button/b35a1363a0f6f"
+            >
               Mentoring
             </option>
             <option value="https://secure.wayforpay.com/button/b9884a3be0cf2">
-              Profesional
+              Professional
             </option>
             <option value="https://secure.wayforpay.com/button/b58aac0b84441">
               Exclusive
@@ -2477,12 +1133,305 @@
           </select>
         </div>
 
-        <div class="tariff-selection">
-          <button class="button" type="button" onclick="window.location.href=document.getElementById('tariff-selection').value">
-            Купить курс
-          </button>
+        <div class="tariffs-selection-price">
+          <div class="price" id="tariff-price-standard">
+            Цена: <span class="accent-gold">390$</span>
+          </div>
+          <div class="price" id="tariff-price-mentoring">
+            Цена: <span class="accent-gold">890$</span>
+          </div>
+          <div class="price" id="tariff-price-professional">
+            Цена: <span class="accent-gold">1390$</span>
+          </div>
+          <div class="price" id="tariff-price-exclusive">
+            Цена: <span class="accent-gold">10000$</span>
+          </div>
         </div>
 
+        <div class="tariff-features">
+          <ul class="list" id="tariff-standard">
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Паттерны
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Домашние задания
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Без проверки ДЗ
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Q/A-семинар с Тимуром
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Частный Telegram-канал с новостями курса
+            </li>
+          </ul>
+
+          <ul class="list" id="tariff-mentoring">
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Паттерны
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Домашние задания
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Q/A-семинар с Тимуром
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Проверка задач ментором уровня Senior
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Чат с ментором и группой из 10 участников
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Code Review Call
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Совместные встречи на свободные темы
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Модуль Ильи Климова «Патерны во фронтенде»
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Сертификат о завершении тренинга с подписью Тимура
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Частный Telegram-канал с новостями курса
+            </li>
+          </ul>
+
+          <ul class="list" id="tariff-professional">
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Паттерны
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Домашние задания
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Q/A-семинар с Тимуром
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Проверка задач ментором уровня Senior+ с опытом разработки
+              комплексных и высоконагруженных систем в группе из 5 человек
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Code Review Call
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Совместные встречи на свободные темы
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Модуль «Архитектура приложений»
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Модуль Ильи Климова «Патерны во фронтенде»
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Модуль Ильи Климова «Как внедрять паттерны проектирования в
+              команду?»
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Сертификат о завершении тренинга с подписью Тимура
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Частный Telegram-канал с новостями курса
+            </li>
+          </ul>
+
+          <ul class="list" id="tariff-exclusive">
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Паттерны
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Домашние задания
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Q/A-семинар с Тимуром
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Проверка заданий Тимуром 1 раз в неделю
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Чат с Тимуром — ответы на вопросы в течение дня
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Code Review Call
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Совместные встречи на свободные темы
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Модуль «Архитектура приложений»
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Модуль Ильи Климова «Патерны во фронтенде»
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Модуль Ильи Климова «Как внедрять паттерны проектирования в
+              команду?»
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Сертификат о завершении тренинга с подписью Тимура
+            </li>
+            <li>
+              <img
+                src="./files/icons/icon-check-green.svg"
+                alt="Опция доступна"
+              />
+              Частный Telegram-канал с новостями курса
+            </li>
+          </ul>
+        </div>
+
+        <a href="" class="button tariff-purchase-button">Купить курс</a>
 
         <div class="tariff-message">
           <div class="inner">
@@ -2496,9 +1445,36 @@
           </div>
         </div>
 
-        <button class="button" type="button" onclick="window.location.href='https://secure.wayforpay.com/payment/s948f83e1a739'">
+        <div class="tariff-steps">
+          <div class="step">
+            <p class="heading">Шаг 1</p>
+            <p class="caption">Забронируйте курс за 100$</p>
+          </div>
+          <picture class="steps-arrow">
+            <source
+              media="(width < 1280px)"
+              srcset="./files/tariffs-steps-arrow-mob.svg"
+            />
+            <source
+              media="(width >= 1280px)"
+              srcset="./files/tariffs-steps-arrow-desk.svg"
+            />
+            <img src="./files/tariffs-steps-arrow-mob.svg" alt="" />
+          </picture>
+          <div class="step">
+            <p class="heading">Крок 2</p>
+            <p class="caption">
+              С вами свяжется наш менеджер и поможет оформить рассрочку
+            </p>
+          </div>
+        </div>
+
+        <a
+          href="https://secure.wayforpay.com/payment/s948f83e1a739"
+          class="button"
+        >
           Забронировать место на курсе
-        </button>
+        </a>
       </div>
     </section>
 
@@ -2519,19 +1495,25 @@
                 <video poster="./files/video/IMG_4086_poster.webp" controls>
                   <source src="./files/video/IMG_4086.mp4" type="video/mp4" />
                 </video>
-                <p class="video-caption">Курс полностью оправдал мои ожидания</p>
+                <p class="video-caption">
+                  Курс полностью оправдал мои ожидания
+                </p>
               </li>
               <li class="video-item slide js-slide">
                 <video poster="./files/video/IMG_4087_poster.webp" controls>
                   <source src="./files/video/IMG_4087.mp4" type="video/mp4" />
                 </video>
-                <p class="video-caption">Я узнал о новых возможностях платформы</p>
+                <p class="video-caption">
+                  Я узнал о новых возможностях платформы
+                </p>
               </li>
               <li class="video-item slide js-slide">
                 <video poster="./files/video/IMG_4088_poster.webp" controls>
                   <source src="./files/video/IMG_4088.mp4" type="video/mp4" />
                 </video>
-                <p class="video-caption">Материалы легко воспринимаются и содержат множество примеров</p>
+                <p class="video-caption">
+                  Материалы легко воспринимаются и содержат множество примеров
+                </p>
               </li>
               <li class="video-item slide js-slide">
                 <video poster="./files/video/IMG_4089_poster.webp" controls>
@@ -2546,15 +1528,17 @@
                   <source src="./files/video/IMG_4090.mp4" type="video/mp4" />
                 </video>
                 <p class="video-caption">
-                  Я узнал о специфических паттернах для JavaScript —
-                  все нюансы и то, как они работают изнутри
+                  Я узнал о специфических паттернах для JavaScript — все нюансы
+                  и то, как они работают изнутри
                 </p>
               </li>
               <li class="video-item slide js-slide">
                 <video poster="./files/video/IMG_4091_poster.webp" controls>
                   <source src="./files/video/IMG_4091.mp4" type="video/mp4" />
                 </video>
-                <p class="video-caption">Я прошёл два курса по паттернам у Тимура</p>
+                <p class="video-caption">
+                  Я прошёл два курса по паттернам у Тимура
+                </p>
               </li>
             </ul>
           </div>
@@ -2563,9 +1547,237 @@
           </button>
         </div>
 
-        <button class="button" type="button" onclick="window.location.href='https://secure.wayforpay.com/payment/s948f83e1a739'">
+        <a
+          href="https://secure.wayforpay.com/payment/s948f83e1a739"
+          class="button"
+        >
           Забронировать место на курсе
-        </button>
+        </a>
+      </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="reviews" id="reviews">
+      <div class="inner reviews-inner">
+        <ul class="reviews-list">
+          <li class="review">
+            <div>
+              <p class="review-author">Тимур</p>
+              <div class="review-rating">
+                <img src="./files/icons/icon-star-filled.svg" alt="" />
+                <img src="./files/icons/icon-star-filled.svg" alt="" />
+                <img src="./files/icons/icon-star-filled.svg" alt="" />
+                <img src="./files/icons/icon-star-filled.svg" alt="" />
+                <img src="./files/icons/icon-star-empty.svg" alt="" />
+              </div>
+            </div>
+            <div>
+              <h6 class="review-heading">Я nodejs dev с 6 годами опыта</h6>
+              <div class="review-body">
+                <p>
+                  Я понял что нужен новый шаг чтобы стать более зрелым как
+                  инженер. Я большую часть своей карьеры имел дело с паттернами
+                  на уровне наблюдателя, тоесть есть готовый код и я пойму что
+                  это и зачем, но паттерны не были частью моего майндсета, когда
+                  знание паттернов на автомате влияет на то какой код я БУДУ
+                  писать и как сделать это лучше. И в момент когда Тимур сказал
+                  что на курсе будут задачи, паттерны переосмысленные и
+                  адаптированные под js, еженедельные созвоны где можно узнать
+                  правильно я всё понял и т.д, и тут я понял что оно мне надо
+                </p>
+                  Понравилось в принципе всё(на звонке чтото пытался вытянуть из
+                  пальца что было НЕ идеально, обдумал, всё было круто). Больше
+                  всего понравилось ощущения того что пройденный материал
+                  вызывав чувство - АААААА так вот как оно работает и как можно
+                  сделать. Поэтому обучение в комбинации обучающего материала
+                  высокого уровня, работы с ментором и созвоны с Тимуром имеет
+                  большую эффективность.
+                </p>
+                <p>
+                  В принципе я стал намного увереннее чувствовать в анализе и
+                  дизайне каких либо решений, больше стал опираться не просто на
+                  сухой опыт и ощущение, а на уже сотни раз пройденные шаблоны
+                  со своими плюсами и минусами.
+                </p>
+                <p>
+                  По началу хотелось быть душнилой который в любое место хочет
+                  засунуть паттерн, к счастью решилось быстро)
+                </p>
+                <p>
+                  Я бы посоветовал пройти курсу каждому, особенно на начале
+                  своего пути, смотря на материал Тимура, я думаю что все
+                  люди которых я смотрел при обучении просто сами ничего не
+                  знали, ещё и меня заставили посмотреть и дать ощущение будто и
+                  я теперь всё знаю. Поэтому вместо того чтобы годами смотреть
+                  тонны мусора(увы говно-контента в интернете валом), один раз
+                  стоит пройти курс.
+                </p>
+                <p>
+                  Цена курса ничтожно мала в сравнении с тем что вы заплатите смотря годами ютуб
+                </p>
+                <p>
+              </div>
+              <button type="button" class="review-toggle">Разгорнути</button>
+            </div>
+          </li>
+          <li class="review">
+            <div>
+              <p class="review-author">Віталій</p>
+              <div class="review-rating">
+                <img src="./files/icons/icon-star-filled.svg" alt="" />
+                <img src="./files/icons/icon-star-filled.svg" alt="" />
+                <img src="./files/icons/icon-star-filled.svg" alt="" />
+                <img src="./files/icons/icon-star-filled.svg" alt="" />
+                <img src="./files/icons/icon-star-empty.svg" alt="" />
+              </div>
+            </div>
+            <div>
+              <h6 class="review-heading">
+                Я — frontend-разработчик с двухлетним опытом, до этого долго
+                занимался вёрсткой.
+              </h6>
+              <div class="review-body">
+                <p>
+                  Поскольку я изучал вёрстку и JavaScript самостоятельно, мои
+                  знания были разрозненными и не имели крепкого фундамента. Я
+                  хотел это исправить, чтобы повысить свой профессиональный
+                  уровень...
+                </p>
+                <p>
+                  О паттернах проектирования я раньше только слышал, зная, что
+                  они упрощают разработку и повышают качество кода. Когда я
+                  узнал об этом курсе, сразу понял, что это именно то, что мне
+                  нужно.
+                </p>
+                <p>
+                  Мне очень понравилось, что в начале обучения был "КМБ" — это
+                  помогло подтянуть всех студентов к одному уровню и дать
+                  необходимые базовые знания. Формат еженедельных созвонов
+                  оказался очень эффективным: они были и лекциями, и
+                  консультациями, где можно было задать преподавателю любые
+                  вопросы по курсу и не только. Также здорово, что после
+                  окончания курса сохраняется доступ ко всем материалам — к ним
+                  можно вернуться в любой момент.
+                </p>
+                <p>
+                  После прохождения курса я получил много новой и полезной
+                  информации, а также более глубокое понимание JavaScript.
+                  Сейчас я пишу код более осмысленно, постепенно внедряю
+                  решения, которые увидел на курсе. Я стал меньше сомневаться
+                  в своих решениях и больше думать о качестве кода.
+                </p>
+                <p>
+                  Рекомендую этот курс всем, кто хочет повысить свой уровень.
+                  Учитывая огромное количество обучающего контента в интернете,
+                  здесь вы получите качественные и структурированные знания с
+                  высоким уровнем экспертизы и примерами кода.
+                </p>
+              </div>
+              <button type="button" class="review-toggle">Разгорнути</button>
+            </div>
+          </li>
+          <li class="review">
+            <div>
+              <p class="review-author">Мурад</p>
+              <div class="review-rating">
+                <img src="./files/icons/icon-star-filled.svg" alt="" />
+                <img src="./files/icons/icon-star-filled.svg" alt="" />
+                <img src="./files/icons/icon-star-filled.svg" alt="" />
+                <img src="./files/icons/icon-star-filled.svg" alt="" />
+                <img src="./files/icons/icon-star-empty.svg" alt="" />
+              </div>
+            </div>
+            <div>
+              <h6 class="review-heading">
+                Node js розробник, 5 років досвіду.
+              </h6>
+              <div class="review-body">
+                <p>
+                  Я вже давно слідкував за контентом Тимура на ютубі, було дуже
+                  цікаво і хотілось більш детально розібратися в темах, які він
+                  розбирав у своїх відео.
+                </p>
+                <p>
+                  Подобаються зіздвони, як по темам курса так і комʼюніті.
+                  Класні лекції. Також зачепило, що багато лекцій по ~10 хв, в
+                  яких без води максимально чітко розбирається якась тема, і що
+                  є окремі довгі відео, в яких тема більш детально
+                  розкривається. І можна їх розгорнуто переглянути, коли є час.
+                </p>
+                <p>
+                  Дізнався багато нового, завдяки чому став більш коректно писати
+                  код. Курс висвітлює багато різних тем, тому в цілому розширив
+                  кругозір, у тому як можна підходити до вирішення задач.
+                </p>
+                <p>
+                  Курс порекомендував би всім JavaScript розробникам.
+                </p>
+              </div>
+              <button type="button" class="review-toggle">Разгорнути</button>
+            </div>
+          </li>
+          <li class="review">
+            <div>
+              <p class="review-author">Вячеслав</p>
+              <div class="review-rating">
+                <img src="./files/icons/icon-star-filled.svg" alt="" />
+                <img src="./files/icons/icon-star-filled.svg" alt="" />
+                <img src="./files/icons/icon-star-filled.svg" alt="" />
+                <img src="./files/icons/icon-star-filled.svg" alt="" />
+                <img src="./files/icons/icon-star-empty.svg" alt="" />
+              </div>
+            </div>
+            <div>
+              <h6 class="review-heading">
+                Я — full-stack разработчик (Senior) с 8 годами опыта. Работаю с
+                Node.js (Koa/Express) и ReactJS + TypeScript.
+              </h6>
+              <div class="review-body">
+                <p>
+                  Я пришёл на курс, чтобы систематизировать знания о паттернах
+                  проектирования. В проекте часто возникали такие проблемы,
+                  как высокая связность модулей и дублирование логики, что
+                  затрудняло рефакторинг, внедрение новых фич и покрытие
+                  тестами.
+                </p>
+                <p>
+                  В курсе больше всего понравилось наличие еженедельных
+                  созвонов, как по программе, так и внутри комьюнити.
+                  После завершения обучения остаётся доступ к этим созвонам,
+                  что особенно важно для тех, кто работает удалённо: это
+                  частично заменяет живой обмен опытом. Очень удобно
+                  организованы материалы и структура курса — по оглавлению
+                  легко найти нужный раздел.
+                </p>
+                <p>
+                  Не менее важная часть — еженедельные созвоны с ментором курса
+                  и разбор практических задач.
+                </p>
+                <p>
+                  В результате после курса я стал чаще применять паттерны в
+                  разработке, отдельные части программы стали менее связаны
+                  между собой. Уменьшилось количество дублированного кода,
+                  поддержка модулей стала заметно проще.
+                </p>
+                <p>
+                  Я бы рекомендовал курс разработчикам уровня Middle и выше —
+                  тем, кто хочет перейти от архитектуры «файлов и папок» к
+                  более высокому уровню архитектурного мышления. А также тем,
+                  кто хочет систематизировать практики и получить готовые приёмы
+                  для рефакторинга.
+                </p>
+              </div>
+              <button type="button" class="review-toggle">Разгорнути</button>
+            </div>
+          </li>
+        </ul>
+
+        <a
+          href="https://secure.wayforpay.com/payment/s948f83e1a739"
+          class="button"
+        >
+          Забронировать место на курсе
+        </a>
       </div>
     </section>
 
@@ -2662,9 +1874,13 @@
             <p class="author-about">10+ лет в продуктовой разработке</p>
           </li>
         </ol>
-        <button type="button" class="button intro-submit" onclick="window.location.href='https://secure.wayforpay.com/payment/s948f83e1a739'">
+
+        <a
+          href="https://secure.wayforpay.com/payment/s948f83e1a739"
+          class="button"
+        >
           Забронировать место на курсе
-        </button>
+        </a>
       </div>
     </section>
 
@@ -2907,10 +2123,15 @@
       </div>
     </div>
 
-    <script>const slides=document.querySelector(".js-slides"),slideItems=document.querySelectorAll(".js-slide"),btnLeft=document.querySelector(".js-prev"),btnRight=document.querySelector(".js-next");let currentIndex=0;function getVisibleSlides(){return window.innerWidth<768?1:4}function updateSlider(){var e=-100/getVisibleSlides()*currentIndex;slides.style.transform=`translateX(${e}%)`}btnRight.addEventListener("click",()=>{currentIndex<slideItems.length-getVisibleSlides()&&(currentIndex++,updateSlider())}),btnLeft.addEventListener("click",()=>{0<currentIndex&&(currentIndex--,updateSlider())}),window.addEventListener("resize",updateSlider);const surveyData={full_name:"",phone:"",experience:"",role:"",has_attended:"",how_ready:""},$=(e,t=document)=>t.querySelector(e),getCheckedVal=e=>(e=document.querySelector(`input[name="${e}"]:checked`))?e.value:"",show=e=>e.style.display="",hide=e=>e.style.display="none",modal=$(".modal"),step1=$("#survey-form-step-1"),step2=$("#survey-form-step-2"),step3=$("#survey-form-step-3"),closeBtn=$(".modal-close"),backBtns=document.querySelectorAll(".survey-back"),surveyForm=$("#survey-form");window.openSuvey=function(){var e=$("#full_name")?.value.trim(),t=$("#phone")?.value.trim();e&&t?(surveyData.full_name=e,surveyData.phone=t,show(step1),hide(step2),hide(step3),modal.classList.add("is-open")):alert("Будь ласка, заповніть ім’я та телефон")},window.goToStep2=function(){var e=getCheckedVal("experience"),t=getCheckedVal("role");e&&t?(surveyData.experience=e,surveyData.role=t,hide(step1),show(step2)):alert("Будь ласка, оберіть досвід і роль")},window.goToStep1=function(){hide(step2),show(step1)},window.closeSurveyModal=function(){modal.classList.remove("is-open"),step1.style.display="none",step2.style.display="none",step3.style.display="none"},closeBtn?.addEventListener("click",()=>{modal.classList.remove("is-open")}),backBtns.forEach(e=>{e.addEventListener("click",()=>{"none"!==step2.style.display?goToStep1():modal.classList.remove("is-open")})}),surveyForm.addEventListener("submit",async e=>{e.preventDefault();var e=getCheckedVal("has_attended"),t=getCheckedVal("how_ready");if(e&&t){surveyData.has_attended=e,surveyData.how_ready=t,e={...surveyData,submittedAt:new Date().toISOString()},console.log("PAYLOAD to send:",e);try{var s=await fetch("https://pattern-960410420882.europe-central2.run.app",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(e)}),n=await s.text();if(s.ok){try{JSON.parse(n)}catch{}hide(step1),hide(step2),show(step3)}else console.error("HTTP status:",s.status),console.error("Response body:",n),alert("Сервер відхилив запит (HTTP "+s.status+"). Деталі в консолі.")}catch(r){alert("Сталася мережна помилка. Перевірте консоль.")}}else alert("Будь ласка, дайте відповіді на обидва питання")});const countDownDate=new Date("Oct 23, 2025 15:30:00").getTime(),countdownElement=document.getElementById("countdown"),interval=setInterval(function(){let e=new Date().getTime(),t=countDownDate-e;countdownElement.innerHTML=Math.floor(t/864e5)+" д "+Math.floor(t%864e5/36e5)+" ч "+Math.floor(t%36e5/6e4)+" мин ",t<0&&(clearInterval(interval),countdownElement.innerHTML="Час вийшов!")},1e3);</script>
+    <script src="script.js"></script>
     <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","802901322442215");fbq("track","PageView");</script>
     <noscript>
-      <img height="1" width="1" style="display: none" src="https://www.facebook.com/tr?id=802901322442215&ev=PageView&noscript=1"/>
+      <img
+        height="1"
+        width="1"
+        style="display: none"
+        src="https://www.facebook.com/tr?id=992407839606853&ev=PageView&noscript=1"
+      />
     </noscript>
   </body>
 </html>
