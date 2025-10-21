@@ -624,27 +624,43 @@
           <span class="accent-purple">менеджер звʼяжеться з вами</span>
         </h3>
 
-        <form class="cta-form" action="">
-          <div class="cta-form-cell">
-            <label class="label-text" for="full_name">Ім'я</label>
-            <input
-              type="text"
-              id="full_name"
-              name="full_name"
-              required
-              placeholder="Ім'я"
-            />
+        <form action="">
+          <div class="cta-form">
+            <div class="cta-form-cell">
+              <label class="label-text" for="full_name">Ім'я</label>
+              <input
+                type="text"
+                id="full_name"
+                name="full_name"
+                required
+                placeholder="Ім'я"
+              />
+            </div>
+            <div class="cta-form-cell">
+              <label class="label-text" for="phone">Телефон</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                required
+                placeholder="Телефон"
+              />
+            </div>
+            <div class="cta-form-cell">
+              <label class="label-text" for="phone">Телефон</label>
+              <input
+                type="text"
+                id="telegram"
+                name="tg"
+                required
+                placeholder="Telegram"
+              />
+            </div>
           </div>
-          <div class="cta-form-cell">
-            <label class="label-text" for="phone">Телефон</label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              required
-              placeholder="Телефон"
-            />
-          </div>
+          <label class="cta-form-checkbox" for="agreement">
+            <input type="checkbox" id="agreement" name="agreement" required />
+            Даю згоду на обробку моїх персональних даних відповідно до
+          </label>
           <button type="button" class="button" onclick="openSuvey()">
             Далі
           </button>

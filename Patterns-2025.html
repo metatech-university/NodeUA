@@ -622,27 +622,33 @@
           <span class="accent-purple">менеджер свяжется с вами</span>
         </h3>
 
-        <form class="cta-form" action="">
-          <div class="cta-form-cell">
-            <label class="label-text" for="full_name">Имя</label>
-            <input
-              type="text"
-              id="full_name"
-              name="full_name"
-              required
-              placeholder="Имя"
-            />
+        <form action="">
+          <div class="cta-form">
+            <div class="cta-form-cell">
+              <label class="label-text" for="full_name">Имя</label>
+              <input
+                type="text"
+                id="full_name"
+                name="full_name"
+                required
+                placeholder="Имя"
+              />
+            </div>
+            <div class="cta-form-cell">
+              <label class="label-text" for="phone">Телефон</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                required
+                placeholder="Телефон"
+              />
+            </div>
           </div>
-          <div class="cta-form-cell">
-            <label class="label-text" for="phone">Телефон</label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              required
-              placeholder="Телефон"
-            />
-          </div>
+          <label class="cta-form-checkbox" for="agreement">
+            <input type="checkbox" id="agreement" name="agreement" required />
+            Даю согласие на обработку моих персональных данных
+          </label>
           <button type="button" class="button" onclick="openSuvey()">
             Далее
           </button>
