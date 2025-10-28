@@ -207,6 +207,7 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 20px;
   width: max-content;
   height: 64px;
   margin-block-start: auto;
@@ -221,7 +222,7 @@ textarea {
   letter-spacing: 1px;
   color: #1a1919;
   cursor: pointer;
-  transition: 0.2s ease-in-out;
+  transition: 0.15s ease-in-out;
 
   @media (min-width: 1280px) {
     padding-inline: 60px;
@@ -507,13 +508,26 @@ textarea {
   @media (min-width: 1280px) {
     grid-template-columns: repeat(2, 1fr);
     gap: 28px;
+    align-items: end;
+  }
+}
+
+.about-cell {
+  display: contents;
+
+  @media (min-width: 1280px) {
+    display: block;
   }
 }
 
 .about-subheading {
-  margin-bottom: 26px;
+  margin-block-end: -14px;
   font-size: 24px;
   font-weight: 700;
+
+  @media (min-width: 1280px) {
+    margin-block-end: 26px;
+  }
 }
 
 .about-list {
@@ -580,6 +594,15 @@ textarea {
   }
 }
 
+.about-telegram {
+  grid-row: 5;
+
+  @media (min-width: 1280px) {
+    margin-block-start: 80px;
+    margin-inline: 0;
+  }
+}
+
 /* Prices */
 
 .prices {
@@ -607,6 +630,7 @@ textarea {
   width: 100%;
   max-width: 1160px;
   margin-inline: auto;
+  margin-block-end: 40px;
   font-size: 24px;
 
   & li + li {
@@ -1556,5 +1580,65 @@ table {
 
   @media (min-width: 768px) {
     margin-bottom: 75px;
+  }
+}
+
+/* Thank you */
+.thank-you {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+
+  @media (min-width: 1280px) {
+    padding-block-start: 120px;
+  }
+
+  & .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    padding: 68px 20px 350px;
+    text-align: center;
+    background-color: #212121;
+    background-image: url('./files/thannk-you-bg.svg');
+    background-position: 100% 100%;
+    background-repeat: no-repeat;
+    background-size: 40%;
+
+    @media (min-width: 1280px) {
+      background-size: 25%;
+      padding: 24px;
+    }
+
+    & h1,
+    & h2 {
+      line-height: 1.2;
+    }
+
+    & h1 {
+      margin-block-end: 40px;
+      font-size: 58px;
+      font-weight: 700;
+
+      @media (min-width: 1280px) {
+        font-size: 64px;
+      }
+    }
+
+    & h2 {
+      max-width: 480px;
+      margin-block-end: 80px;
+      font-size: 28px;
+
+      @media (min-width: 1280px) {
+        margin-block-end: 200px;
+      }
+    }
+
+    & .button {
+      margin-block: 0;
+    }
   }
 }
