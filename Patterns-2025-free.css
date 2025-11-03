@@ -239,6 +239,12 @@ textarea {
     }
   }
 
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+    pointer-events: none;
+  }
+
   &.dark {
     background-color: #2d2d2d;
     border-color: #2d2d2d;
@@ -1044,12 +1050,12 @@ textarea {
 }
 
 .survey-message {
-  margin-bottom: 45px;
+  margin-block: 45px;
   text-align: center;
   font-size: 26px;
   font-weight: 700;
 
   @media (min-width: 768px) {
-    margin-bottom: 75px;
+    margin-block: 75px;
   }
 }
