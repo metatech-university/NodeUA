@@ -653,13 +653,6 @@ textarea {
       background-color: #888888;
       content: '';
     }
-
-    &:last-of-type::before {
-      height: auto;
-      background-color: transparent;
-      transform: translateX(-4px);
-      content: '🎯';
-    }
   }
 }
 
