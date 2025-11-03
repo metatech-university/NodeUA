@@ -426,7 +426,12 @@
               Даю согласие на обработку моих персональных данных
             </label>
             <input type="hidden" value="promo" id="course" />
-            <button type="button" class="button" onclick="openSuvey()">
+            <button
+              type="button"
+              id="open-survey-btn"
+              class="button"
+              onclick="openSuvey()"
+            >
               Start Patterns Mini
             </button>
           </form>
@@ -558,8 +563,9 @@
               </div>
               <div class="survey-cell">
                 <button
-                  class="button survey-submit"
                   type="button"
+                  id="survey-next-step1"
+                  class="button survey-submit"
                   onclick="goToStep2()"
                 >
                   Далее
@@ -649,7 +655,11 @@
                 </button>
               </div>
               <div class="survey-cell">
-                <button class="button survey-submit" type="submit">
+                <button
+                  type="submit"
+                  id="survey-submit-btn"
+                  class="button survey-submit"
+                >
                   Start Patterns Mini
                 </button>
               </div>
@@ -659,7 +669,7 @@
           <!-- step 3 -->
           <div id="survey-form-step-3" style="display: none">
             <p class="survey-message">
-              Спасибо за регистрацию!
+              Спасибо за регистрацию! <br />
               <span class="accent-gold"> Перенаправляем вас на курс... </span>
             </p>
           </div>
