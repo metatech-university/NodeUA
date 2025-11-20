@@ -22,12 +22,12 @@
     <header class="header">
       <div class="inner">
         <nav class="navigation">
-          <a href="#">Міні-курс Patterns 2.0</a>
+          <a href="https://nodeua.com/Patterns-2025-free-ua">
+            Курс Patterns Mini
+          </a>
           <a href="https://nodeua.com/Patterns-2025-ua">
             Огляд курсу Patterns 2025
           </a>
-          <a href="#">2-денний воркшоп “Programming Paradigms” </a>
-          <a href="#">Новини</a>
         </nav>
       </div>
 
@@ -52,8 +52,9 @@
             <span class="accent-gold">“Programming Paradigms”</span>
           </h1>
           <h2 class="intro-subheading">
-            Навчись адаптувати патерни для конкретного випадку, вибирати
-            правильний інструмент під завдання, скорочуючи складність і помилки
+            Навчись обирати не парадигму, а бажані характеристики коду, бо
+            архітектура починається з вибору способу розгалудження, ітерування,
+            роботи з контекстом, обробки помилок, тощо...
           </h2>
 
           <a class="button gold intro-submit" href="#registration">
@@ -66,7 +67,7 @@
         <div class="intro-image">
           <img src="./files/imaages/cube.webp" alt="" />
           <div class="intro-message">
-            <p>Лекції, практичні завдання та їх перевірка код.</p>
+            <p>Лекції, практичні завдання та ревʼю коду.</p>
           </div>
         </div>
       </div>
@@ -155,7 +156,7 @@
           </li>
           <li>
             <img src="./files/icons/icon-check-purple.svg" alt="" />
-            Записи матеріалів і доступ до всіх слайдів/кодів
+            Записи матеріалів і доступ до всіх слайдів та прикладів коду
           </li>
         </ul>
       </div>
@@ -270,72 +271,73 @@
           <li>
             <strong>Functional Programming</strong>
             <p class="programm-schedule-description">
-              pure functions, immutability, composition, HOF, pipelines, async
-              streams
+              pure functions, immutability, composition, HOF, pipelines
             </p>
           </li>
           <li>
             <strong>Structural Programming</strong>
-            <p class="programm-schedule-description">блоки, без goto</p>
+            <p class="programm-schedule-description">
+              nested blocks without goto (jumps), branching, loops
+            </p>
           </li>
           <li>
             <strong>Imperative Programming</strong>
             <p class="programm-schedule-description">
-              statements, mutations, architecture вплив
+              statements, mutations, explicit step-by-step commands
             </p>
           </li>
           <li>
             <strong>Declarative Programming</strong>
             <p class="programm-schedule-description">
-              “what over how”, DSLs, rule engines
+              "what" over "how" to compute, expressions, DSLs, rule engines
             </p>
           </li>
           <li>
             <strong>Procedural Programming</strong>
             <p class="programm-schedule-description">
-              лінійний контроль, SRP, транзакційні скрипти
+              linear control flow, procedures operating on shared data
             </p>
           </li>
           <li>
             <strong>Contract Programming</strong>
             <p class="programm-schedule-description">
-              контракти, стабільність, чіткі протоколи
+              contracts, interfaces, protocols, stable behaviour
             </p>
           </li>
           <li>
             <strong>Prototype-based Programming</strong>
             <p class="programm-schedule-description">
-              об’єкти від об’єктів, делегування, гнучкі композиції
+              prototype chains, dynamic inheritance, flexible behaviour
             </p>
           </li>
           <li>
             <strong>Reactive Programming</strong>
             <p class="programm-schedule-description">
-              observable streams, async events, backpressure
+              propagate changes via dataflow and event streams
             </p>
           </li>
           <li>
             <strong>Closure-based Programming</strong>
             <p class="programm-schedule-description">
-              приватний стан, фабрики, реактивні одиниці
+              capture lexical environment as contexts, mutable or immutable
             </p>
           </li>
           <li>
             <strong>FSM / Automata</strong>
             <p class="programm-schedule-description">
-              стани, переходи, workflow
+              discrete states, transitions, workflows triggered by inputs
             </p>
           </li>
           <li>
             <strong>Actor Model</strong>
             <p class="programm-schedule-description">
-              message-passing, ізольованість, concurrency, мікросервіси
+              message-passing, actor state isolation, async concurrency
             </p>
           </li>
           <li>
             <strong>Metaprogramming</strong>
             <p class="programm-schedule-description">
-              reflection, macros, codegen
+              reflection, introspection, macros, codegen, generics, dynamic dispatch
             </p>
           </li>
         </ol>
@@ -350,8 +352,8 @@
         <ul class="what-you-get-list why-list">
           <li>
             <img src="./files/icons/icon-check-purple.svg" alt="" />
-            Парадигми стали обов’язковою частиною роботи — без них неможливо
-            розуміти код команди
+            Парадигми це спосіб обрати характеристики коду, що вплине на
+            побудову архітектури
           </li>
           <li>
             <img src="./files/icons/icon-check-purple.svg" alt="" />
@@ -452,14 +454,14 @@
             <input type="checkbox" id="agreement" name="agreement" required />
             Даю згоду на обробку моїх персональних даних відповідно до
           </label>
-          <input type="hidden" value="promo" id="course" />
+          <input type="hidden" value="paradigms" id="course" />
           <button
             type="button"
             id="open-survey-btn"
             class="button gold"
             onclick="openSuvey()"
           >
-            Start Patterns Mini
+            Start Paradigms
           </button>
         </form>
       </div>
@@ -684,7 +686,7 @@
                   id="survey-submit-btn"
                   class="button survey-submit"
                 >
-                  Start Patterns Mini
+                  Start Paradigms
                 </button>
               </div>
             </div>
@@ -701,7 +703,7 @@
       </div>
     </div>
 
-    <script src="Patterns-2025-free.js"></script>
+    <script src="Patterns-2025-paradigms.js"></script>
     <!-- prettier-ignore -->
     <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","802901322442215");fbq("track","PageView");</script>
     <!-- prettier-ignore -->
